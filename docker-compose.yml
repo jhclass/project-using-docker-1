@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    build: 
+      context: .  # 현재 디렉터리를 Docker 빌드 컨텍스트로 사용
+      dockerfile: Dockerfile  # 현재 디렉터리 내의 Dockerfile 사용
+    image: myapp:latest  # 빌드된 이미지에 태그 지정
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app  # 현재 디렉터리를 컨테이너의 /usr/src/app에 마운트
+      - /usr/src/app/node_modules  # 로컬 node_modules 제외
+    command: npm run start:dev  # 개발 환경에서 사용

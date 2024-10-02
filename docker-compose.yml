@@ -1,13 +1,31 @@
 version: '3'
 services:
   app:
-    build: 
-      context: .  # 현재 디렉터리를 Docker 빌드 컨텍스트로 사용
-      dockerfile: Dockerfile  # 현재 디렉터리 내의 Dockerfile 사용
-    image: myapp:latest  # 빌드된 이미지에 태그 지정
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: myapp:latest
     ports:
       - "3000:3000"
     volumes:
-      - .:/usr/src/app  # 현재 디렉터리를 컨테이너의 /usr/src/app에 마운트
-      - /usr/src/app/node_modules  # 로컬 node_modules 제외
-    command: npm run start:dev  # 개발 환경에서 사용
+      - .:/usr/src/myapp
+      - /usr/src/myapp/node_modules
+    environment:
+      DATABASE_URL: ${DATABASE_URL}  # .env 파일에서 DATABASE_URL 읽기
+    depends_on:
+      - db
+    command: npm run start:all
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}  # .env 파일에서 POSTGRES_USER 참조
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # .env 파일에서 POSTGRES_PASSWORD 참조
+      POSTGRES_DB: ${POSTGRES_DB}  # .env 파일에서 POSTGRES_DB 참조
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

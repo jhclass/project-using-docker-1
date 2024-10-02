@@ -12,3 +12,881 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+//지점
+model Branch {
+  id                       Int                        @id @default(autoincrement())
+  branchName               String
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  ManageUser               ManageUser[]
+  StudentState             StudentState[]
+  AdviceType               AdviceType[]
+  ConsultationMemo         ConsultationMemo[]
+  Subject                  Subject[]
+  UserActivityLogs         UserActivityLogs[]
+  Student                  Student[]
+  StudentPayment           StudentPayment[]
+  PaymentDetail            PaymentDetail[]
+  StudentMemo              StudentMemo[]
+  Lectures                 Lectures[]
+  Attendance               Attendance[]
+  WorkLogs                 WorkLogs[]
+  Stamp                    Stamp[]
+  WorkRequest              WorkRequest[]
+  Alarm                    Alarm[]
+  Sms                      Sms[]
+  MessageStorage           MessageStorage[]
+  EmploymentStatus         EmploymentStatus[]
+  EduInfomation            EduInfomation[]
+  Career                   Career[]
+  Certificate              Certificate[]
+  StudentConsultation      StudentConsultation[]
+  HopeForEmployment        HopeForEmployment[]
+  EmploymentRecommendation EmploymentRecommendation[]
+  PreInspection            PreInspection[]
+  RegularEvaluationSet     RegularEvaluationSet[]
+  IpRecord                 IpRecord[]
+  StudentPortfolio         StudentPortfolio[]
+  PermissionsGranted       PermissionsGranted[]
+  BoardForWorkRequest      BoardForWorkRequest[]
+  ApiKey                   ApiKey[]
+  AttendanceRecord         AttendanceRecord[]
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  firstName String
+  lastName  String?
+  username  String    @unique
+  email     String    @unique
+  password  String
+  bio       String?
+  avatar    String?
+  photos    Photo[]
+  follower  User[]    @relation("FollowRelation")
+  following User[]    @relation("FollowRelation")
+  Likes     Like[]
+  comments  Comment[]
+  rooms     Room[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  message   Message[]
+  replies   Reply[]
+}
+
+model Photo {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  file      String
+  caption   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  hashtags  Hashtag[]
+  Likes     Like[]
+  likeId    Int?
+  comments  Comment[]
+}
+
+model Hashtag {
+  id        Int      @id @default(autoincrement())
+  hashtag   String   @unique
+  photos    Photo[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  photo     Photo    @relation(fields: [photoId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  photoId   Int
+
+  @@unique([userId, photoId])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  photo     Photo    @relation(fields: [photoId], references: [id])
+  payload   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+  photoId   Int
+  replies   Reply[]
+}
+
+model Reply {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId Int
+  payload   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Room {
+  id        Int       @id @default(autoincrement())
+  users     User[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  payload   String
+  user      User     @relation(fields: [userId], references: [id])
+  room      Room     @relation(fields: [roomId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  read      Boolean  @default(false)
+  userId    Int
+  roomId    Int
+}
+
+//관리자 계정
+model ManageUser {
+  id                   Int                   @id @default(autoincrement())
+  mUserId              String                @unique // 관리자 아이디
+  mUsername            String // 관리자의 이름
+  mPassword            String // 관리자 비밀번호
+  mGrade               Int? //관리자 등급 (등급에 따른 보기권한 제한)
+  mRank                String? //관리자 직급,직책
+  mPhoneNum            String?               @unique // 관리자 전화번호
+  mPhoneNumCompany     String? // 회사번호
+  mPhoneNumInside      String? // 내선번호
+  mPhoneNumFriend      String? //기타 지인 번호
+  mPart                String[] // 관리자의 부서
+  mAvatar              String? // 관리자 프로필 이미지
+  mJoiningDate         DateTime? // 입사일
+  mZipCode             String? //우편번호
+  mAddresses           String? //주소
+  mAddressDetail       String? //상세주소
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  StudentStates        StudentState[]
+  ConsultationMemo     ConsultationMemo[]
+  favoriteStudentState Int[]
+  Student              Student[]
+  StudentMemo          StudentMemo[]
+  StudentPayment       StudentPayment[]
+  PaymentDetail        PaymentDetail[]
+  Lectures             Lectures[]
+  Stamp                Stamp[]
+  resign               String?               @default("N") //퇴사 여부 Default === "N" 퇴사시 === "Y"
+  email                String?
+  frequentlyUsed       String[] //자주 사용하는 문장
+  lastModifiedBy       String?
+  Branch               Branch?               @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  Sms                  Sms[]
+  MessageStorage       MessageStorage[]
+  PermissionsGranted   PermissionsGranted[]
+  BoardForWorkRequest  BoardForWorkRequest[]
+  lastModifiedTime     DateTime?
+  AttendanceRecord     AttendanceRecord[]
+}
+
+//학생상담
+model StudentState {
+  id               Int                @id @default(autoincrement())
+  campus           String?
+  category         String?
+  stName           String
+  phoneNum1        String
+  phoneNum2        String?
+  phoneNum3        String?
+  subject          String[]
+  detail           String?
+  agreement        String
+  progress         Int
+  stEmail          String?
+  stAddr           String?
+  subDiv           String? // 수강구분(hrd인지, 등)
+  stVisit          DateTime? // 상담예정일
+  expEnrollDate    DateTime? // 수강예정일
+  perchase         Boolean? // 수강확정
+  birthday         DateTime? // 생년월일
+  currentManager   ManageUser?        @relation(fields: [currentManagerId], references: [id])
+  currentManagerId Int?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  ConsultationMemo ConsultationMemo[]
+  receiptDiv       String?            @default("") //접수구분
+  pic              String?            @default("담당자 지정필요") //담당자
+  adviceTypes      AdviceType[]
+  classMethod      String[] //수업방식
+  Branch           Branch?            @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime?
+}
+
+//상담분야
+model AdviceType {
+  id               Int            @id @default(autoincrement())
+  type             String
+  indexNum         Int?
+  category         String?
+  onOff            String?
+  defaultValue     String? //Y or N
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  studentStates    StudentState[]
+  Branch           Branch?        @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime?
+}
+
+//상담메모
+model ConsultationMemo {
+  id               Int          @id @default(autoincrement())
+  content          String
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  studentState     StudentState @relation(fields: [studentStateId], references: [id], onDelete: Cascade)
+  studentStateId   Int
+  manageUser       ManageUser   @relation(fields: [manageUserId], references: [id], onDelete: Cascade)
+  manageUserId     Int
+  Branch           Branch?      @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime?
+}
+
+//과정
+model Subject {
+  id                       Int                        @id @default(autoincrement())
+  subDiv                   String //강의구분
+  subjectName              String // 강의명
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  fee                      Int //수강료
+  startDate                DateTime? // 시작일
+  endDate                  DateTime? // 종료일
+  totalTime                Int?                       @default(0) //강의 총 시간
+  teacherName              String?                    @default("강사명 없음")
+  roomNum                  String? // 강의실번호
+  exposure                 Boolean? // 노출여부
+  subjectCode              String? // 과목코드
+  expiresDateStart         DateTime? //유효기간 시작
+  expiresDateEnd           DateTime? //유효기간 종료
+  StudentPayment           StudentPayment[]
+  round                    Int
+  lectures                 Lectures?
+  Branch                   Branch?                    @relation(fields: [branchId], references: [id])
+  branchId                 Int?
+  EduInfomation            EduInfomation[]
+  Career                   Career[]
+  Certificate              Certificate[]
+  StudentConsultation      StudentConsultation[]
+  HopeForEmployment        HopeForEmployment[]
+  EmploymentRecommendation EmploymentRecommendation[]
+  EmploymentStatus         EmploymentStatus[]
+  PreInspection            PreInspection[]
+  RegularEvaluationSet     RegularEvaluationSet[]
+  StudentPortfolio         StudentPortfolio[]
+  lastModifiedTime         DateTime? //최근수정시간
+}
+
+model UserActivityLogs {
+  id               Int       @id @default(autoincrement())
+  userId           String
+  eventName        String
+  description      String? //엔드포인트
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  Branch           Branch?   @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+model Student {
+  id               Int              @id @default(autoincrement())
+  name             String // 이름
+  phoneNum1        String // 전화번호
+  phoneNum2        String?
+  smsAgreement     String // sms 동의
+  writer           String // 등록자
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  birthday         DateTime?
+  manager          ManageUser?      @relation(fields: [managerUserId], references: [id])
+  managerUserId    Int? //담당자
+  studentMemo      StudentMemo[]
+  studentPayment   StudentPayment[]
+  attendance       Attendance[]
+  Branch           Branch?          @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+//수강생 결제 정보 (수강신청)
+model StudentPayment {
+  id                       Int                        @id @default(autoincrement())
+  seScore                  Int //선발평가점수
+  tuitionFee               Int? // 수강료(할인전)
+  discountAmount           String? // 할인율
+  cashAmount               Int? //현금
+  cardAmount               Int? //카드
+  actualAmount             Int? // 실결제액
+  unCollectedAmount        Int? // 미 수납액
+  receiptClassification    String[] //영수증 분류 (자체영수증,현금영수증,이니시스,계산서,LGU+)
+  paymentDate              DateTime? // 결제일
+  student                  Student                    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId                Int
+  paymentDetail            PaymentDetail[]
+  processingManager        ManageUser                 @relation(fields: [processingManagerId], references: [id], onDelete: Cascade)
+  processingManagerId      Int
+  situationReport          Boolean?
+  amountReceived           Int? //수납액
+  subject                  Subject                    @relation(fields: [subjectId], references: [id])
+  subjectId                Int
+  campus                   String?
+  subDiv                   String? // 수강구분
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  lectureAssignment        String? //강의배정하시겠습니까?
+  courseComplete           String?                    @default("") // 이수처리하겠습니까?
+  employment               String?
+  dueDate                  DateTime?
+  classCode                String?
+  isWeekend                String?
+  attendance               Attendance[]
+  Branch                   Branch?                    @relation(fields: [branchId], references: [id])
+  branchId                 Int?
+  mZipCode                 String? //우편번호
+  mAddresses               String? //주소
+  mAddressDetail           String? //상세주소
+  //중도탈락관련
+  dateOfDroppingOut        DateTime? //중도탈락일자
+  reasonFordroppingOut     String? //중도탈락사유
+  EmploymentStatus         EmploymentStatus[]
+  EduInfomation            EduInfomation[]
+  Career                   Career[]
+  Certificate              Certificate[]
+  StudentConsultation      StudentConsultation[]
+  HopeForEmployment        HopeForEmployment[]
+  EmploymentRecommendation EmploymentRecommendation[]
+  PreInspection            PreInspection[]
+  StudentPortfolio         StudentPortfolio[]
+  supportType              String? //지원유형 : 취업패키지 등
+  lastModifiedTime         DateTime? //최근수정시간
+  lastModifiedByUserId     String? // 직원아이디
+  lastModifiedByName       String? //직원이름
+}
+
+//취업현황
+model EmploymentStatus {
+  id                   Int            @id @default(autoincrement())
+  lectureId            Int //강의id
+  studentId            Int // 학생id
+  stName               String // 학생이름
+  employmentType       String // 구분 : 취업,창업
+  dateOfEmployment     DateTime // 취업일자
+  companyName          String // 회사이름
+  businessNum          String // 사업자번호
+  responsibilities     String // 담당업무
+  location             String // 소재지
+  phoneNum             String // 전화번호
+  businessSize         String // 사업장규모
+  imploymentInsurance  String // 고용보험여부 : Y || N
+  proofOfImployment    String // 재직증명 : Y || N
+  relatedFields        String // 관련분야 : 동일/관련/다른
+  completionType       String // 수료타입 : 조기,수료
+  Subject              Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId            Int
+  StudentPayment       StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId     Int
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  Branch               Branch?        @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  lastModifiedByUserId String // 직원아이디
+  lastModifiedByName   String //직원이름
+  lastModifiedTime     DateTime? //최근수정시간
+}
+
+//학력사항
+model EduInfomation {
+  id                   Int            @id @default(autoincrement())
+  lectureId            Int //강의id
+  studentId            Int // 학생id
+  stName               String // 학생이름
+  eduType              String // 학교 
+  eduName              String // 학교이름
+  major                String? // 전공
+  graduationStatus     String // 졸업여부 
+  Subject              Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId            Int
+  StudentPayment       StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId     Int
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  Branch               Branch?        @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  lastModifiedByUserId String // 직원아이디
+  lastModifiedByName   String //직원이름
+  lastModifiedTime     DateTime? //최근수정시간
+}
+
+//경력사항
+model Career {
+  id                   Int            @id @default(autoincrement())
+  lectureId            Int //강의id
+  studentId            Int // 학생id
+  stName               String // 학생이름
+  careerDetails        String // 경력내용 
+  Subject              Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId            Int
+  StudentPayment       StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId     Int
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  Branch               Branch?        @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  lastModifiedByUserId String // 직원아이디
+  lastModifiedByName   String //직원이름
+  lastModifiedTime     DateTime? //최근수정시간
+}
+
+//자격취득현황
+model Certificate {
+  id                   Int            @id @default(autoincrement())
+  lectureId            Int //강의id
+  studentId            Int // 학생id
+  stName               String // 학생이름
+  CAdate               DateTime //자격취득일
+  certificateName      String //자격증이름
+  certificateLevel     String? //자격증급수
+  CertificateIssuer    String //자격증발행처
+  Subject              Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId            Int
+  StudentPayment       StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId     Int
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  Branch               Branch?        @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  lastModifiedByUserId String // 직원아이디
+  lastModifiedByName   String //직원이름
+  lastModifiedTime     DateTime? //최근수정시간
+}
+
+//상담 (학적부)
+model StudentConsultation {
+  id                    Int            @id @default(autoincrement())
+  lectureId             Int //강의id
+  studentId             Int // 학생id
+  stName                String // 학생이름
+  typeOfConsultation    String // 상담유형 : 기초상담,취업상담, 사후관리
+  dateOfConsultation    DateTime // 상담일자 
+  detailsOfConsultation String // 상담내용
+  Subject               Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId             Int
+  StudentPayment        StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId      Int
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  Branch                Branch?        @relation(fields: [branchId], references: [id])
+  branchId              Int?
+  lastModifiedByUserId  String // 직원아이디
+  lastModifiedByName    String //직원이름
+  lastModifiedTime      DateTime? //최근수정시간
+}
+
+//취업희망분야 
+model HopeForEmployment {
+  id                   Int            @id @default(autoincrement())
+  lectureId            Int //강의id
+  studentId            Int // 학생id
+  stName               String // 학생이름
+  workingArea          String // 근무지역
+  fieldOfHope          String // 희망분야
+  hopefulReward        Int // 희망보수(int!)
+  workType             String // 근무형태 : 정규,비정규
+  workingHours         Int // 근무시간 (int)
+  opinion              String // 의견
+  Subject              Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId            Int
+  StudentPayment       StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId     Int
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  Branch               Branch?        @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  lastModifiedByUserId String // 직원아이디
+  lastModifiedByName   String //직원이름
+  lastModifiedTime     DateTime? //최근수정시간
+}
+
+//취업추천
+model EmploymentRecommendation {
+  id                            Int            @id @default(autoincrement())
+  lectureId                     Int //강의id
+  studentId                     Int // 학생id
+  stName                        String // 학생이름
+  dateOfRecommendation          DateTime // 추천일자
+  recruitmentField              String // 채용분야 
+  companyName                   String // 회사명
+  location                      String // 소재지
+  phoneNum                      String // 전화번호
+  dateOfInterview               DateTime // 면접일
+  employmentStatus              String // 취업여부 : Y || N
+  reasonForNonEmployment        String // 미취업사유
+  certificateOfEmploymentStatus String // 재직증명서확보여부 : Y || N
+  Subject                       Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId                     Int
+  StudentPayment                StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId              Int
+  createdAt                     DateTime       @default(now())
+  updatedAt                     DateTime       @updatedAt
+  Branch                        Branch?        @relation(fields: [branchId], references: [id])
+  branchId                      Int?
+  lastModifiedByUserId          String // 직원아이디
+  lastModifiedByName            String //직원이름
+  lastModifiedTime              DateTime? //최근수정시간
+}
+
+//사전점검
+model PreInspection {
+  id                   Int            @id @default(autoincrement())
+  lectureId            Int //강의id
+  studentId            Int // 학생id
+  stName               String // 학생이름
+  dateOfPreInspection  DateTime? //사전점검일
+  preScreenerType      String? // 사전검사구분 "강사","교무팀"
+  preInspectionDetails String? // 사전점검내용 
+  actionTaken          String? //조치사항
+  Subject              Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId            Int
+  StudentPayment       StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId     Int
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  Branch               Branch?        @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  lastModifiedByUserId String // 직원아이디
+  lastModifiedByName   String //직원이름
+  lastModifiedTime     DateTime? //최근수정시간
+}
+
+//정기평가 내용설정
+model RegularEvaluationSet {
+  id                   Int       @id @default(autoincrement())
+  lectureId            Int
+  statusType           String // 구분
+  evaluationDetails    String // 평가내용
+  points               Int // 점수 (배점)
+  Subject              Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId            Int
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  Branch               Branch?   @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  lastModifiedByUserId String // 직원아이디
+  lastModifiedByName   String //직원이름
+  lastModifiedTime     DateTime? //최근수정시간
+}
+
+//학생포트폴리오
+model StudentPortfolio {
+  id                   Int            @id @default(autoincrement())
+  lectureId            Int //강의id
+  studentId            Int // 학생id
+  stName               String // 학생이름
+  isBest               String? //Y or N ,Y 일 경우 우수학생(추천학생)
+  url                  String[] //포트폴리오 url 경로
+  filePath             String[]
+  details              String?
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  StudentPayment       StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId     Int
+  Subject              Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId            Int
+  Branch               Branch?        @relation(fields: [branchId], references: [id])
+  branchId             Int?
+  lastModifiedByUserId String // 직원아이디
+  lastModifiedByName   String //직원이름
+  lastModifiedTime     DateTime? //최근수정시간
+}
+
+model PaymentDetail {
+  id                 Int            @id @default(autoincrement())
+  cashOrCard         String // 현금&&카드여부
+  cardCompany        String? // 카드회사
+  cardNum            String? //카드번호
+  installment        Int? //할부개월
+  ApprovalNum        String? //승인번호
+  amountPayment      Int? //결제금액
+  //unpaidPayment    Int? //미수납액
+  paymentDate        DateTime? //결제일
+  bankName           String? //은행이름
+  depositorName      String? // 입금자명
+  depositAmount      Int? //입금금액
+  depositDate        DateTime? //입금일
+  studentPayment     StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId   Int //연결된 학생결제(StudentPayment 의 id)
+  receiver           ManageUser?    @relation(fields: [receiverId], references: [id], onDelete: Cascade)
+  receiverId         Int?
+  accountingManager  String? //회계담당자
+  reqRefund          Boolean?       @default(false) //환불신청 여부
+  reqRefundManager   String? //환불신청자
+  reqRefundManagerId Int? // 환불신청자아이디
+  reqRefundDate      String? //환불신청일
+  refundApproval     Boolean?       @default(false) // 환불승인여부 
+  refundManager      String? //환불승인자
+  refundApprovalDate String? // 환불승인일
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  stName             String?
+  cashReceipts       String[]
+  Branch             Branch?        @relation(fields: [branchId], references: [id])
+  branchId           Int?
+  lastModifiedTime   DateTime? //최근수정시간
+}
+
+model StudentMemo {
+  id               Int         @id @default(autoincrement())
+  content          String
+  student          Student?    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId        Int?
+  manageUser       ManageUser? @relation(fields: [manageUserId], references: [id])
+  manageUserId     Int?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  Branch           Branch?     @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+model Lectures {
+  id                 Int          @id @default(autoincrement())
+  createdAt          DateTime     @default(now()) //등록일로 사용하자
+  updatedAt          DateTime     @updatedAt
+  campus             String?
+  temporaryName      String
+  subDiv             String //null 이면 안됨.
+  teachers           ManageUser[]
+  roomNum            String
+  subject            Subject      @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId          Int          @unique
+  lecturePeriodStart DateTime //강의기간 시작일
+  lecturePeriodEnd   DateTime //강의기간 종료일
+  lectureDetails     String[] //강의 일자들
+  lectureTime        String[] //시작,종료시간
+  eduStatusReport    String // 교육상황보고 연동
+  ApprovedNum        Int? //승인인원
+  confirmedNum       Int? //확정인원
+  sessionNum         Int? //회차
+  timetableAttached  String? //시간표첨부
+  WorkLogs           WorkLogs[]
+  attendance         Attendance[]
+  Branch             Branch?      @relation(fields: [branchId], references: [id])
+  branchId           Int?
+  lastModifiedTime   DateTime? //최근수정시간
+}
+
+model Attendance {
+  id                 Int            @id @default(autoincrement())
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  attendanceState    String? //출석,지각,조퇴,결석,외출,지각&조퇴,지각&외출,외출&조퇴,지각&외출&조퇴,공가,절반출석
+  studentPayment     StudentPayment @relation(fields: [studentPaymentId], references: [id], onDelete: Cascade)
+  studentPaymentId   Int
+  attendanceDate     String //날짜
+  student            Student        @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId          Int
+  lectures           Lectures       @relation(fields: [lecturesId], references: [id], onDelete: Cascade)
+  lecturesId         Int
+  isCanceled         String?        @default("N") //휴강여부 
+  attendanceDateTime DateTime? //attendanceDateTime //시간
+  Branch             Branch?        @relation(fields: [branchId], references: [id])
+  branchId           Int?
+  lastModifiedTime   DateTime? //최근수정시간
+}
+
+model WorkLogs {
+  id                 Int       @id @default(autoincrement())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  paymentOne         String?
+  paymentTwo         String?
+  paymentThree       String?
+  trainingInfoOne    String[] // 교시, 담당교사, 교과목명, 능력단위명, 훈련내용
+  trainingInfoTwo    String[]
+  trainingInfoThree  String[]
+  trainingInfoFour   String[]
+  trainingInfoFive   String[]
+  trainingInfoSix    String[]
+  trainingInfoSeven  String[]
+  trainingInfoEight  String[]
+  trainingTimeOneday Int[] //일계 - 교양, 전공, 실습, 기타, 계
+  trainingTimeTotal  Int[] //누계 - 교양, 전공, 실습, 기타, 계
+  instruction        String? // 지시사항
+  attendanceSt       String? //출석학생
+  absentSt           String? //결석학생
+  tardySt            String? //지각학생
+  leaveEarlySt       String? //조퇴학생
+  outingSt           String? //외출
+  etc                String? //기타사항
+  checkList          String[]  @default([]) //체크사항 예) 지각,외출,조퇴 시간의 합이 총 수업시간의 절반을 넘은 학생이 있습니까? 
+  checkContext       String[]  @default([]) //체크사항 순번에 해당하는 내용작성. 
+  lectures           Lectures  @relation(fields: [lecturesId], references: [id], onDelete: Cascade)
+  lecturesId         Int
+  workLogsDate       String
+  attendanceCount    Int[] //출석 카운트 [재적,출석,결석,지각,조퇴,외출]
+  Branch             Branch?   @relation(fields: [branchId], references: [id])
+  branchId           Int?
+  lastModifiedTime   DateTime? //최근수정시간
+}
+
+model Stamp {
+  id               Int        @id @default(autoincrement())
+  Manager          ManageUser @relation(fields: [manageUserId], references: [id], onDelete: Cascade)
+  manageUserId     Int
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  imageUrl         String
+  Branch           Branch?    @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+//업무요청
+model WorkRequest {
+  id               Int       @id @default(autoincrement())
+  campus           String?
+  to               String //받는사람의 이름
+  toId             Int //받는사람의 아이디 manageUserId
+  from             String // 보낸사람의 이름
+  fromId           Int // 보낸사람의 아이디
+  context          String // 요청내용 
+  read             String    @default("N") //읽음 여부
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  Branch           Branch?   @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+model Alarm {
+  id               Int       @id @default(autoincrement())
+  title            String //카테고리
+  content          String
+  personalTarget   Int[] //대상 매니저 배열
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  Branch           Branch?   @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+//SMS
+model Sms {
+  id               Int         @id @default(autoincrement())
+  receiver         String //받는사람 api 전송용
+  message          String //메세지
+  manageUser       ManageUser? @relation(fields: [manageUserId], references: [id], onDelete: Cascade) //보내는 매니저의 아이디를 자동으로 기록하여 남길예정
+  manageUserId     Int? //보내는 사람 기록 남김
+  Branch           Branch?     @relation(fields: [branchId], references: [id])
+  createdAt        DateTime    @default(now()) //
+  updatedAt        DateTime    @updatedAt
+  saveType         String? //개인,학원
+  branchId         Int?
+  rDate            String? //예약일
+  rTime            String? //예약시간
+  successType      String? //발송성공여부
+  sender           String? //발신자
+  failureReason    String? // 실패사유
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+model MessageStorage {
+  id               Int         @id @default(autoincrement())
+  manageUser       ManageUser? @relation(fields: [manageUserId], references: [id], onDelete: Cascade) //보내는 매니저의 아이디를 자동으로 기록하여 남길예정
+  manageUserId     Int? //보내는 사람 기록 남김
+  message          String //메세지
+  saveType         String? //개인,학원
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  Branch           Branch?     @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+model IpRecord {
+  id               Int       @id @default(autoincrement())
+  ipRecord         String
+  allowed          String //허용비허용
+  details          String? //상세설명(필요시)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  Branch           Branch?   @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+model PermissionsGranted {
+  id               Int          @id @default(autoincrement())
+  permissionName   String       @unique //권한이름 예 카테고리이름
+  topic            String? // 주제 예 ) 카테고리  (adviceType 과 유사)
+  ManageUser       ManageUser[]
+  smsPermitted     String? //sms 권한 
+  readOnly         String? // 읽기권한
+  allPermitted     String? //전체권한
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  Branch           Branch?      @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+//게시판
+model BoardForWorkRequest {
+  id               Int        @id @default(autoincrement())
+  requestedTeam    String //요청부서
+  progressStatus   String //진행상태
+  details          String //내용
+  filePath         String[] //파일경로(배열)
+  author           ManageUser @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId         Int //작성자아이디
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  Branch           Branch?    @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+model ApiKey {
+  id               Int       @id @default(autoincrement())
+  keyName          String
+  keyValue         String    @unique
+  userId           String
+  details          String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  Branch           Branch?   @relation(fields: [branchId], references: [id])
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
+}
+
+//출근기록
+model AttendanceRecord {
+  id           Int        @id @default(autoincrement())
+  clockIn      DateTime //출근
+  clockOut     DateTime //퇴근
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  ManageUser   ManageUser @relation(fields: [manageUserId], references: [id], onDelete: Cascade)
+  manageUserId Int
+  Branch       Branch?    @relation(fields: [branchId], references: [id])
+  branchId     Int?
+}

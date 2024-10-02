@@ -6,6 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "install:all": "npm ci --legacy-peer-deps && npx prisma migrate dev",
+    "start:all": "npm run install:all && npm run start:dev && npx prisma studio",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

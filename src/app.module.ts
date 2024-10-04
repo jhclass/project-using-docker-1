@@ -3,7 +3,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
-import { SampleResolver } from "./sample/sample.resolver";
+import { SampleResolver } from "@src/sample/sample.resolver";
 import { join } from "path";
 import { PrismaService } from "@src/prisma/prisma.service";
 

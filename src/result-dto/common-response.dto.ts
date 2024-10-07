@@ -5,7 +5,7 @@ export class CommonResponse {
   @Field()
   ok: boolean;
   @Field({ nullable: true })
-  message: string;
+  message?: string;
   @Field({ nullable: true })
-  error: string;
+  error?: string;
 }

@@ -2,6 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CommonResponse {
+  ok: Boolean!
+  message: String
+  error: String
+}
+
 type Query {
   sayHello: String!
+}
+
+type Mutation {
+  createManageUser(mUserId: String!, mUsername: String!, mPassword: String!, mGrade: Int, mRank: String, mPart: [String!], mPhoneNum: String, mPhoneNumCompany: String, mPhoneNumFriend: String, mPhoneNumInside: String, mJoiningDate: String, mAddresses: String, email: String, mZipCode: String, mAddressDetail: String): CommonResponse!
 }

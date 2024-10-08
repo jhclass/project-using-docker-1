@@ -7,14 +7,11 @@ import { SampleResolver } from "@src/sample/sample.resolver";
 import { join } from "path";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { CreateManageUserModule } from "@src/manage-user/create-manage-user/create-manage-user.module";
-import { EditManageUserResolver } from "./manage-user/edit-manage-user/edit-manage-user.resolver";
-import { EditManageUserService } from "./manage-user/edit-manage-user/edit-manage-user.service";
 import { EditManageUserModule } from "./manage-user/edit-manage-user/edit-manage-user.module";
 import { ConfigModule } from "@nestjs/config";
 import { S3Controller } from "./s3/s3.controller";
 import { S3Service } from "./s3/s3.service";
-import { DeleteManageUserResolver } from "@src/manage-user/delete-manage-user/delete-manage-user.resolver";
-import { DeleteManageUserService } from "@src/manage-user/delete-manage-user/delete-manage-user.service";
+import { DeleteManageUserModule } from "./manage-user/delete-manage-user/delete-manage-user.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -25,17 +22,9 @@ import { DeleteManageUserService } from "@src/manage-user/delete-manage-user/del
     }),
     CreateManageUserModule,
     EditManageUserModule,
+    DeleteManageUserModule,
   ],
   controllers: [AppController, S3Controller],
-  providers: [
-    AppService,
-    SampleResolver,
-    PrismaService,
-    EditManageUserResolver,
-    EditManageUserService,
-    S3Service,
-    DeleteManageUserResolver,
-    DeleteManageUserService,
-  ],
+  providers: [AppService, SampleResolver, PrismaService, S3Service],
 })
 export class AppModule {}

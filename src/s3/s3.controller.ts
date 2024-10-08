@@ -18,6 +18,13 @@ export class S3Controller {
     @Body("folderName") folderName: string,
   ) {
     const url = await this.s3Service.uploadFile(file, folderName);
-    return { url };
+    return url;
+  }
+  @Post("delete")
+  async deleteFile(
+    @Body("url") url: string,
+    @Body("folderName") folderName: string,
+  ) {
+    return this.s3Service.deleteFile(url, folderName);
   }
 }

@@ -1,9 +1,14 @@
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+  DeleteObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { v4 as uuidv4 } from "uuid";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as path from "path";
+import { DeleteFileResponse } from "@src/result-dto/common-response.dto";
 @Injectable()
 export class S3Service {
   private s3Client: S3Client;
@@ -50,5 +55,38 @@ export class S3Service {
       Key: key,
     });
     return await getSignedUrl(this.s3Client, command, { expiresIn: 3600 });
+  }
+  async deleteFile(
+    url: string,
+    folderName: string,
+  ): Promise<DeleteFileResponse> {
+    try {
+      if (!folderName || !url) {
+        throw new Error("folderName 과 url을 다시 확인하세요.");
+      }
+      const decodeUrl = decodeURI(url);
+      const filePath = decodeUrl.split(`/${folderName}/`)[1];
+      console.log("url", url);
+      const fileName = `${folderName}/${filePath}`;
+      const params = {
+        Bucket: this.bucketName,
+        Key: fileName,
+      };
+      const command = new DeleteObjectCommand(params);
+      console.log(command);
+
+      await this.s3Client.send(command);
+      return {
+        ok: true,
+        message: "정상적으로 파일 삭제 완료 되었습니다.",
+      };
+    } catch (error) {
+      console.error(error.message);
+      return {
+        ok: false,
+        message: "에러발생! 에러메세지를 확인하세요.",
+        error: `Error:${error.message}`,
+      };
+    }
   }
 }

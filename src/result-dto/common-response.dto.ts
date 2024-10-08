@@ -9,3 +9,13 @@ export class CommonResponse {
   @Field({ nullable: true })
   error?: string;
 }
+
+@ObjectType()
+export class DeleteFileResponse {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+}

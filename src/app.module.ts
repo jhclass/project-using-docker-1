@@ -13,6 +13,8 @@ import { EditManageUserModule } from "./manage-user/edit-manage-user/edit-manage
 import { ConfigModule } from "@nestjs/config";
 import { S3Controller } from "./s3/s3.controller";
 import { S3Service } from "./s3/s3.service";
+import { DeleteManageUserResolver } from "@src/manage-user/delete-manage-user/delete-manage-user.resolver";
+import { DeleteManageUserService } from "@src/manage-user/delete-manage-user/delete-manage-user.service";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -32,6 +34,8 @@ import { S3Service } from "./s3/s3.service";
     EditManageUserResolver,
     EditManageUserService,
     S3Service,
+    DeleteManageUserResolver,
+    DeleteManageUserService,
   ],
 })
 export class AppModule {}

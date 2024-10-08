@@ -66,7 +66,6 @@ export class S3Service {
       }
       const decodeUrl = decodeURI(url);
       const filePath = decodeUrl.split(`/${folderName}/`)[1];
-      console.log("url", url);
       const fileName = `${folderName}/${filePath}`;
       const params = {
         Bucket: this.bucketName,

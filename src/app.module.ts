@@ -7,12 +7,15 @@ import { SampleResolver } from "@src/sample/sample.resolver";
 import { join } from "path";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { CreateManageUserModule } from "@src/manage-user/create-manage-user/create-manage-user.module";
-import { EditManageUserResolver } from './manage-user/edit-manage-user/edit-manage-user.resolver';
-import { EditManageUserService } from './manage-user/edit-manage-user/edit-manage-user.service';
-import { EditManageUserModule } from './manage-user/edit-manage-user/edit-manage-user.module';
-
+import { EditManageUserResolver } from "./manage-user/edit-manage-user/edit-manage-user.resolver";
+import { EditManageUserService } from "./manage-user/edit-manage-user/edit-manage-user.service";
+import { EditManageUserModule } from "./manage-user/edit-manage-user/edit-manage-user.module";
+import { ConfigModule } from "@nestjs/config";
+import { S3Controller } from "./s3/s3.controller";
+import { S3Service } from "./s3/s3.service";
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       //typePaths: ['./src/**/*.gql'], // 경로 설정을 제대로 하지 않으면 안됩니다.
@@ -21,7 +24,14 @@ import { EditManageUserModule } from './manage-user/edit-manage-user/edit-manage
     CreateManageUserModule,
     EditManageUserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, SampleResolver, PrismaService, EditManageUserResolver, EditManageUserService],
+  controllers: [AppController, S3Controller],
+  providers: [
+    AppService,
+    SampleResolver,
+    PrismaService,
+    EditManageUserResolver,
+    EditManageUserService,
+    S3Service,
+  ],
 })
 export class AppModule {}

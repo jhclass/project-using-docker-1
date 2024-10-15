@@ -12,7 +12,8 @@ import { ConfigModule } from "@nestjs/config";
 import { S3Controller } from "./s3/s3.controller";
 import { S3Service } from "./s3/s3.service";
 import { DeleteManageUserModule } from "./manage-user/delete-manage-user/delete-manage-user.module";
-import { LoginModule } from "./login/login.module";
+import { LoginModule } from "@src/login/login.module";
+import { JwtStrategy } from "@src/jwt.strategy";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -27,6 +28,12 @@ import { LoginModule } from "./login/login.module";
     LoginModule,
   ],
   controllers: [AppController, S3Controller],
-  providers: [AppService, SampleResolver, PrismaService, S3Service],
+  providers: [
+    AppService,
+    SampleResolver,
+    PrismaService,
+    S3Service,
+    JwtStrategy,
+  ],
 })
 export class AppModule {}

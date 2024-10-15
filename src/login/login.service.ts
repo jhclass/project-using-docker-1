@@ -25,7 +25,7 @@ export class LoginService {
         throw new Error("비밀번호가 일치하지 않습니다.");
       }
       const token = jwt.sign(
-        { id: existingId.mUserId },
+        { mUserId: existingId.mUserId },
         process.env.SECRET_KEY,
         { expiresIn: "12h" },
       );

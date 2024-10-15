@@ -19,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
     const thisUser = await this.client.manageUser.findUnique({
       where: {
-        id: payload.id,
+        mUserId: payload.mUserId,
       },
     });
     return thisUser;

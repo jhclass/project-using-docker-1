@@ -2,6 +2,40 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Branch {
+  id: Int!
+  branchName: String
+  createdAt: String!
+  updatedAt: String!
+  lastModifiedTime: String
+}
+
+type ManageUser {
+  id: Int!
+  mUserId: String!
+  mUsername: String!
+  mPassword: String!
+  mGrade: Int
+  mRank: String
+  mPhoneNum: String
+  mPhoneNumCompany: String
+  mPhoneNumInside: String
+  mPhoneFriend: String
+  mPart: [String!]
+  mAvatar: String
+  mJoiningDate: String
+  mAddresses: String
+  createdAt: String
+  updatedAt: String
+  resign: String
+  email: String
+  mZipCode: String
+  mAddressDetail: String
+  Branch: [Branch!]
+  branchId: Int
+  lastModifiedTime: String
+}
+
 type CommonResponse {
   ok: Boolean!
   message: String
@@ -15,8 +49,17 @@ type ResultLogin {
   token: String
 }
 
+type ResultSeeManageUser {
+  ok: Boolean!
+  message: String
+  error: String
+  result: [ManageUser!]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
+  seeManageUser(limit: Int, page: Int, resign: String): ResultSeeManageUser!
 }
 
 type Mutation {

@@ -1,5 +1,5 @@
-import { ObjectType, Field } from "@nestjs/graphql";
-
+import { ObjectType, Field, Int } from "@nestjs/graphql";
+import { ManageUser } from "@dto/table.dto";
 @ObjectType()
 export class CommonResponse {
   @Field()
@@ -30,4 +30,18 @@ export class ResultLogin {
   error?: string;
   @Field({ nullable: true })
   token?: string;
+}
+
+@ObjectType()
+export class ResultSeeManageUser {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => [ManageUser], { nullable: true })
+  result?: ManageUser[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
 }

@@ -14,13 +14,20 @@ import { S3Service } from "./s3/s3.service";
 import { DeleteManageUserModule } from "./manage-user/delete-manage-user/delete-manage-user.module";
 import { LoginModule } from "@src/login/login.module";
 import { JwtStrategy } from "@src/jwt.strategy";
+import { SeeManageUserService } from "./manage-user/see-manage-user/see-manage-user.service";
+import { SeeManageUserResolver } from "./manage-user/see-manage-user/see-manage-user.resolver";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      //typePaths: ['./src/**/*.gql'], // 경로 설정을 제대로 하지 않으면 안됩니다.
+      //typePaths: ["src/schema.gql"], // 경로 설정을 제대로 하지 않으면 안됩니다.
       autoSchemaFile: join(process.cwd(), "src/schema.gql"), // 자동으로 gql 생성. typeDefs 폴더에 따로 추가해 주지 않아도 됩니다.
+      // definitions: {
+      //   //typecript class 자동생성
+      //   path: join(process.cwd(), "src/result-dto/graphql.ts"),
+      //   outputAs: "class",
+      // },
     }),
     CreateManageUserModule,
     EditManageUserModule,
@@ -34,6 +41,8 @@ import { JwtStrategy } from "@src/jwt.strategy";
     PrismaService,
     S3Service,
     JwtStrategy,
+    SeeManageUserService,
+    SeeManageUserResolver,
   ],
 })
 export class AppModule {}

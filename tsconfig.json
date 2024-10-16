@@ -12,7 +12,7 @@
     "baseUrl": "./",
     "paths": {
       "@src/*": ["src/*"],
-      "@common/*": ["src/result-dto/*"]
+      "@dto/*": ["src/result-dto/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

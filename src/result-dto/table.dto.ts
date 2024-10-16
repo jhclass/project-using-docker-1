@@ -54,8 +54,8 @@ export class ManageUser {
   mZipCode?: string;
   @Field({ nullable: true })
   mAddressDetail?: string;
-  @Field(() => [Branch], { nullable: true })
-  Branch?: Branch[];
+  @Field(() => Branch, { nullable: true })
+  Branch?: Branch;
   @Field(() => Int, { nullable: true })
   branchId?: number;
   @Field(() => String, { nullable: true })

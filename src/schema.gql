@@ -31,7 +31,7 @@ type ManageUser {
   email: String
   mZipCode: String
   mAddressDetail: String
-  Branch: [Branch!]
+  Branch: Branch
   branchId: Int
   lastModifiedTime: String
 }

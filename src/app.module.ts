@@ -14,8 +14,7 @@ import { S3Service } from "./s3/s3.service";
 import { DeleteManageUserModule } from "./manage-user/delete-manage-user/delete-manage-user.module";
 import { LoginModule } from "@src/login/login.module";
 import { JwtStrategy } from "@src/jwt.strategy";
-import { SeeManageUserService } from "./manage-user/see-manage-user/see-manage-user.service";
-import { SeeManageUserResolver } from "./manage-user/see-manage-user/see-manage-user.resolver";
+import { SeeManageUserModule } from "@src/manage-user/see-manage-user/see-manage-user.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -33,6 +32,7 @@ import { SeeManageUserResolver } from "./manage-user/see-manage-user/see-manage-
     EditManageUserModule,
     DeleteManageUserModule,
     LoginModule,
+    SeeManageUserModule,
   ],
   controllers: [AppController, S3Controller],
   providers: [
@@ -41,8 +41,6 @@ import { SeeManageUserResolver } from "./manage-user/see-manage-user/see-manage-
     PrismaService,
     S3Service,
     JwtStrategy,
-    SeeManageUserService,
-    SeeManageUserResolver,
   ],
 })
 export class AppModule {}

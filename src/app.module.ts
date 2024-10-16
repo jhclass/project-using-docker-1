@@ -15,6 +15,7 @@ import { DeleteManageUserModule } from "./manage-user/delete-manage-user/delete-
 import { LoginModule } from "@src/login/login.module";
 import { JwtStrategy } from "@src/jwt.strategy";
 import { SeeManageUserModule } from "@src/manage-user/see-manage-user/see-manage-user.module";
+import { SearchManageUserModule } from "@src/manage-user/search-manage-user/search-manage-user.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -33,6 +34,7 @@ import { SeeManageUserModule } from "@src/manage-user/see-manage-user/see-manage
     DeleteManageUserModule,
     LoginModule,
     SeeManageUserModule,
+    SearchManageUserModule,
   ],
   controllers: [AppController, S3Controller],
   providers: [

@@ -45,3 +45,17 @@ export class ResultSeeManageUser {
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }
+
+@ObjectType()
+export class SearchManageUserResult {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  error?: string;
+  @Field({ nullable: true })
+  message?: string;
+  @Field(() => [ManageUser], { nullable: true })
+  result?: ManageUser[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}

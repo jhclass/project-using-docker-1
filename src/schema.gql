@@ -57,9 +57,18 @@ type ResultSeeManageUser {
   totalCount: Int
 }
 
+type SearchManageUserResult {
+  ok: Boolean!
+  error: String
+  message: String
+  result: [ManageUser!]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   seeManageUser(limit: Int, page: Int, resign: String): ResultSeeManageUser!
+  searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String!], limit: Int, page: Int): SearchManageUserResult!
 }
 
 type Mutation {

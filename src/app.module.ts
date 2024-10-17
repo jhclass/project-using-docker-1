@@ -16,6 +16,7 @@ import { LoginModule } from "@src/login/login.module";
 import { JwtStrategy } from "@src/jwt.strategy";
 import { SeeManageUserModule } from "@src/manage-user/see-manage-user/see-manage-user.module";
 import { SearchManageUserModule } from "@src/manage-user/search-manage-user/search-manage-user.module";
+import { CreateBranchModule } from "./branch/create-branch/create-branch.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -35,6 +36,7 @@ import { SearchManageUserModule } from "@src/manage-user/search-manage-user/sear
     LoginModule,
     SeeManageUserModule,
     SearchManageUserModule,
+    CreateBranchModule,
   ],
   controllers: [AppController, S3Controller],
   providers: [

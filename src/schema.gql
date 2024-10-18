@@ -78,4 +78,5 @@ type Mutation {
   login(mUserId: String!, mPassword: String!): ResultLogin!
   createBranch(branchName: String!): CommonResponse!
   editBranch(id: Int!, newBranchName: String!): CommonResponse!
+  deleteBranch(id: Int!): CommonResponse!
 }

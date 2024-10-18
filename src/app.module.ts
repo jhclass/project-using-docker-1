@@ -18,6 +18,7 @@ import { SeeManageUserModule } from "@src/manage-user/see-manage-user/see-manage
 import { SearchManageUserModule } from "@src/manage-user/search-manage-user/search-manage-user.module";
 import { CreateBranchModule } from "@src/branch/create-branch/create-branch.module";
 import { EditBranchModule } from "@src/branch/edit-branch/edit-branch.module";
+import { DeleteBranchModule } from "@src/branch/delete-branch/delete-branch.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -39,6 +40,7 @@ import { EditBranchModule } from "@src/branch/edit-branch/edit-branch.module";
     SearchManageUserModule,
     CreateBranchModule,
     EditBranchModule,
+    DeleteBranchModule,
   ],
   controllers: [AppController, S3Controller],
   providers: [

@@ -9,14 +9,15 @@ import { PrismaService } from "@src/prisma/prisma.service";
 import { CreateManageUserModule } from "@src/manage-user/create-manage-user/create-manage-user.module";
 import { EditManageUserModule } from "./manage-user/edit-manage-user/edit-manage-user.module";
 import { ConfigModule } from "@nestjs/config";
-import { S3Controller } from "./s3/s3.controller";
-import { S3Service } from "./s3/s3.service";
+import { S3Controller } from "@src/s3/s3.controller";
+import { S3Service } from "@src/s3/s3.service";
 import { DeleteManageUserModule } from "./manage-user/delete-manage-user/delete-manage-user.module";
 import { LoginModule } from "@src/login/login.module";
 import { JwtStrategy } from "@src/jwt.strategy";
 import { SeeManageUserModule } from "@src/manage-user/see-manage-user/see-manage-user.module";
 import { SearchManageUserModule } from "@src/manage-user/search-manage-user/search-manage-user.module";
-import { CreateBranchModule } from "./branch/create-branch/create-branch.module";
+import { CreateBranchModule } from "@src/branch/create-branch/create-branch.module";
+import { EditBranchModule } from "@src/branch/edit-branch/edit-branch.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -37,6 +38,7 @@ import { CreateBranchModule } from "./branch/create-branch/create-branch.module"
     SeeManageUserModule,
     SearchManageUserModule,
     CreateBranchModule,
+    EditBranchModule,
   ],
   controllers: [AppController, S3Controller],
   providers: [

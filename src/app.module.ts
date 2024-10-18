@@ -6,19 +6,12 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { SampleResolver } from "@src/sample/sample.resolver";
 import { join } from "path";
 import { PrismaService } from "@src/prisma/prisma.service";
-import { CreateManageUserModule } from "@src/manage-user/create-manage-user/create-manage-user.module";
-import { EditManageUserModule } from "./manage-user/edit-manage-user/edit-manage-user.module";
 import { ConfigModule } from "@nestjs/config";
-import { S3Controller } from "@src/s3/s3.controller";
-import { S3Service } from "@src/s3/s3.service";
-import { DeleteManageUserModule } from "./manage-user/delete-manage-user/delete-manage-user.module";
 import { LoginModule } from "@src/login/login.module";
 import { JwtStrategy } from "@src/jwt.strategy";
-import { SeeManageUserModule } from "@src/manage-user/see-manage-user/see-manage-user.module";
-import { SearchManageUserModule } from "@src/manage-user/search-manage-user/search-manage-user.module";
-import { CreateBranchModule } from "@src/branch/create-branch/create-branch.module";
-import { EditBranchModule } from "@src/branch/edit-branch/edit-branch.module";
-import { DeleteBranchModule } from "@src/branch/delete-branch/delete-branch.module";
+import { BranchModule } from "@src/branch/branch.module";
+import { ManageUserModule } from "@src/manage-user/manage-user.module";
+import { S3Module } from "@src/s3/s3.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -32,23 +25,12 @@ import { DeleteBranchModule } from "@src/branch/delete-branch/delete-branch.modu
       //   outputAs: "class",
       // },
     }),
-    CreateManageUserModule,
-    EditManageUserModule,
-    DeleteManageUserModule,
     LoginModule,
-    SeeManageUserModule,
-    SearchManageUserModule,
-    CreateBranchModule,
-    EditBranchModule,
-    DeleteBranchModule,
+    BranchModule,
+    ManageUserModule,
+    S3Module,
   ],
-  controllers: [AppController, S3Controller],
-  providers: [
-    AppService,
-    SampleResolver,
-    PrismaService,
-    S3Service,
-    JwtStrategy,
-  ],
+  controllers: [AppController],
+  providers: [AppService, SampleResolver, PrismaService, JwtStrategy],
 })
 export class AppModule {}

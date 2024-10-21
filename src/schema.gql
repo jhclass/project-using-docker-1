@@ -47,6 +47,7 @@ type ResultLogin {
   message: String
   error: String
   token: String
+  refreshToken: String
 }
 
 type ResultSeeManageUser {
@@ -65,6 +66,12 @@ type SearchManageUserResult {
   totalCount: Int
 }
 
+type ResultRefreshToken {
+  ok: Boolean!
+  error: String
+  newAccessToken: String
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String!], limit: Int, page: Int): SearchManageUserResult!
@@ -79,4 +86,5 @@ type Mutation {
   createManageUser(mUserId: String!, mUsername: String!, mPassword: String!, mGrade: Int, mRank: String, mPart: [String!], mPhoneNum: String, mPhoneNumCompany: String, mPhoneNumFriend: String, mPhoneNumInside: String, mJoiningDate: String, mAddresses: String, email: String, mZipCode: String, mAddressDetail: String): CommonResponse!
   editManageUser(id: Int!, mUsername: String, mPassword: String, mGrade: Int, mRank: String, mPhoneNum: String, mPhoneNumCompany: String, mPhoneNumInside: String, mPhoneNumFriend: String, mPart: [String!], mJoiningDate: String, mAddresses: String, email: String, resign: String, mZipCode: String, mAddressDetail: String, lastModifiedTime: String): CommonResponse!
   deleteManageUser(id: Int!): CommonResponse!
+  refreshToken(refreshToken: String!): ResultRefreshToken!
 }

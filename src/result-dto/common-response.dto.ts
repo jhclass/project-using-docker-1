@@ -30,6 +30,8 @@ export class ResultLogin {
   error?: string;
   @Field({ nullable: true })
   token?: string;
+  @Field({ nullable: true })
+  refreshToken?: string;
 }
 
 @ObjectType()
@@ -58,4 +60,14 @@ export class SearchManageUserResult {
   result?: ManageUser[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
+}
+
+@ObjectType()
+export class ResultRefreshToken {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  error?: string;
+  @Field({ nullable: true })
+  newAccessToken?: string;
 }

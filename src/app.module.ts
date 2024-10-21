@@ -12,6 +12,7 @@ import { JwtStrategy } from "@src/jwt.strategy";
 import { BranchModule } from "@src/branch/branch.module";
 import { ManageUserModule } from "@src/manage-user/manage-user.module";
 import { S3Module } from "@src/s3/s3.module";
+import { RefreshTokenModule } from "@src/refresh-token/refresh-token.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -29,6 +30,7 @@ import { S3Module } from "@src/s3/s3.module";
     BranchModule,
     ManageUserModule,
     S3Module,
+    RefreshTokenModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

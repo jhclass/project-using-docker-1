@@ -29,11 +29,19 @@ export class LoginService {
         process.env.SECRET_KEY,
         { expiresIn: "12h" },
       );
+      const refreshToken = jwt.sign(
+        { mUserId: existingId.mUserId },
+        process.env.REFRESH_KEY,
+        {
+          expiresIn: "12h",
+        },
+      );
 
       return {
         ok: true,
         message: "로그인 완료 되었습니다.",
         token,
+        refreshToken,
       };
     } catch (error) {
       console.error(error);

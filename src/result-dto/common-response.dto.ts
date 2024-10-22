@@ -71,3 +71,12 @@ export class ResultRefreshToken {
   @Field({ nullable: true })
   newAccessToken?: string;
 }
+@ObjectType()
+export class ResultIsMe {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+}

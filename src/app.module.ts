@@ -13,6 +13,7 @@ import { BranchModule } from "@src/branch/branch.module";
 import { ManageUserModule } from "@src/manage-user/manage-user.module";
 import { S3Module } from "@src/s3/s3.module";
 import { RefreshTokenModule } from "@src/refresh-token/refresh-token.module";
+import { MMeModule } from "@src/m-me/m-me.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -31,6 +32,7 @@ import { RefreshTokenModule } from "@src/refresh-token/refresh-token.module";
     ManageUserModule,
     S3Module,
     RefreshTokenModule,
+    MMeModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

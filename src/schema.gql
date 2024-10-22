@@ -72,10 +72,18 @@ type ResultRefreshToken {
   newAccessToken: String
 }
 
+type ResultIsMe {
+  ok: Boolean!
+  message: String
+  error: String
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String!], limit: Int, page: Int): SearchManageUserResult!
   seeManageUser(limit: Int, page: Int, resign: String): ResultSeeManageUser!
+  mMe: ManageUser!
+  isMme: ResultIsMe!
 }
 
 type Mutation {

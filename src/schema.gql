@@ -36,6 +36,40 @@ type ManageUser {
   lastModifiedTime: String
 }
 
+type StudentState {
+  id: Int!
+  campus: String
+  category: String
+  stName: String!
+  phoneNum1: String!
+  phoneNum2: String
+  phoneNum3: String
+  currentManager: String
+  subject: [String!]
+  detail: String
+  agreement: String!
+  progress: Int!
+  stEmail: String
+  stAddr: String
+  subDiv: String
+  stVisit: String
+  expEnrollDate: String
+  perchase: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  receiptDiv: String
+  pic: String
+  classMethod: [String!]
+  Branch: Branch
+  branchId: Int
+  lastModifiedTime: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type CommonResponse {
   ok: Boolean!
   message: String
@@ -95,4 +129,5 @@ type Mutation {
   editManageUser(id: Int!, mUsername: String, mPassword: String, mGrade: Int, mRank: String, mPhoneNum: String, mPhoneNumCompany: String, mPhoneNumInside: String, mPhoneNumFriend: String, mPart: [String!], mJoiningDate: String, mAddresses: String, email: String, resign: String, mZipCode: String, mAddressDetail: String, lastModifiedTime: String): CommonResponse!
   deleteManageUser(id: Int!): CommonResponse!
   refreshToken(refreshToken: String!): ResultRefreshToken!
+  createStudentState(agreement: String!, subject: [String!]!, progress: Int!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String!], branchId: Int): CommonResponse!
 }

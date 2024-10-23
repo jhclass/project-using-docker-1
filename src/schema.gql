@@ -8,6 +8,10 @@ type Branch {
   createdAt: String!
   updatedAt: String!
   lastModifiedTime: String
+  AdviceType: [AdviceType!]!
+  StudentState: [StudentState!]!
+  ConsultationMemo: [ConsultationMemo!]!
+  PermissionsGranted: [PermissionsGranted!]!
 }
 
 type ManageUser {
@@ -34,6 +38,8 @@ type ManageUser {
   Branch: Branch
   branchId: Int
   lastModifiedTime: String
+  PermissionsGranted: [PermissionsGranted!]
+  StudentState: [StudentState!]
 }
 
 type StudentState {
@@ -44,7 +50,8 @@ type StudentState {
   phoneNum1: String!
   phoneNum2: String
   phoneNum3: String
-  currentManager: String
+  currentManager: ManageUser
+  currentManagerInt: Int
   subject: [String!]
   detail: String
   agreement: String!
@@ -69,6 +76,50 @@ type StudentState {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type AdviceType {
+  id: Int!
+  type: String!
+  indexNum: Int!
+  category: String
+  onOff: String
+  defaultValue: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  studentStates: [StudentState!]
+  lastModifiedTime: String
+  Branch: Branch
+  branchId: Int
+}
+
+type ConsultationMemo {
+  id: Int!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  studentState: StudentState
+  studentStateId: Int
+  manageUser: ManageUser
+  manageUserId: Int
+  Branch: Branch
+  branchId: Int
+  lastModifiedTime: String
+}
+
+type PermissionsGranted {
+  id: Int!
+  permissionName: String!
+  topic: String
+  ManageUser: [ManageUser!]!
+  smsPermitted: String
+  readOnly: String
+  allPermitted: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  Branch: Branch
+  branchId: Int
+  lastModifiedTime: DateTime
+}
 
 type CommonResponse {
   ok: Boolean!
@@ -130,4 +181,5 @@ type Mutation {
   deleteManageUser(id: Int!): CommonResponse!
   refreshToken(refreshToken: String!): ResultRefreshToken!
   createStudentState(agreement: String!, subject: [String!]!, progress: Int!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String!], branchId: Int): CommonResponse!
+  createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
 }

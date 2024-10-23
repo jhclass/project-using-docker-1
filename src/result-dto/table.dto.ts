@@ -11,6 +11,14 @@ export class Branch {
   updatedAt: Date;
   @Field(() => String, { nullable: true })
   lastModifiedTime?: Date;
+  @Field(() => [AdviceType])
+  AdviceType: AdviceType[];
+  @Field(() => [StudentState])
+  StudentState: StudentState[];
+  @Field(() => [ConsultationMemo])
+  ConsultationMemo: ConsultationMemo[];
+  @Field(() => [PermissionsGranted])
+  PermissionsGranted: PermissionsGranted[];
 }
 
 //ManageUser
@@ -62,9 +70,13 @@ export class ManageUser {
   branchId?: number;
   @Field(() => String, { nullable: true })
   lastModifiedTime?: Date;
+  @Field(() => [PermissionsGranted], { nullable: true })
+  PermissionsGranted?: PermissionsGranted[];
+  @Field(() => [StudentState], { nullable: true })
+  StudentState?: StudentState[];
 }
 
-//StudentState
+//StudentState (상담관리)
 @ObjectType()
 export class StudentState {
   @Field(() => Int)
@@ -81,8 +93,10 @@ export class StudentState {
   phoneNum2?: string;
   @Field({ nullable: true })
   phoneNum3?: string;
-  @Field({ nullable: true })
-  currentManager?: string;
+  @Field(() => ManageUser, { nullable: true })
+  currentManager?: ManageUser;
+  @Field(() => Int, { nullable: true })
+  currentManagerInt: number;
   @Field(() => [String], { nullable: true })
   subject?: string[];
   @Field({ nullable: true })
@@ -144,6 +158,10 @@ export class AdviceType {
   studentStates: StudentState[];
   @Field({ nullable: true })
   lastModifiedTime?: string;
+  @Field(() => Branch, { nullable: true })
+  Branch?: Branch;
+  @Field(() => Int, { nullable: true })
+  branchId?: number;
 }
 
 //상담메모
@@ -171,4 +189,33 @@ export class ConsultationMemo {
   branchId?: number;
   @Field({ nullable: true })
   lastModifiedTime?: string;
+}
+
+//PermisionsGranted(권한)
+@ObjectType()
+export class PermissionsGranted {
+  @Field(() => Int)
+  id: number;
+  @Field()
+  permissionName: string;
+  @Field({ nullable: true })
+  topic: string;
+  @Field(() => [ManageUser])
+  ManageUser: ManageUser[];
+  @Field({ nullable: true })
+  smsPermitted: string;
+  @Field({ nullable: true })
+  readOnly: string;
+  @Field({ nullable: true })
+  allPermitted: string;
+  @Field(() => Date)
+  createdAt: string;
+  @Field(() => Date)
+  updatedAt: string;
+  @Field(() => Branch, { nullable: true })
+  Branch: Branch;
+  @Field(() => Int, { nullable: true })
+  branchId: number;
+  @Field(() => Date, { nullable: true })
+  lastModifiedTime: string;
 }

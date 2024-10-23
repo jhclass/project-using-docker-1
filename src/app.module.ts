@@ -15,6 +15,7 @@ import { S3Module } from "@src/s3/s3.module";
 import { RefreshTokenModule } from "@src/refresh-token/refresh-token.module";
 import { MMeModule } from "@src/m-me/m-me.module";
 import { CreateStudentStateModule } from "@src/student-state/create-student-state/create-student-state.module";
+import { CreatePermissionsGrantedModule } from "@src/permissions-granted/create-permissions-granted/create-permissions-granted.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -35,6 +36,7 @@ import { CreateStudentStateModule } from "@src/student-state/create-student-stat
     RefreshTokenModule,
     MMeModule,
     CreateStudentStateModule,
+    CreatePermissionsGrantedModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

@@ -194,4 +194,5 @@ type Mutation {
   createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
   editPermissionsGranted(lastModifiedTime: String!, id: Int!, manageUserIdsToConnect: [Int!], manageUserIdsToDisconnect: [Int!], smsPermitted: String, readOnly: String, allPermitted: String, permissionName: String, topic: String): CommonResponse!
   deletePermissionsGranted(id: Int!): CommonResponse!
+  createAdviceType(type: String!, indexNum: Int!, category: String!, onOff: String, defaultValue: String): CommonResponse!
 }

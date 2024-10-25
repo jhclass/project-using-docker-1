@@ -17,6 +17,8 @@ import { MMeModule } from "@src/m-me/m-me.module";
 import { CreateStudentStateModule } from "@src/student-state/create-student-state/create-student-state.module";
 import { CreatePermissionsGrantedModule } from "@src/permissions-granted/create-permissions-granted/create-permissions-granted.module";
 import { EditPermissionsGrantedModule } from "@src/permissions-granted/edit-permissions-granted/edit-permissions-granted.module";
+import { DeletePermissionsGrantedModule } from "@src/permissions-granted/delete-permissions-granted/delete-permissions-granted.module";
+import { SearchPermissionsGrantedModule } from "@src/permissions-granted/search-permissions-granted/search-permissions-granted.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -39,6 +41,8 @@ import { EditPermissionsGrantedModule } from "@src/permissions-granted/edit-perm
     CreateStudentStateModule,
     CreatePermissionsGrantedModule,
     EditPermissionsGrantedModule,
+    DeletePermissionsGrantedModule,
+    SearchPermissionsGrantedModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

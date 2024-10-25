@@ -163,12 +163,21 @@ type ResultIsMe {
   error: String
 }
 
+type ResultSearchPermissionsGranted {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [PermissionsGranted!]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String!], limit: Int, page: Int): SearchManageUserResult!
   seeManageUser(limit: Int, page: Int, resign: String): ResultSeeManageUser!
   mMe: ManageUser!
   isMme: ResultIsMe!
+  searchPermissionsGranted(id: Int, permissionName: String, topic: String, manageUserId: Int): ResultSearchPermissionsGranted!
 }
 
 type Mutation {
@@ -184,4 +193,5 @@ type Mutation {
   createStudentState(agreement: String!, subject: [String!]!, progress: Int!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String!], branchId: Int): CommonResponse!
   createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
   editPermissionsGranted(lastModifiedTime: String!, id: Int!, manageUserIdsToConnect: [Int!], manageUserIdsToDisconnect: [Int!], smsPermitted: String, readOnly: String, allPermitted: String, permissionName: String, topic: String): CommonResponse!
+  deletePermissionsGranted(id: Int!): CommonResponse!
 }

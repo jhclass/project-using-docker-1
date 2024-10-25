@@ -15,10 +15,8 @@ import { S3Module } from "@src/s3/s3.module";
 import { RefreshTokenModule } from "@src/refresh-token/refresh-token.module";
 import { MMeModule } from "@src/m-me/m-me.module";
 import { CreateStudentStateModule } from "@src/student-state/create-student-state/create-student-state.module";
-import { CreatePermissionsGrantedModule } from "@src/permissions-granted/create-permissions-granted/create-permissions-granted.module";
-import { EditPermissionsGrantedModule } from "@src/permissions-granted/edit-permissions-granted/edit-permissions-granted.module";
-import { DeletePermissionsGrantedModule } from "@src/permissions-granted/delete-permissions-granted/delete-permissions-granted.module";
-import { SearchPermissionsGrantedModule } from "@src/permissions-granted/search-permissions-granted/search-permissions-granted.module";
+import { PermissionsGrantedModule } from "@src/permissions-granted/permissions-granted.module";
+import { CreateAdviceTypeModule } from "@src/advice-type/create-advice-type/create-advice-type.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -39,10 +37,8 @@ import { SearchPermissionsGrantedModule } from "@src/permissions-granted/search-
     RefreshTokenModule,
     MMeModule,
     CreateStudentStateModule,
-    CreatePermissionsGrantedModule,
-    EditPermissionsGrantedModule,
-    DeletePermissionsGrantedModule,
-    SearchPermissionsGrantedModule,
+    PermissionsGrantedModule,
+    CreateAdviceTypeModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

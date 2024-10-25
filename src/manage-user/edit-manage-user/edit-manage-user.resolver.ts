@@ -1,11 +1,15 @@
-import { Resolver, Mutation, Args, Int } from "@nestjs/graphql";
+import { Resolver, Mutation, Args, Int, Context } from "@nestjs/graphql";
 import { CommonResponse } from "@src/result-dto/common-response.dto";
 import { EditManageUserService } from "@src/manage-user/edit-manage-user/edit-manage-user.service";
+import { UseGuards } from "@nestjs/common";
+import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 @Resolver()
 export class EditManageUserResolver {
   constructor(private editManageUserService: EditManageUserService) {}
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => CommonResponse)
   async editManageUser(
+    @Context() context: any,
     @Args({ name: "id", type: () => Int }) id: number,
     @Args("mUsername", { nullable: true }) mUsername?: string,
     @Args("mPassword", { nullable: true }) mPassword?: string,
@@ -24,8 +28,10 @@ export class EditManageUserResolver {
     @Args("mZipCode", { nullable: true }) mZipCode?: string,
     @Args("mAddressDetail", { nullable: true }) mAddressDetail?: string,
     @Args("lastModifiedTime", { nullable: true }) lastModifiedTime?: string,
+    @Args("branchId", { type: () => Int, nullable: true }) branchId?: number,
   ): Promise<CommonResponse> {
     return this.editManageUserService.editManageUserFunc(
+      context,
       id,
       mUsername,
       mPassword,
@@ -43,6 +49,7 @@ export class EditManageUserResolver {
       mZipCode,
       mAddressDetail,
       lastModifiedTime,
+      branchId,
     );
   }
 }

@@ -9,17 +9,17 @@ export class EditPermissionsGrantedService {
     context: any,
     lastModifiedTime: string,
     id: number,
-    permissionName: string,
-    topic: string,
     manageUserIdsToConnect?: number[],
     manageUserIdsToDisconnect?: number[],
     smsPermitted?: string,
     readOnly?: string,
     allPermitted?: string,
+    permissionName?: string,
+    topic?: string,
   ) {
     try {
       const { user } = context.req;
-      const { branchId } = user.branchId;
+      const { branchId } = user;
       const existingId = await this.client.permissionsGranted.findUnique({
         where: { id, branchId: branchId },
       });

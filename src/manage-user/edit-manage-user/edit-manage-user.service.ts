@@ -5,6 +5,7 @@ import * as bcrypt from "bcrypt";
 export class EditManageUserService {
   constructor(private readonly client: PrismaService) {}
   async editManageUserFunc(
+    context: any,
     id: number,
     mUsername?: string,
     mPassword?: string,
@@ -22,8 +23,11 @@ export class EditManageUserService {
     mZipCode?: string,
     mAddressDetail?: string,
     lastModifiedTime?: string,
+    branchId?: number,
   ) {
     try {
+      const { user } = context.req;
+      branchId = branchId ?? user.branchId;
       const existingId = await this.client.manageUser.findUnique({
         where: {
           id,
@@ -56,6 +60,7 @@ export class EditManageUserService {
           mZipCode,
           mAddressDetail,
           lastModifiedTime,
+          branchId,
         },
       });
       return {

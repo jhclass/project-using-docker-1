@@ -7,6 +7,7 @@ import * as bcrypt from "bcrypt";
 export class CreateManageUserService {
   constructor(private readonly client: PrismaService) {}
   async createManageUserFunc(
+    context: any,
     mUserId: string,
     mUsername: string,
     mPassword: string,
@@ -22,9 +23,14 @@ export class CreateManageUserService {
     email?: string,
     mZipCode?: string,
     mAddressDetail?: string,
+    branchId?: number,
   ): Promise<CommonResponse> {
     try {
+      const { user } = context.req;
+      //console.log(user);
+      branchId = branchId ?? user.branchId;
       // 이름 , 아이디 중복여부, 전화번호
+
       const existingUser = await this.client.manageUser.findFirst({
         where: {
           OR: [{ mUserId }, { mPhoneNum }, { mUsername }],
@@ -52,6 +58,7 @@ export class CreateManageUserService {
           email,
           mZipCode,
           mAddressDetail,
+          branchId,
         },
       });
       return {

@@ -1,12 +1,16 @@
-import { Args, Mutation, Resolver, Int } from "@nestjs/graphql";
+import { Args, Mutation, Resolver, Int, Context } from "@nestjs/graphql";
 import { CommonResponse } from "@src/result-dto/common-response.dto";
 import { CreateManageUserService } from "@src/manage-user/create-manage-user/create-manage-user.service";
+import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
+import { UseGuards } from "@nestjs/common";
 
 @Resolver()
 export class CreateManageUserResolver {
   constructor(private createManageUserService: CreateManageUserService) {}
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => CommonResponse)
   createManageUser(
+    @Context() context: any,
     @Args("mUserId") mUserId: string,
     @Args("mUsername") mUsername: string,
     @Args("mPassword") mPassword: string,
@@ -23,8 +27,10 @@ export class CreateManageUserResolver {
     @Args("email", { nullable: true }) email?: string,
     @Args("mZipCode", { nullable: true }) mZipCode?: string,
     @Args("mAddressDetail", { nullable: true }) mAddressDetail?: string,
+    @Args("branchId", { type: () => Int, nullable: true }) branchId?: number,
   ): Promise<CommonResponse> {
     return this.createManageUserService.createManageUserFunc(
+      context,
       mUserId,
       mUsername,
       mPassword,
@@ -40,6 +46,7 @@ export class CreateManageUserResolver {
       email,
       mZipCode,
       mAddressDetail,
+      branchId,
     );
   }
 }

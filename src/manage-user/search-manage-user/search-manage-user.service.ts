@@ -22,17 +22,17 @@ interface ISearchConditions {
 export class SearchManageUserService {
   constructor(private readonly client: PrismaService) {}
   async searchManageUserFunc(
-    id: number,
-    mUserId: string,
-    mUsername: string,
-    mGrade: number,
-    mRank: string,
-    mPhoneNum: string,
-    mPart: string,
-    resign: string,
-    mJoiningDate: string[],
-    limit: number,
-    page: number,
+    id?: number,
+    mUserId?: string,
+    mUsername?: string,
+    mGrade?: number,
+    mRank?: string,
+    mPhoneNum?: string,
+    mPart?: string,
+    resign?: string,
+    mJoiningDate?: string[],
+    limit?: number,
+    page?: number,
   ) {
     try {
       const pageNum = page ?? 1;

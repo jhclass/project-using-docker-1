@@ -6,22 +6,22 @@ export class EditManageUserService {
   constructor(private readonly client: PrismaService) {}
   async editManageUserFunc(
     id: number,
-    mUsername: string,
-    mPassword: string,
-    mGrade: number,
-    mRank: string,
-    mPhoneNum: string,
-    mPhoneNumCompany: string,
-    mPhoneNumInside: string,
-    mPhoneNumFriend: string,
-    mPart: string[],
-    mJoiningDate: string,
-    mAddresses: string,
-    email: string,
-    resign: string,
-    mZipCode: string,
-    mAddressDetail: string,
-    lastModifiedTime: string,
+    mUsername?: string,
+    mPassword?: string,
+    mGrade?: number,
+    mRank?: string,
+    mPhoneNum?: string,
+    mPhoneNumCompany?: string,
+    mPhoneNumInside?: string,
+    mPhoneNumFriend?: string,
+    mPart?: string[],
+    mJoiningDate?: string,
+    mAddresses?: string,
+    email?: string,
+    resign?: string,
+    mZipCode?: string,
+    mAddressDetail?: string,
+    lastModifiedTime?: string,
   ) {
     try {
       const existingId = await this.client.manageUser.findUnique({
@@ -32,7 +32,7 @@ export class EditManageUserService {
       if (!existingId) {
         throw new Error(`id 가 없습니다.`);
       }
-      let hashedPassword;
+      let hashedPassword: string;
       if (mPassword) {
         hashedPassword = await bcrypt.hash(mPassword, 10);
       }

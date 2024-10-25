@@ -16,6 +16,7 @@ import { RefreshTokenModule } from "@src/refresh-token/refresh-token.module";
 import { MMeModule } from "@src/m-me/m-me.module";
 import { CreateStudentStateModule } from "@src/student-state/create-student-state/create-student-state.module";
 import { CreatePermissionsGrantedModule } from "@src/permissions-granted/create-permissions-granted/create-permissions-granted.module";
+import { EditPermissionsGrantedModule } from "@src/permissions-granted/edit-permissions-granted/edit-permissions-granted.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -37,6 +38,7 @@ import { CreatePermissionsGrantedModule } from "@src/permissions-granted/create-
     MMeModule,
     CreateStudentStateModule,
     CreatePermissionsGrantedModule,
+    EditPermissionsGrantedModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

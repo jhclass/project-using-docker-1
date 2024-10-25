@@ -182,4 +182,5 @@ type Mutation {
   refreshToken(refreshToken: String!): ResultRefreshToken!
   createStudentState(agreement: String!, subject: [String!]!, progress: Int!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String!], branchId: Int): CommonResponse!
   createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
+  editPermissionsGranted(lastModifiedTime: String!, id: Int!, permissionName: String!, topic: String!, manageUserIdsToConnect: [Int!], manageUserIdsToDisconnect: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
 }

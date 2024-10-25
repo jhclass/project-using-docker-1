@@ -6,6 +6,7 @@ import { ResultSeeManageUser } from "@src/result-dto/common-response.dto";
 export class SeeManageUserService {
   constructor(private readonly client: PrismaService) {}
   async seeManageUserFunc(
+    context: any,
     limit?: number,
     page?: number,
     resign?: string,

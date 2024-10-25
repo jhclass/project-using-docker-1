@@ -8,10 +8,10 @@ export class CreatePermissionsGrantedService {
     context: any,
     permissionName: string,
     topic: string,
-    manageUserIds: number[],
-    smsPermitted: string,
-    readOnly: string,
-    allPermitted: string,
+    manageUserIds?: number[],
+    smsPermitted?: string,
+    readOnly?: string,
+    allPermitted?: string,
   ) {
     try {
       const { user } = context.req;
@@ -30,13 +30,12 @@ export class CreatePermissionsGrantedService {
           },
         },
       });
-      console.log("existingIds", existingIds);
+
       const foundIds = existingIds.map((user) => user.id);
       const missingIds = manageUserIds.filter(
         (id: number) => !foundIds.includes(id), //역순으로 변경해서 포함되지 않는 것만 추출
       );
-      //console.log("foundIds", foundIds);
-      //console.log("missingIds", missingIds.length);
+
       if (missingIds.length > 0) {
         throw new Error(
           `다음 ID는 존재하지 않습니다: ${missingIds.join(", ")}`,

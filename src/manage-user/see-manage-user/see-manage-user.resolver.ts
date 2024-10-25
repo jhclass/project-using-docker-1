@@ -16,8 +16,13 @@ export class SeeManageUserResolver {
     @Args("resign", { nullable: true }) resign?: string,
   ): Promise<ResultSeeManageUser> {
     //console.log("context:", context);
-    const { user } = context.req;
-    console.log(user);
-    return this.seeManageUserService.seeManageUserFunc(limit, page, resign);
+    //const { user } = context.req;
+    //console.log(user);
+    return this.seeManageUserService.seeManageUserFunc(
+      context,
+      limit,
+      page,
+      resign,
+    );
   }
 }

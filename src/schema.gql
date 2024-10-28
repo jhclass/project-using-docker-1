@@ -59,8 +59,8 @@ type StudentState {
   stEmail: String
   stAddr: String
   subDiv: String
-  stVisit: String
-  expEnrollDate: String
+  stVisit: DateTime
+  expEnrollDate: DateTime
   perchase: Boolean
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -69,7 +69,8 @@ type StudentState {
   classMethod: [String!]
   Branch: Branch
   branchId: Int
-  lastModifiedTime: String
+  lastModifiedTime: DateTime
+  adviceTypes: [AdviceType!]
 }
 
 """
@@ -84,19 +85,20 @@ type AdviceType {
   category: String
   onOff: String
   defaultValue: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: String!
+  updatedAt: String!
   studentStates: [StudentState!]
   lastModifiedTime: String
   Branch: Branch
   branchId: Int
+  StudentState: [StudentState!]!
 }
 
 type ConsultationMemo {
   id: Int!
   content: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: String!
+  updatedAt: String!
   studentState: StudentState
   studentStateId: Int
   manageUser: ManageUser
@@ -110,15 +112,15 @@ type PermissionsGranted {
   id: Int!
   permissionName: String!
   topic: String
-  ManageUser: [ManageUser!]!
+  ManageUser: [ManageUser!]
   smsPermitted: String
   readOnly: String
   allPermitted: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: String!
+  updatedAt: String!
   Branch: Branch
   branchId: Int
-  lastModifiedTime: DateTime
+  lastModifiedTime: String
 }
 
 type CommonResponse {
@@ -171,6 +173,14 @@ type ResultSearchPermissionsGranted {
   totalCount: Int
 }
 
+type ResultAdviceType {
+  ok: Boolean!
+  message: String
+  error: String
+  adviceType: [AdviceType!]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String!], limit: Int, page: Int): SearchManageUserResult!
@@ -178,6 +188,7 @@ type Query {
   mMe: ManageUser!
   isMme: ResultIsMe!
   searchPermissionsGranted(id: Int, permissionName: String, topic: String, manageUserId: Int): ResultSearchPermissionsGranted!
+  seeAdviceType(limit: Int, page: Int, category: String): ResultAdviceType!
 }
 
 type Mutation {
@@ -194,6 +205,6 @@ type Mutation {
   createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
   editPermissionsGranted(lastModifiedTime: String!, id: Int!, manageUserIdsToConnect: [Int!], manageUserIdsToDisconnect: [Int!], smsPermitted: String, readOnly: String, allPermitted: String, permissionName: String, topic: String): CommonResponse!
   deletePermissionsGranted(id: Int!): CommonResponse!
-  createAdviceType(type: String!, indexNum: Int!, category: String!, onOff: String, defaultValue: String): CommonResponse!
   editAdviceType(id: Int!, onOff: String, category: String, defaultValue: String): CommonResponse!
+  createAdviceType(type: String!, indexNum: Int!, category: String!, onOff: String, defaultValue: String): CommonResponse!
 }

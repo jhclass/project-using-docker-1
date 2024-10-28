@@ -13,7 +13,9 @@ export class CreateAdviceTypeService {
     defaultValue?: string,
   ) {
     try {
+      onOff = onOff ?? "Y";
       const { user } = context.req;
+
       if (onOff === "N") {
         throw new Error(`onOff 상태는 무조건 "Y" 로 지정해야합니다.`);
       }

@@ -18,7 +18,7 @@ export class SearchPermissionsGrantedResolver {
     @Args("topic", { nullable: true }) topic?: string,
     @Args("manageUserId", { type: () => Int, nullable: true })
     manageUserId?: number,
-  ) {
+  ): Promise<ResultSearchPermissionsGranted> {
     return this.searchPermissionsGrantedService.searchPermissionsGrantedFunc(
       context,
       id,

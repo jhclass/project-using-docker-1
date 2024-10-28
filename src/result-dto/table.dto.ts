@@ -96,7 +96,7 @@ export class StudentState {
   @Field(() => ManageUser, { nullable: true })
   currentManager?: ManageUser;
   @Field(() => Int, { nullable: true })
-  currentManagerInt: number;
+  currentManagerInt?: number;
   @Field(() => [String], { nullable: true })
   subject?: string[];
   @Field({ nullable: true })
@@ -106,33 +106,35 @@ export class StudentState {
   @Field(() => Int)
   progress: number;
   @Field({ nullable: true })
-  stEmail: string;
+  stEmail?: string;
   @Field({ nullable: true })
-  stAddr: string;
+  stAddr?: string;
   @Field({ nullable: true })
-  subDiv: string;
-  @Field({ nullable: true })
-  stVisit: string;
-  @Field({ nullable: true })
-  expEnrollDate: string;
+  subDiv?: string;
+  @Field(() => Date, { nullable: true })
+  stVisit?: Date;
+  @Field(() => Date, { nullable: true })
+  expEnrollDate?: Date;
   @Field({ nullable: true })
   perchase?: boolean;
   @Field(() => Date)
-  createdAt: string;
+  createdAt: Date;
   @Field(() => Date)
-  updatedAt: string;
+  updatedAt: Date;
   @Field({ nullable: true })
   receiptDiv?: string;
   @Field({ nullable: true })
-  pic: string;
+  pic?: string; // 기본값 설정이 가능하면 설정
   @Field(() => [String], { nullable: true })
   classMethod?: string[];
   @Field(() => Branch, { nullable: true })
   Branch?: Branch;
   @Field(() => Int, { nullable: true })
   branchId?: number;
-  @Field({ nullable: true })
-  lastModifiedTime?: string;
+  @Field(() => Date, { nullable: true })
+  lastModifiedTime?: Date;
+  @Field(() => [AdviceType], { nullable: true })
+  adviceTypes?: AdviceType[];
 }
 
 //분야관리
@@ -150,14 +152,14 @@ export class AdviceType {
   onOff?: string;
   @Field({ nullable: true })
   defaultValue?: string;
-  @Field(() => Date)
-  createdAt: string;
-  @Field(() => Date)
-  updatedAt: string;
+  @Field(() => String)
+  createdAt: Date;
+  @Field(() => String)
+  updatedAt: Date;
   @Field(() => [StudentState], { nullable: true })
-  studentStates: StudentState[];
-  @Field({ nullable: true })
-  lastModifiedTime?: string;
+  studentStates?: StudentState[];
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date;
   @Field(() => Branch, { nullable: true })
   Branch?: Branch;
   @Field(() => Int, { nullable: true })
@@ -171,10 +173,10 @@ export class ConsultationMemo {
   id: number;
   @Field()
   content: string;
-  @Field(() => Date)
-  createdAt: string;
-  @Field(() => Date)
-  updatedAt: string;
+  @Field(() => String)
+  createdAt: Date;
+  @Field(() => String)
+  updatedAt: Date;
   @Field(() => StudentState, { nullable: true })
   studentState?: StudentState;
   @Field(() => Int, { nullable: true })
@@ -200,22 +202,22 @@ export class PermissionsGranted {
   permissionName: string;
   @Field({ nullable: true })
   topic: string;
-  @Field(() => [ManageUser])
-  ManageUser: ManageUser[];
+  @Field(() => [ManageUser], { nullable: true })
+  ManageUser?: ManageUser[];
   @Field({ nullable: true })
   smsPermitted: string;
   @Field({ nullable: true })
   readOnly: string;
   @Field({ nullable: true })
   allPermitted: string;
-  @Field(() => Date)
-  createdAt: string;
-  @Field(() => Date)
-  updatedAt: string;
+  @Field(() => String)
+  createdAt: Date;
+  @Field(() => String)
+  updatedAt: Date;
   @Field(() => Branch, { nullable: true })
-  Branch: Branch;
+  Branch?: Branch;
   @Field(() => Int, { nullable: true })
   branchId: number;
-  @Field(() => Date, { nullable: true })
-  lastModifiedTime: string;
+  @Field(() => String, { nullable: true })
+  lastModifiedTime: Date;
 }

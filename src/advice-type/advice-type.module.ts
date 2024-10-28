@@ -1,0 +1,18 @@
+import { Module } from "@nestjs/common";
+import { AdviceTypeResolver } from "./advice-type.resolver";
+import { AdviceTypeService } from "./advice-type.service";
+import { PrismaModule } from "@src/prisma/prisma.module";
+import { SeeAdviceTypeModule } from "./see-advice-type/see-advice-type.module";
+import { EditAdviceTypeModule } from "./edit-advice-type/edit-advice-type.module";
+import { CreateAdviceTypeModule } from "./create-advice-type/create-advice-type.module";
+
+@Module({
+  imports: [
+    PrismaModule,
+    SeeAdviceTypeModule,
+    EditAdviceTypeModule,
+    CreateAdviceTypeModule,
+  ],
+  providers: [AdviceTypeResolver, AdviceTypeService],
+})
+export class AdviceTypeModule {}

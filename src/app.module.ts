@@ -17,6 +17,8 @@ import { MMeModule } from "@src/m-me/m-me.module";
 import { CreateStudentStateModule } from "@src/student-state/create-student-state/create-student-state.module";
 import { PermissionsGrantedModule } from "@src/permissions-granted/permissions-granted.module";
 import { CreateAdviceTypeModule } from "@src/advice-type/create-advice-type/create-advice-type.module";
+import { EditAdviceTypeModule } from './advice-type/edit-advice-type/edit-advice-type.module';
+import { DeleteAdviceTypeModule } from './advice-type/delete-advice-type/delete-advice-type.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -39,6 +41,8 @@ import { CreateAdviceTypeModule } from "@src/advice-type/create-advice-type/crea
     CreateStudentStateModule,
     PermissionsGrantedModule,
     CreateAdviceTypeModule,
+    EditAdviceTypeModule,
+    DeleteAdviceTypeModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

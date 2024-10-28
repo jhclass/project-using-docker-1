@@ -207,4 +207,5 @@ type Mutation {
   deletePermissionsGranted(id: Int!): CommonResponse!
   editAdviceType(id: Int!, onOff: String, category: String, defaultValue: String): CommonResponse!
   createAdviceType(type: String!, indexNum: Int!, category: String!, onOff: String, defaultValue: String): CommonResponse!
+  staticPushAT(id: Int!, onOff: String): CommonResponse!
 }

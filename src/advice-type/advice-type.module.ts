@@ -5,6 +5,7 @@ import { PrismaModule } from "@src/prisma/prisma.module";
 import { SeeAdviceTypeModule } from "./see-advice-type/see-advice-type.module";
 import { EditAdviceTypeModule } from "./edit-advice-type/edit-advice-type.module";
 import { CreateAdviceTypeModule } from "./create-advice-type/create-advice-type.module";
+import { StaticPushAtModule } from "./static-push-at/static-push-at.module";
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CreateAdviceTypeModule } from "./create-advice-type/create-advice-type.
     SeeAdviceTypeModule,
     EditAdviceTypeModule,
     CreateAdviceTypeModule,
+    StaticPushAtModule,
   ],
   providers: [AdviceTypeResolver, AdviceTypeService],
 })

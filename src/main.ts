@@ -7,6 +7,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ["log", "error", "warn"],
   });
-  await app.listen(3000);
+  // 전역 CORS 설정
+  app.enableCors({
+    origin: "http://localhost:8000", // 허용할 프론트엔드 주소
+    credentials: true,
+  });
+  await app.listen(4000);
 }
 bootstrap();

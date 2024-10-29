@@ -18,6 +18,7 @@ import { CreateStudentStateModule } from "@src/student-state/create-student-stat
 import { PermissionsGrantedModule } from "@src/permissions-granted/permissions-granted.module";
 import { AdviceTypeModule } from "@src/advice-type/advice-type.module";
 import { AlarmModule } from "@src/alarm/alarm.module";
+import { WebsocketModule } from "@src/websocket/websocket.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -30,6 +31,12 @@ import { AlarmModule } from "@src/alarm/alarm.module";
       //   path: join(process.cwd(), "src/result-dto/graphql.ts"),
       //   outputAs: "class",
       // },
+      debug: true,
+      csrfPrevention: false, // CSRF 보호 비활성화
+      formatError: (error) => {
+        console.log(error); // 모든 에러 로그
+        return error;
+      },
     }),
     LoginModule,
     BranchModule,
@@ -41,6 +48,7 @@ import { AlarmModule } from "@src/alarm/alarm.module";
     PermissionsGrantedModule,
     AdviceTypeModule,
     AlarmModule,
+    WebsocketModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

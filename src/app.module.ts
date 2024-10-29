@@ -16,7 +16,8 @@ import { RefreshTokenModule } from "@src/refresh-token/refresh-token.module";
 import { MMeModule } from "@src/m-me/m-me.module";
 import { CreateStudentStateModule } from "@src/student-state/create-student-state/create-student-state.module";
 import { PermissionsGrantedModule } from "@src/permissions-granted/permissions-granted.module";
-import { AdviceTypeModule } from "./advice-type/advice-type.module";
+import { AdviceTypeModule } from "@src/advice-type/advice-type.module";
+import { AlarmModule } from "@src/alarm/alarm.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -39,6 +40,7 @@ import { AdviceTypeModule } from "./advice-type/advice-type.module";
     CreateStudentStateModule,
     PermissionsGrantedModule,
     AdviceTypeModule,
+    AlarmModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

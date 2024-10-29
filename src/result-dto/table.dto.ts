@@ -221,3 +221,25 @@ export class PermissionsGranted {
   @Field(() => String, { nullable: true })
   lastModifiedTime: Date;
 }
+
+@ObjectType()
+export class Alarm {
+  @Field(() => Int)
+  id: number;
+  @Field()
+  title: string;
+  @Field()
+  content: string;
+  @Field(() => [Int])
+  personalTarget: number[];
+  @Field(() => String)
+  createdAt: Date;
+  @Field(() => String)
+  updatedAt: Date;
+  @Field(() => Branch)
+  Branch: Branch;
+  @Field(() => Int)
+  branchId: string;
+  @Field(() => String)
+  lastModifiedTime: Date;
+}

@@ -1,4 +1,7 @@
-import { Module } from '@nestjs/common';
+import { Module } from "@nestjs/common";
+import { ReadAlarmsModule } from "./read-alarms/read-alarms.module";
 
-@Module({})
+@Module({
+  imports: [ReadAlarmsModule],
+})
 export class AlarmModule {}

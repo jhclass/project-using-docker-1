@@ -15,11 +15,13 @@ export class SeeAdviceTypeResolver {
     @Args("page", { type: () => Int, nullable: true }) page?: number,
     @Args("category", { nullable: true }) category?: string,
   ): Promise<ResultAdviceType> {
-    return this.seeAdviceService.seeAdviceFunc(
-      context,
-      limit,
-      page,
-      category,
-    ) as unknown as ResultAdviceType;
+    // return this.seeAdviceService.seeAdviceFunc(
+    //   context,
+    //   limit,
+    //   page,
+    //   category,
+    // ) as unknown as ResultAdviceType;
+    /**as unknown as ResultAdviceType 을 사용하기 보다는 타입이 어디가 불일치가 일어나고 있는지 찾는게 더 중요**/
+    return this.seeAdviceService.seeAdviceFunc(context, limit, page, category);
   }
 }

@@ -8,10 +8,10 @@ type Branch {
   createdAt: String!
   updatedAt: String!
   lastModifiedTime: String
-  AdviceType: [AdviceType!]!
-  StudentState: [StudentState!]!
-  ConsultationMemo: [ConsultationMemo!]!
-  PermissionsGranted: [PermissionsGranted!]!
+  AdviceType: [AdviceType!]
+  StudentState: [StudentState!]
+  ConsultationMemo: [ConsultationMemo!]
+  PermissionsGranted: [PermissionsGranted!]
 }
 
 type ManageUser {
@@ -59,24 +59,19 @@ type StudentState {
   stEmail: String
   stAddr: String
   subDiv: String
-  stVisit: DateTime
-  expEnrollDate: DateTime
+  stVisit: String
+  expEnrollDate: String
   perchase: Boolean
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: String!
+  updatedAt: String!
   receiptDiv: String
   pic: String
   classMethod: [String!]
   Branch: Branch
   branchId: Int
-  lastModifiedTime: DateTime
+  lastModifiedTime: String
   adviceTypes: [AdviceType!]
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type AdviceType {
   id: Int!
@@ -208,4 +203,5 @@ type Mutation {
   editAdviceType(id: Int!, onOff: String, category: String, defaultValue: String): CommonResponse!
   createAdviceType(type: String!, indexNum: Int!, category: String!, onOff: String, defaultValue: String): CommonResponse!
   staticPushAT(id: Int!, onOff: String): CommonResponse!
+  changeOrderAT(indexNums: [Int!]!, ids: [Int!]): CommonResponse!
 }

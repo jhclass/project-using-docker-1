@@ -11,14 +11,14 @@ export class Branch {
   updatedAt: Date;
   @Field(() => String, { nullable: true })
   lastModifiedTime?: Date;
-  @Field(() => [AdviceType])
-  AdviceType: AdviceType[];
-  @Field(() => [StudentState])
-  StudentState: StudentState[];
-  @Field(() => [ConsultationMemo])
-  ConsultationMemo: ConsultationMemo[];
-  @Field(() => [PermissionsGranted])
-  PermissionsGranted: PermissionsGranted[];
+  @Field(() => [AdviceType], { nullable: true })
+  AdviceType?: AdviceType[];
+  @Field(() => [StudentState], { nullable: true })
+  StudentState?: StudentState[];
+  @Field(() => [ConsultationMemo], { nullable: true })
+  ConsultationMemo?: ConsultationMemo[];
+  @Field(() => [PermissionsGranted], { nullable: true })
+  PermissionsGranted?: PermissionsGranted[];
 }
 
 //ManageUser
@@ -111,15 +111,15 @@ export class StudentState {
   stAddr?: string;
   @Field({ nullable: true })
   subDiv?: string;
-  @Field(() => Date, { nullable: true })
+  @Field(() => String, { nullable: true })
   stVisit?: Date;
-  @Field(() => Date, { nullable: true })
+  @Field(() => String, { nullable: true })
   expEnrollDate?: Date;
   @Field({ nullable: true })
   perchase?: boolean;
-  @Field(() => Date)
+  @Field(() => String)
   createdAt: Date;
-  @Field(() => Date)
+  @Field(() => String)
   updatedAt: Date;
   @Field({ nullable: true })
   receiptDiv?: string;
@@ -131,7 +131,7 @@ export class StudentState {
   Branch?: Branch;
   @Field(() => Int, { nullable: true })
   branchId?: number;
-  @Field(() => Date, { nullable: true })
+  @Field(() => String, { nullable: true })
   lastModifiedTime?: Date;
   @Field(() => [AdviceType], { nullable: true })
   adviceTypes?: AdviceType[];

@@ -230,16 +230,16 @@ export class Alarm {
   title: string;
   @Field()
   content: string;
-  @Field(() => [Int])
-  personalTarget: number[];
-  @Field(() => String)
-  createdAt: Date;
-  @Field(() => String)
-  updatedAt: Date;
-  @Field(() => Branch)
-  Branch: Branch;
-  @Field(() => Int)
-  branchId: string;
-  @Field(() => String)
-  lastModifiedTime: Date;
+  @Field(() => [Int], { nullable: true })
+  personalTarget?: number[];
+  @Field(() => String, { nullable: true })
+  createdAt?: Date;
+  @Field(() => String, { nullable: true })
+  updatedAt?: Date;
+  @Field(() => Branch, { nullable: true })
+  Branch?: Branch;
+  @Field(() => Int, { nullable: true })
+  branchId?: number;
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date;
 }

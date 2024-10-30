@@ -1,5 +1,10 @@
 import { ObjectType, Field, Int } from "@nestjs/graphql";
-import { AdviceType, ManageUser, PermissionsGranted } from "@dto/table.dto";
+import {
+  AdviceType,
+  Alarm,
+  ManageUser,
+  PermissionsGranted,
+} from "@dto/table.dto";
 @ObjectType()
 export class CommonResponse {
   @Field()
@@ -106,5 +111,19 @@ export class ResultAdviceType {
   @Field(() => [AdviceType], { nullable: true })
   adviceType?: AdviceType[];
   @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}
+
+@ObjectType()
+export class ResultSeeAlarms {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => [Alarm], { nullable: true })
+  data?: Alarm[];
+  @Field({ nullable: true })
   totalCount?: number;
 }

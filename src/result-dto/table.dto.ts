@@ -94,6 +94,277 @@ export class ManageUser {
   Stamp?: Stamp[];
 }
 
+//Stamp (도장)
+@ObjectType()
+export class Stamp {
+  @Field(() => Int, { nullable: true })
+  id?: number;
+  @Field(() => ManageUser, { nullable: true })
+  Manager?: ManageUser;
+  @Field(() => Int, { nullable: true })
+  manageUserId?: number;
+  @Field(() => String, { nullable: true })
+  createdAt?: Date;
+  @Field(() => String, { nullable: true })
+  updatedAt?: Date;
+  @Field({ nullable: true })
+  imageUrl?: string;
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date; //최근수정시간
+}
+
+//Lectures(강의)
+@ObjectType()
+export class Lectures {
+  @Field(() => Int)
+  id: number;
+  @Field(() => String)
+  createdAt: Date;
+  @Field(() => String)
+  updatedAt: Date;
+  @Field()
+  campus: string; // 신촌점이 입력될 수 있도록
+  @Field()
+  temporaryName: string;
+  @Field()
+  subDiv: string; // null 이면 안됩니다.
+  @Field(() => [ManageUser])
+  teachers: ManageUser[];
+  @Field()
+  roomNum: string;
+  @Field(() => Subject, { nullable: true })
+  subject?: Subject;
+  @Field(() => Int)
+  subjectId: number;
+  @Field()
+  lecturePeriodStart: string;
+  @Field()
+  lecturePeriodEnd: string;
+  @Field(() => [String])
+  lectureDetails: string[]; //강의 일자들
+  @Field(() => [String])
+  lectureTime: string[]; //시작, 종료시간
+  @Field()
+  eduStatusReport: string; //교육상황보고 연동
+  @Field(() => Int)
+  ApprovedNum: number; //승인인원
+  @Field(() => Int)
+  confirmedNum: number; //확정인원
+  @Field(() => Int)
+  sessionNum: number; //회차
+  @Field({ nullable: true })
+  timetableAttached?: string; //시간표첨부
+  @Field(() => [WorkLogs], { nullable: true })
+  WorkLogs?: WorkLogs[];
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date; //최근수정시간
+}
+
+//Subject(과정)
+@ObjectType()
+export class Subject {
+  @Field(() => Int, { nullable: true })
+  id?: number;
+  @Field({ nullable: true })
+  subDiv?: string;
+  @Field({ nullable: true })
+  subjectName?: string;
+  @Field(() => String, { nullable: true })
+  createdAt?: Date;
+  @Field(() => String, { nullable: true })
+  updatedAt?: Date;
+  @Field(() => Int, { nullable: true })
+  fee?: number;
+  @Field(() => String, { nullable: true })
+  startDate?: Date;
+  @Field(() => String, { nullable: true })
+  endDate?: Date;
+  @Field({ nullable: true })
+  roomNum?: string;
+  @Field({ nullable: true })
+  exposure?: boolean;
+  @Field(() => Int, { nullable: true })
+  totalTime?: number;
+  @Field({ nullable: true })
+  teacherName?: string;
+  @Field({ nullable: true })
+  subjectCode?: string;
+  @Field({ nullable: true })
+  expiresDateStart?: string;
+  @Field({ nullable: true })
+  expiresDateEnd?: string;
+  @Field(() => Int, { nullable: true })
+  round?: number;
+  @Field(() => [StudentPayment], { nullable: true })
+  StudentPayment?: StudentPayment[];
+  @Field(() => Lectures, { nullable: true })
+  lectures?: Lectures;
+  @Field(() => Int, { nullable: true })
+  branchId?: number;
+  @Field(() => Branch, { nullable: true })
+  Branch?: Branch;
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date; //#최근수정시간
+}
+
+//WorkLogs(업무일지);
+@ObjectType()
+export class WorkLogs {
+  @Field(() => Int, { nullable: true })
+  id: number;
+  @Field()
+  createdAt: String!;
+  @Field()
+  updatedAt: String!;
+  @Field()
+  paymentOne: String; //#결제1 (강사)
+  @Field()
+  paymentTwo: String; //#결제2 (담당직원)
+  @Field()
+  paymentThree: String; //#결제3 (관리자)
+  @Field()
+  trainingInfoOne: [String]!; //# 교시, 담당교사, 교과목명, 능력단위명, 훈련내용
+  @Field()
+  trainingInfoTwo: [String]!;
+  @Field()
+  trainingInfoThree: [String]!;
+  @Field()
+  trainingInfoFour: [String]!;
+  @Field()
+  trainingInfoFive: [String]!;
+  @Field()
+  trainingInfoSix: [String]!;
+  @Field()
+  trainingInfoSeven: [String]!;
+  @Field()
+  trainingInfoEight: [String]!;
+  @Field()
+  trainingTimeOneday: [Int]!; //#일계 - 교양, 전공, 실습, 기타, 계
+  @Field()
+  trainingTimeTotal: [Int]!; //#누계 - 교양, 전공, 실습, 기타, 계
+  @Field()
+  instruction: String; //# 지시사항
+  @Field()
+  absentSt: String; //#결석학생
+  @Field()
+  tardySt: String; //#지각학생
+  @Field()
+  leaveEarlySt: String; //#조퇴학생
+  @Field()
+  outingSt: String; //#외출학생
+  @Field()
+  etc: String; //#기타사항
+  @Field()
+  lectures: Lectures;
+  @Field()
+  lecturesId: Int!;
+  @Field()
+  workLogsDate: String!;
+  @Field()
+  attendanceCount: [Int]; // #출석 카운트 [재적,출석,결석,지각,조퇴,외출]
+  @Field()
+  Branch: Branch;
+  @Field()
+  BranchId: Int;
+  @Field()
+  checkList: [String]!;
+  @Field()
+  checkContext: [String];
+  @Field()
+  lastModifiedTime: String; //#최근수정시간
+}
+
+//StudentMemo (수강생 메모)
+@ObjectType()
+export class StudentMemo {
+  @Field(() => Int)
+  id: number;
+  @Field()
+  content: string;
+  @Field(() => Student, { nullable: true })
+  student?: Student;
+  @Field(() => Int, { nullable: true })
+  studentId?: number;
+  @Field(() => ManageUser, { nullable: true })
+  manageUser?: ManageUser;
+  @Field(() => Int, { nullable: true })
+  manageUserId?: number;
+  @Field({ nullable: true })
+  createdAt?: string;
+  @Field({ nullable: true })
+  updatedAt?: string;
+  @Field({ nullable: true })
+  lastModifiedTime?: string;
+}
+
+@ObjectType()
+export class PaymentDetail {
+  @Field(() => Int)
+  id: number;
+  @Field({ nullable: true })
+  cardCompany?: string; // 카드회사
+  @Field({ nullable: true })
+  cardNum?: string; //카드번호
+  @Field(() => Int, { nullable: true })
+  installment?: number; //할부개월
+  @Field({ nullable: true })
+  ApprovalNum?: string; //승인번호
+  @Field(() => Int, { nullable: true })
+  amountPayment?: number; //결제금액
+  @Field(() => Int, { nullable: true })
+  #unpaidPayment?: number; //미수납액
+  @Field({ nullable: true })
+  paymentDate?: string; //결제일
+  @Field({ nullable: true })
+  bankName?: string; //은행이름
+  @Field({ nullable: true })
+  depositorName?: string; // 입금자명
+  @Field(() => Int, { nullable: true })
+  depositAmount?: number; //입금금액
+  @Field({ nullable: true })
+  depositDate?: string; //입금일
+  @Field(() => StudentPayment)
+  studentPayment: StudentPayment;
+  @Field(() => Int)
+  studentPaymentId: number; //연결된 학생결제(StudentPayment 의 id)
+  @Field(() => ManageUser, { nullable: true })
+  receiver?: ManageUser;
+  @Field(() => Int, { nullable: true })
+  receiverId?: number;
+  @Field({ nullable: true })
+  accountingManager?: string;
+  @Field({ nullable: true })
+  reqRefund?: boolean;
+  @Field({ nullable: true })
+  reqRefundManager?: string; // 환불신청자
+  @Field(() => Int, { nullable: true })
+  reqRefundManagerId?: number; // 환불신청한 매니저 아이디
+  @Field({ nullable: true })
+  reqRefundDate?: string; //환불신청일
+  @Field({ nullable: true })
+  refundApproval?: boolean;
+  @Field({ nullable: true })
+  refundManager?: string; //환불승인자
+  @Field({ nullable: true })
+  refundApprovalDate?: string; //환불승인일
+  @Field(() => String)
+  createdAt: Date;
+  @Field(() => String)
+  updatedAt: Date;
+  @Field(() => Int, { nullable: true })
+  studentId?: number;
+  @Field({ nullable: true })
+  stName?: string;
+  @Field(() => [String], { nullable: true })
+  cashReceipts?: string[];
+  @Field(() => Branch, { nullable: true })
+  Branch?: Branch;
+  @Field(() => Int, { nullable: true })
+  branchId?: number;
+  @Field({ nullable: true })
+  lastModifiedTime?: string; //최근수정시간
+}
+
 //Student (수강생)
 @ObjectType()
 export class Student {

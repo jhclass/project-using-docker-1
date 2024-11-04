@@ -573,6 +573,18 @@ type Alarm {
   lastModifiedTime: String
 }
 
+type AttendanceRecord {
+  id: Int!
+  clockIn: String!
+  clockOut: String
+  createdAt: String!
+  updatedAt: String!
+  ManageUser: ManageUser!
+  manageUserId: Int!
+  Branch: Branch
+  branchId: Int
+}
+
 type CommonResponse {
   ok: Boolean!
   message: String
@@ -591,7 +603,7 @@ type ResultSeeManageUser {
   ok: Boolean!
   message: String
   error: String
-  result: [ManageUser!]
+  result: [ManageUser]
   totalCount: Int
 }
 
@@ -599,7 +611,7 @@ type SearchManageUserResult {
   ok: Boolean!
   error: String
   message: String
-  result: [ManageUser!]
+  result: [ManageUser]
   totalCount: Int
 }
 
@@ -619,7 +631,7 @@ type ResultSearchPermissionsGranted {
   ok: Boolean!
   message: String
   error: String
-  data: [PermissionsGranted!]
+  data: [PermissionsGranted]
   totalCount: Int
 }
 
@@ -627,7 +639,7 @@ type ResultAdviceType {
   ok: Boolean!
   message: String
   error: String
-  adviceType: [AdviceType!]
+  adviceType: [AdviceType]
   totalCount: Int
 }
 
@@ -635,19 +647,28 @@ type ResultSeeAlarms {
   ok: Boolean!
   message: String
   error: String
-  data: [Alarm!]
+  data: [Alarm]
   totalCount: Float
+}
+
+type ResultSearchAttendanceRecord {
+  ok: Boolean!
+  message: String
+  error: String
+  result: [AttendanceRecord]
+  totalCount: Int
 }
 
 type Query {
   sayHello: String!
-  searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String!], limit: Int, page: Int): SearchManageUserResult!
+  searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
   seeManageUser(limit: Int, page: Int, resign: String): ResultSeeManageUser!
   mMe: ManageUser!
   isMme: ResultIsMe!
   searchPermissionsGranted(id: Int, permissionName: String, topic: String, manageUserId: Int): ResultSearchPermissionsGranted!
   seeAdviceType(limit: Int, page: Int, category: String): ResultAdviceType!
   seeAlarms(limit: Int, page: Int): ResultSeeAlarms!
+  searchAttendanceRecord(id: Int, period: [String], mUserId: String, mUsername: String, page: Int, limit: Int): ResultSearchAttendanceRecord!
 }
 
 type Mutation {
@@ -669,4 +690,5 @@ type Mutation {
   staticPushAT(id: Int!, onOff: String): CommonResponse!
   changeOrderAT(indexNums: [Int!]!, ids: [Int!]): CommonResponse!
   readAlarms(id: Int, all: String): CommonResponse!
+  createAttendanceRecord(clockIn: String!): CommonResponse!
 }

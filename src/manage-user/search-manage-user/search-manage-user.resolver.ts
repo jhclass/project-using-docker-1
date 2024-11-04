@@ -18,7 +18,7 @@ export class SearchManageUserResolver {
     @Args("mPhoneNum", { nullable: true }) mPhoneNum?: string,
     @Args("mPart", { nullable: true }) mPart?: string,
     @Args("resign", { nullable: true }) resign?: string,
-    @Args("mJoiningDate", { type: () => [String], nullable: true })
+    @Args("mJoiningDate", { type: () => [String], nullable: "itemsAndList" })
     mJoiningDate?: string[],
     @Args("limit", { type: () => Int, nullable: true }) limit?: number,
     @Args("page", { type: () => Int, nullable: true }) page?: number,

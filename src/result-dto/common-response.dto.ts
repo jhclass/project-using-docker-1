@@ -3,6 +3,7 @@ import { ManageUser } from "./manageUser.dto";
 import { PermissionsGranted } from "./permissionsGranted.dto";
 import { AdviceType } from "./adviceType.dto";
 import { Alarm } from "./alarm.dto";
+import { AttendanceRecord } from "./attendanceRecord.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -46,7 +47,7 @@ export class ResultSeeManageUser {
   message?: string;
   @Field({ nullable: true })
   error?: string;
-  @Field(() => [ManageUser], { nullable: true })
+  @Field(() => [ManageUser], { nullable: "itemsAndList" })
   result?: ManageUser[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
@@ -60,7 +61,7 @@ export class SearchManageUserResult {
   error?: string;
   @Field({ nullable: true })
   message?: string;
-  @Field(() => [ManageUser], { nullable: true })
+  @Field(() => [ManageUser], { nullable: "itemsAndList" })
   result?: ManageUser[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
@@ -93,7 +94,7 @@ export class ResultSearchPermissionsGranted {
   message?: string;
   @Field({ nullable: true })
   error?: string;
-  @Field(() => [PermissionsGranted], { nullable: true })
+  @Field(() => [PermissionsGranted], { nullable: "itemsAndList" })
   data?: PermissionsGranted[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
@@ -107,7 +108,7 @@ export class ResultAdviceType {
   message?: string;
   @Field({ nullable: true })
   error?: string;
-  @Field(() => [AdviceType], { nullable: true })
+  @Field(() => [AdviceType], { nullable: "itemsAndList" })
   adviceType?: AdviceType[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
@@ -121,8 +122,22 @@ export class ResultSeeAlarms {
   message?: string;
   @Field({ nullable: true })
   error?: string;
-  @Field(() => [Alarm], { nullable: true })
+  @Field(() => [Alarm], { nullable: "itemsAndList" })
   data?: Alarm[];
   @Field({ nullable: true })
+  totalCount?: number;
+}
+
+@ObjectType()
+export class ResultSearchAttendanceRecord {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => [AttendanceRecord], { nullable: "itemsAndList" })
+  result?: AttendanceRecord[];
+  @Field(() => Int, { nullable: true })
   totalCount?: number;
 }

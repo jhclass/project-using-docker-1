@@ -19,6 +19,7 @@ import { PermissionsGrantedModule } from "@src/permissions-granted/permissions-g
 import { AdviceTypeModule } from "@src/advice-type/advice-type.module";
 import { AlarmModule } from "@src/alarm/alarm.module";
 import { WebsocketModule } from "@src/websocket/websocket.module";
+import { AttendanceRecordModule } from "./attendance-record/attendance-record.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -49,6 +50,7 @@ import { WebsocketModule } from "@src/websocket/websocket.module";
     AdviceTypeModule,
     AlarmModule,
     WebsocketModule,
+    AttendanceRecordModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

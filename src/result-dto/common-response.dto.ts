@@ -1,10 +1,9 @@
 import { ObjectType, Field, Int } from "@nestjs/graphql";
-import {
-  AdviceType,
-  Alarm,
-  ManageUser,
-  PermissionsGranted,
-} from "@dto/table.dto";
+import { ManageUser } from "./manageUser.dto";
+import { PermissionsGranted } from "./permissionsGranted.dto";
+import { AdviceType } from "./adviceType.dto";
+import { Alarm } from "./alarm.dto";
+
 @ObjectType()
 export class CommonResponse {
   @Field()

@@ -1,9 +1,10 @@
 import { Resolver, Query, Context } from "@nestjs/graphql";
 import { MMeService } from "./m-me.service";
-import { ManageUser } from "@src/result-dto/table.dto";
+
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { ResultIsMe } from "@src/result-dto/common-response.dto";
+import { ManageUser } from "@src/result-dto/manageUser.dto";
 
 @Resolver()
 export class MMeResolver {

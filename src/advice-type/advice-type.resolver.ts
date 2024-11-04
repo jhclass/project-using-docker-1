@@ -1,6 +1,8 @@
 import { Parent, ResolveField, Resolver } from "@nestjs/graphql";
-import { AdviceType, StudentState } from "@src/result-dto/table.dto";
+
 import { AdviceTypeService } from "./advice-type.service";
+import { AdviceType } from "@src/result-dto/adviceType.dto";
+import { StudentState } from "@src/result-dto/studentState.dto";
 
 @Resolver(() => AdviceType)
 export class AdviceTypeResolver {

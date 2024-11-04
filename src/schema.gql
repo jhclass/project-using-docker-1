@@ -2,46 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Branch {
-  id: Int!
-  branchName: String
-  createdAt: String!
-  updatedAt: String!
-  lastModifiedTime: String
-  AdviceType: [AdviceType!]
-  StudentState: [StudentState!]
-  ConsultationMemo: [ConsultationMemo!]
-  PermissionsGranted: [PermissionsGranted!]
-}
-
-type ManageUser {
-  id: Int!
-  mUserId: String!
-  mUsername: String!
-  mPassword: String!
-  mGrade: Int
-  mRank: String
-  mPhoneNum: String
-  mPhoneNumCompany: String
-  mPhoneNumInside: String
-  mPhoneFriend: String
-  mPart: [String!]
-  mAvatar: String
-  mJoiningDate: String
-  mAddresses: String
-  createdAt: String
-  updatedAt: String
-  resign: String
-  email: String
-  mZipCode: String
-  mAddressDetail: String
-  Branch: Branch
-  branchId: Int
-  lastModifiedTime: String
-  PermissionsGranted: [PermissionsGranted!]
-  StudentState: [StudentState!]
-}
-
 type StudentState {
   id: Int!
   campus: String
@@ -103,6 +63,18 @@ type ConsultationMemo {
   lastModifiedTime: String
 }
 
+type Branch {
+  id: Int!
+  branchName: String
+  createdAt: String!
+  updatedAt: String!
+  lastModifiedTime: String
+  AdviceType: [AdviceType!]
+  StudentState: [StudentState!]
+  ConsultationMemo: [ConsultationMemo!]
+  PermissionsGranted: [PermissionsGranted!]
+}
+
 type PermissionsGranted {
   id: Int!
   permissionName: String!
@@ -113,6 +85,489 @@ type PermissionsGranted {
   allPermitted: String
   createdAt: String!
   updatedAt: String!
+  Branch: Branch
+  branchId: Int
+  lastModifiedTime: String
+}
+
+type StudentMemo {
+  id: Int!
+  content: String!
+  student: Student
+  studentId: Int
+  manageUser: ManageUser
+  manageUserId: Int
+  createdAt: String
+  updatedAt: String
+  lastModifiedTime: String
+}
+
+type WorkLogs {
+  id: Int
+  createdAt: String!
+  updatedAt: String!
+  paymentOne: String
+  paymentTwo: String
+  paymentThree: String
+  trainingInfoOne: [String!]!
+  trainingInfoTwo: [String!]!
+  trainingInfoThree: [String!]!
+  trainingInfoFour: [String!]!
+  trainingInfoFive: [String!]!
+  trainingInfoSix: [String!]!
+  trainingInfoSeven: [String!]!
+  trainingInfoEight: [String!]!
+  trainingTimeOneday: [Int!]!
+  trainingTimeTotal: [Int!]!
+  instruction: String
+  absentSt: String
+  tardySt: String
+  leaveEarlySt: String
+  outingSt: String
+  etc: String
+  lectures: Lectures
+  lecturesId: Int!
+  workLogsDate: String!
+  attendanceCount: [Int!]!
+  Branch: Branch
+  BranchId: Int
+  checkList: [String!]!
+  checkContext: [String!]
+  lastModifiedTime: String
+}
+
+type Lectures {
+  id: Int!
+  createdAt: String!
+  updatedAt: String!
+  campus: String!
+  temporaryName: String!
+  subDiv: String!
+  teachers: [ManageUser!]!
+  roomNum: String!
+  subject: Subject
+  subjectId: Int!
+  lecturePeriodStart: String!
+  lecturePeriodEnd: String!
+  lectureDetails: [String!]!
+  lectureTime: [String!]!
+  eduStatusReport: String!
+  ApprovedNum: Int!
+  confirmedNum: Int!
+  sessionNum: Int!
+  timetableAttached: String
+  WorkLogs: [WorkLogs!]
+  lastModifiedTime: String
+}
+
+type Subject {
+  id: Int
+  subDiv: String
+  subjectName: String
+  createdAt: String
+  updatedAt: String
+  fee: Int
+  startDate: String
+  endDate: String
+  roomNum: String
+  exposure: Boolean
+  totalTime: Int
+  teacherName: String
+  subjectCode: String
+  expiresDateStart: String
+  expiresDateEnd: String
+  round: Int
+  StudentPayment: [StudentPayment!]
+  lectures: Lectures
+  branchId: Int
+  Branch: Branch
+  lastModifiedTime: String
+}
+
+type Attendance {
+  id: Int
+  createdAt: String
+  updatedAt: String
+  attendanceState: String
+  attendanceDate: String
+  studentPayment: StudentPayment
+  studentPaymentId: Int!
+  student: Student
+  studentId: Int
+  lectures: Lectures
+  lecturesId: Int
+  isCanceled: String
+  attendanceDateTime: String
+  lastModifiedTime: String
+  Branch: Branch
+  branchId: Int
+}
+
+type EmploymentStatus {
+  id: Int!
+  studentId: Int!
+  stName: String!
+  employmentType: String!
+  dateOfEmployment: String!
+  companyName: String!
+  businessNum: String!
+  responsibilities: String!
+  location: String!
+  phoneNum: String!
+  businessSize: String!
+  imploymentInsurance: String!
+  proofOfImployment: String!
+  relatedFields: String!
+  completionType: String!
+  Subject: Subject!
+  subjectId: Int!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
+type EduInfomation {
+  id: Int!
+  lectureId: Int!
+  studentId: Int!
+  stName: String!
+  eduType: String!
+  eduName: String!
+  major: String
+  graduationStatus: String!
+  Subject: Subject!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
+type Certificate {
+  id: Int!
+  lectureId: Int!
+  studentId: Int!
+  stName: String!
+  CAdate: String!
+  certificateName: String!
+  certificateLevel: String
+  CertificateIssuer: String!
+  Subject: Subject!
+  subjectId: Int!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
+type StudentConsultation {
+  id: Int!
+  lectureId: Int!
+  studentId: Int!
+  stName: String!
+  typeOfConsultation: String!
+  dateOfConsultation: String!
+  detailsOfConsultation: String!
+  Subject: Subject!
+  subjectId: Int!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int!
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
+type HopeForEmployment {
+  id: Int!
+  lectureId: Int!
+  studentId: Int!
+  stName: String!
+  workingArea: String!
+  fieldOfHope: String!
+  hopefulReward: Int!
+  workType: String!
+  workingHours: Int!
+  opinion: String!
+  Subject: Subject!
+  subjectId: Int!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
+type EmploymentRecommendation {
+  id: Int!
+  lectureId: Int!
+  studentId: Int!
+  stName: String!
+  dateOfRecommendation: String!
+  recruitmentField: String!
+  companyName: String!
+  location: String!
+  phoneNum: String!
+  dateOfInterview: String
+  employmentStatus: String!
+  reasonForNonEmployment: String!
+  certificateOfEmploymentStatus: String!
+  Subject: Subject!
+  subjectId: Int!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int!
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String!
+}
+
+type PreInspection {
+  id: Int!
+  lectureId: Int!
+  studentId: Int!
+  stName: String!
+  dateOfPreInspection: String
+  preScreenerType: String
+  preInspectionDetails: String
+  actionTaken: String
+  Subject: Subject!
+  subjectId: Int!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
+type StudentPortfolio {
+  id: Int!
+  lectureId: Int!
+  studentId: Int!
+  stName: String!
+  isBest: String!
+  filePath: [String!]!
+  details: String
+  url: [String!]
+  createdAt: String!
+  updatedAt: String!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  Subject: Subject!
+  subjectId: Int!
+  Branch: Branch
+  branchId: Int
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
+type PaymentDetail {
+  id: Int!
+  cardCompany: String
+  cardNum: String
+  installment: Int
+  ApprovalNum: String
+  amountPayment: Int
+  paymentDate: String
+  bankName: String
+  depositorName: String
+  depositAmount: Int
+  depositDate: String
+  studentPayment: StudentPayment!
+  studentPaymentId: Int!
+  receiver: ManageUser
+  receiverId: Int
+  accountingManager: String
+  reqRefund: Boolean
+  reqRefundManager: String
+  reqRefundManagerId: Int
+  reqRefundDate: String
+  refundApproval: Boolean
+  refundManager: String
+  refundApprovalDate: String
+  createdAt: String!
+  updatedAt: String!
+  studentId: Int
+  stName: String
+  cashReceipts: [String!]
+  Branch: Branch
+  branchId: Int
+  lastModifiedTime: String
+}
+
+type Career {
+  id: Int!
+  lectureId: Int!
+  studentId: Int!
+  stName: String!
+  careerDetails: String!
+  Subject: Subject!
+  StudentPayment: StudentPayment!
+  studentPaymentId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
+type StudentPayment {
+  id: Int!
+  seScore: Int
+  tuitionFee: Int
+  discountAmount: String
+  cashAmount: Int
+  cardAmount: Int
+  actualAmount: Int
+  unCollectedAmount: Int
+  receiptClassification: [String!]
+  paymentDate: String
+  student: Student
+  studentId: Int!
+  paymentDetail: [PaymentDetail!]
+  processingManager: ManageUser
+  processingManagerId: Int
+  situationReport: Boolean
+  amountReceived: Int
+  subject: Subject
+  subjectId: Int
+  campus: String
+  subDiv: String
+  courseComplete: String
+  employment: String
+  dueDate: String
+  classCode: String
+  lectureAssignment: String
+  createdAt: String
+  updatedAt: String
+  isWeekend: String
+  attendance: [Attendance!]
+  Branch: Branch
+  branchId: Int
+  mZipCode: String
+  mAddresses: String
+  mAddressDetail: String
+  dateOfDroppingOut: String
+  reasonFordroppingOut: String
+  EmploymentStatus: [EmploymentStatus!]
+  EduInfomation: [EduInfomation!]
+  Career: [Career!]
+  Certificate: [Certificate!]
+  StudentConsultation: [StudentConsultation!]
+  HopeForEmployment: [HopeForEmployment!]
+  EmploymentRecommendation: [EmploymentRecommendation!]
+  PreInspection: [PreInspection!]
+  StudentPortfolio: [StudentPortfolio!]
+  supportType: String
+  lastModifiedTime: String
+  lastModifiedByName: String
+  lastModifiedByUserId: String
+}
+
+type Student {
+  id: Int!
+  name: String!
+  phoneNum1: String!
+  phoneNum2: String
+  smsAgreement: String!
+  writer: String!
+  createdAt: String!
+  updatedAt: String!
+  birthday: String
+  manager: ManageUser
+  managerUserId: Int
+  studentMemo: [StudentMemo!]
+  studentPayment: [StudentPayment!]
+  lastModifiedTime: String
+  Branch: Branch
+  branchId: Int
+}
+
+type Stamp {
+  id: Int
+  Manager: ManageUser
+  manageUserId: Int
+  createdAt: String
+  updatedAt: String
+  imageUrl: String
+  lastModifiedTime: String
+}
+
+type ManageUser {
+  id: Int!
+  mUserId: String!
+  mUsername: String!
+  mPassword: String!
+  mGrade: Int
+  mRank: String
+  mPhoneNum: String
+  mPhoneNumCompany: String
+  mPhoneNumInside: String
+  mPhoneNumFriend: String
+  mPart: [String!]
+  mAvatar: String
+  mJoiningDate: String
+  mAddresses: String
+  createdAt: String
+  updatedAt: String
+  resign: String
+  email: String
+  mZipCode: String
+  mAddressDetail: String
+  Branch: Branch
+  branchId: Int
+  lastModifiedTime: String
+  PermissionsGranted: [PermissionsGranted!]
+  StudentState: [StudentState!]
+  ConsultationMemo: [ConsultationMemo!]
+  favoriteStudentState: [Int!]
+  Student: [Student!]
+  StudentMemo: [StudentMemo!]
+  StudentPayment: [StudentPayment!]
+  PaymentDetail: [PaymentDetail!]
+  Lectures: [Lectures!]
+  Stamp: [Stamp!]
+  lastModifiedBy: String
+}
+
+type Alarm {
+  id: Int!
+  title: String!
+  content: String!
+  personalTarget: [Int!]
+  createdAt: String
+  updatedAt: String
   Branch: Branch
   branchId: Int
   lastModifiedTime: String
@@ -176,6 +631,14 @@ type ResultAdviceType {
   totalCount: Int
 }
 
+type ResultSeeAlarms {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [Alarm!]
+  totalCount: Float
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String!], limit: Int, page: Int): SearchManageUserResult!
@@ -184,6 +647,7 @@ type Query {
   isMme: ResultIsMe!
   searchPermissionsGranted(id: Int, permissionName: String, topic: String, manageUserId: Int): ResultSearchPermissionsGranted!
   seeAdviceType(limit: Int, page: Int, category: String): ResultAdviceType!
+  seeAlarms(limit: Int, page: Int): ResultSeeAlarms!
 }
 
 type Mutation {
@@ -204,4 +668,5 @@ type Mutation {
   createAdviceType(type: String!, indexNum: Int!, category: String!, onOff: String, defaultValue: String): CommonResponse!
   staticPushAT(id: Int!, onOff: String): CommonResponse!
   changeOrderAT(indexNums: [Int!]!, ids: [Int!]): CommonResponse!
+  readAlarms(id: Int, all: String): CommonResponse!
 }

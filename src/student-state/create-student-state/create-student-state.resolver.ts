@@ -13,7 +13,9 @@ export class CreateStudentStateResolver {
     @Args("agreement") agreement: string,
     @Args("subject", { type: () => [String] }) subject: string[],
     @Args("progress", { type: () => Int }) progress: number,
-    @Args("stName", { nullable: true }) stName?: string,
+    @Args("adviceTypes", { type: () => [Int] }) adviceTypes: number[],
+    @Args("stName", { nullable: true })
+    stName?: string,
     @Args("phoneNum1", { nullable: true }) phoneNum1?: string,
     @Args("campus", { nullable: true }) campus?: string,
     @Args("detail", { nullable: true }) detail?: string,
@@ -23,14 +25,18 @@ export class CreateStudentStateResolver {
     @Args("stEmail", { nullable: true }) stEmail?: string,
     @Args("stAddr", { nullable: true }) stAddr?: string,
     @Args("stVisit", { nullable: true }) stVisit?: string,
-    @Args("expEnrollDate", { nullable: true }) expEnrollDate?: string,
+    @Args("subDiv", { nullable: true }) subDiv?: string,
+    @Args("expEnrollDate", { nullable: true })
+    expEnrollDate?: string,
     @Args("perchase", { nullable: true }) perchase?: boolean,
     @Args("birthday", { nullable: true }) birthday?: string,
     @Args("receiptDiv", { nullable: true }) receiptDiv?: string,
     @Args("pic", { nullable: true }) pic?: string,
-    @Args("classMethod", { type: () => [String], nullable: true })
+    @Args("classMethod", { type: () => [String], nullable: "itemsAndList" })
     classMethod?: string[],
     @Args("branchId", { type: () => Int, nullable: true }) branchId?: number,
+    //@Args("today", { type: () => [String], nullable: "itemsAndList" })
+    //today?: string[],
   ): Promise<CommonResponse> {
     //logger.log(`branchId: ${branchId}`);
     return this.createStudentStateService.createStudentStateFunc(
@@ -48,6 +54,7 @@ export class CreateStudentStateResolver {
       stEmail,
       stAddr,
       stVisit,
+      subDiv,
       expEnrollDate,
       perchase,
       birthday,
@@ -55,6 +62,7 @@ export class CreateStudentStateResolver {
       pic,
       classMethod,
       branchId,
+      //today,
     );
   }
 }

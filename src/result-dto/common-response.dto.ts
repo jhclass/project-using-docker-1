@@ -4,6 +4,7 @@ import { PermissionsGranted } from "./permissionsGranted.dto";
 import { AdviceType } from "./adviceType.dto";
 import { Alarm } from "./alarm.dto";
 import { AttendanceRecord } from "./attendanceRecord.dto";
+import { StudentState } from "./studentState.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -99,7 +100,37 @@ export class ResultSearchPermissionsGranted {
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }
-
+@ObjectType()
+export class UpdateStudentStateResult {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+}
+@ObjectType()
+export class StudentStateResponse {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+  @Field(() => [StudentState], { nullable: "itemsAndList" })
+  studentState?: StudentState[];
+}
+@ObjectType()
+export class UpdateFavoriteResult {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => ManageUser, { nullable: true })
+  favoriteStudentState?: ManageUser;
+}
 @ObjectType()
 export class ResultAdviceType {
   @Field()

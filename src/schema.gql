@@ -635,6 +635,26 @@ type ResultSearchPermissionsGranted {
   totalCount: Int
 }
 
+type UpdateStudentStateResult {
+  ok: Boolean!
+  message: String
+  error: String
+}
+
+type StudentStateResponse {
+  ok: Boolean!
+  message: String
+  totalCount: Int
+  studentState: [StudentState]
+}
+
+type UpdateFavoriteResult {
+  ok: Boolean!
+  message: String
+  error: String
+  favoriteStudentState: ManageUser
+}
+
 type ResultAdviceType {
   ok: Boolean!
   message: String
@@ -669,6 +689,8 @@ type Query {
   seeAdviceType(limit: Int, page: Int, category: String): ResultAdviceType!
   seeAlarms(limit: Int, page: Int): ResultSeeAlarms!
   searchAttendanceRecord(id: Int, period: [String], mUserId: String, mUsername: String, page: Int, limit: Int): ResultSearchAttendanceRecord!
+  seeStudentState(page: Int!, limit: Int): StudentStateResponse!
+  seeFavorite: [StudentState!]!
 }
 
 type Mutation {
@@ -681,7 +703,7 @@ type Mutation {
   editManageUser(id: Int!, mUsername: String, mPassword: String, mGrade: Int, mRank: String, mPhoneNum: String, mPhoneNumCompany: String, mPhoneNumInside: String, mPhoneNumFriend: String, mPart: [String!], mJoiningDate: String, mAddresses: String, email: String, resign: String, mZipCode: String, mAddressDetail: String, lastModifiedTime: String, branchId: Int): CommonResponse!
   deleteManageUser(id: Int!): CommonResponse!
   refreshToken(refreshToken: String!): ResultRefreshToken!
-  createStudentState(agreement: String!, subject: [String!]!, progress: Int!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String!], branchId: Int): CommonResponse!
+  createStudentState(agreement: String!, subject: [String!]!, progress: Int!, adviceTypes: [Int!]!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, subDiv: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String], branchId: Int): CommonResponse!
   createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
   editPermissionsGranted(lastModifiedTime: String!, id: Int!, manageUserIdsToConnect: [Int!], manageUserIdsToDisconnect: [Int!], smsPermitted: String, readOnly: String, allPermitted: String, permissionName: String, topic: String): CommonResponse!
   deletePermissionsGranted(id: Int!): CommonResponse!
@@ -691,4 +713,6 @@ type Mutation {
   changeOrderAT(indexNums: [Int!]!, ids: [Int!]): CommonResponse!
   readAlarms(id: Int, all: String): CommonResponse!
   createAttendanceRecord(clockIn: String!): CommonResponse!
+  updateStudentState(id: Int!, campus: String, category: String, stName: String, phoneNum1: String, phoneNum2: String, phoneNum3: String, subject: [String], detail: String, progress: Int, stEmail: String, stAddr: String, subDiv: String, stVisit: String, expEnrollDate: String, perchase: Boolean, birthday: String, pic: String, receiptDiv: String, adviceTypes: [Int], lastModifiedTime: String): UpdateStudentStateResult!
+  updateFavorite(id: Int!): UpdateFavoriteResult!
 }

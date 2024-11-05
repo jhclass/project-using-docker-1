@@ -19,6 +19,7 @@ export class CreateStudentStateService {
     stEmail?: string,
     stAddr?: string,
     stVisit?: string,
+    subDiv?: string,
     expEnrollDate?: string,
     perchase?: boolean,
     birthday?: string,
@@ -26,6 +27,7 @@ export class CreateStudentStateService {
     pic?: string,
     classMethod?: string[],
     branchId?: number,
+    //today?: string[],
   ) {
     try {
       const { user } = context.req;
@@ -49,6 +51,7 @@ export class CreateStudentStateService {
           stEmail,
           stAddr,
           stVisit,
+          subDiv,
           expEnrollDate,
           perchase,
           birthday,
@@ -58,6 +61,10 @@ export class CreateStudentStateService {
           branchId: user?.branchId || branchId,
         },
       });
+
+      //알람등록,
+      //소켓발송
+
       return {
         ok: true,
         message: `정상적으로 등록 완료 되었습니다.`,

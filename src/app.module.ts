@@ -20,6 +20,10 @@ import { AdviceTypeModule } from "@src/advice-type/advice-type.module";
 import { AlarmModule } from "@src/alarm/alarm.module";
 import { WebsocketModule } from "@src/websocket/websocket.module";
 import { AttendanceRecordModule } from "./attendance-record/attendance-record.module";
+import { EditStudentStateModule } from "./student-state/edit-student-state/edit-student-state.module";
+import { SeeStudentStateModule } from "./student-state/see-student-state/see-student-state.module";
+import { UpdateFavoriteModule } from "./student-state/update-favorite/update-favorite.module";
+import { SeeFavoriteModule } from "./student-state/see-favorite/see-favorite.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -51,6 +55,10 @@ import { AttendanceRecordModule } from "./attendance-record/attendance-record.mo
     AlarmModule,
     WebsocketModule,
     AttendanceRecordModule,
+    EditStudentStateModule,
+    SeeStudentStateModule,
+    UpdateFavoriteModule,
+    SeeFavoriteModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

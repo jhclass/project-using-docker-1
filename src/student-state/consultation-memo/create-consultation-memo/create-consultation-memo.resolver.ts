@@ -15,7 +15,7 @@ export class CreateConsultationMemoResolver {
     @Context() context: any,
     @Args("content") content: string,
     @Args("studentStateId", { type: () => Int }) studentStateId: number,
-  ) {
+  ): Promise<CommonResponse> {
     return this.createConsultationMemoService.createConsultationMemoFunc(
       context,
       content,

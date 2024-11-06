@@ -20,11 +20,7 @@ import { AdviceTypeModule } from "@src/advice-type/advice-type.module";
 import { AlarmModule } from "@src/alarm/alarm.module";
 import { WebsocketModule } from "@src/websocket/websocket.module";
 import { AttendanceRecordModule } from "./attendance-record/attendance-record.module";
-import { EditStudentStateModule } from "./student-state/edit-student-state/edit-student-state.module";
-import { SeeStudentStateModule } from "./student-state/see-student-state/see-student-state.module";
-import { UpdateFavoriteModule } from "./student-state/update-favorite/update-favorite.module";
-import { SeeFavoriteModule } from "./student-state/see-favorite/see-favorite.module";
-import { ConsultationMemoModule } from "./student-state/consultation-memo/consultation-memo.module";
+import { StudentStateModule } from "./student-state/student-state.module";
 
 @Module({
   imports: [
@@ -57,11 +53,7 @@ import { ConsultationMemoModule } from "./student-state/consultation-memo/consul
     AlarmModule,
     WebsocketModule,
     AttendanceRecordModule,
-    EditStudentStateModule,
-    SeeStudentStateModule,
-    UpdateFavoriteModule,
-    SeeFavoriteModule,
-    ConsultationMemoModule,
+    StudentStateModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

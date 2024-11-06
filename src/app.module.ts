@@ -24,6 +24,8 @@ import { EditStudentStateModule } from "./student-state/edit-student-state/edit-
 import { SeeStudentStateModule } from "./student-state/see-student-state/see-student-state.module";
 import { UpdateFavoriteModule } from "./student-state/update-favorite/update-favorite.module";
 import { SeeFavoriteModule } from "./student-state/see-favorite/see-favorite.module";
+import { ConsultationMemoModule } from "./student-state/consultation-memo/consultation-memo.module";
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -59,6 +61,7 @@ import { SeeFavoriteModule } from "./student-state/see-favorite/see-favorite.mod
     SeeStudentStateModule,
     UpdateFavoriteModule,
     SeeFavoriteModule,
+    ConsultationMemoModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

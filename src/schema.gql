@@ -715,4 +715,5 @@ type Mutation {
   createAttendanceRecord(clockIn: String!): CommonResponse!
   updateStudentState(id: Int!, campus: String, category: String, stName: String, phoneNum1: String, phoneNum2: String, phoneNum3: String, subject: [String], detail: String, progress: Int, stEmail: String, stAddr: String, subDiv: String, stVisit: String, expEnrollDate: String, perchase: Boolean, birthday: String, pic: String, receiptDiv: String, adviceTypes: [Int], lastModifiedTime: String): UpdateStudentStateResult!
   updateFavorite(id: Int!): UpdateFavoriteResult!
+  createConsultationMemo(content: String!, studentStateId: Int!): CommonResponse!
 }

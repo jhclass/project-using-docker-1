@@ -9,6 +9,7 @@ export class CreateStudentStateService {
     agreement: string,
     subject: string[],
     progress: number,
+    adviceTypes: number[],
     stName: string,
     phoneNum1: string,
     campus?: string,
@@ -27,6 +28,7 @@ export class CreateStudentStateService {
     pic?: string,
     classMethod?: string[],
     branchId?: number,
+
     //today?: string[],
   ) {
     try {
@@ -34,8 +36,17 @@ export class CreateStudentStateService {
       //const { ip } = context.req;
       //console.log("a", ip);
       //권한 -> 분야관리 -> 소켓 -> 다시 상담관리 -> 상담 메모 순으로 작업.
+      const branchName = await this.client.branch.findUnique({
+        where: {
+          id: user?.branchId,
+        },
+        select: {
+          branchName: true,
+        },
+      });
+      //console.log(branchName);
       const classMethods = classMethod === null ? [] : classMethod;
-
+      //console.log(user.branchId);
       await this.client.studentState.create({
         data: {
           agreement,
@@ -43,7 +54,7 @@ export class CreateStudentStateService {
           progress,
           stName,
           phoneNum1,
-          campus,
+          campus: campus ?? branchName?.branchName,
           detail,
           category,
           phoneNum2,
@@ -58,7 +69,10 @@ export class CreateStudentStateService {
           receiptDiv,
           pic,
           classMethod: classMethods,
-          branchId: user?.branchId || branchId,
+          branchId: branchId ?? user?.branchId,
+          adviceTypes: {
+            connect: adviceTypes.map((id) => ({ id })),
+          },
         },
       });
 

@@ -1,12 +1,15 @@
 import { Args, Resolver, Mutation, Int, Context } from "@nestjs/graphql";
 import { CreateStudentStateService } from "./create-student-state.service";
 import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { UseGuards } from "@nestjs/common";
+import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 
 @Resolver()
 export class CreateStudentStateResolver {
   constructor(
     private readonly createStudentStateService: CreateStudentStateService,
   ) {}
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => CommonResponse)
   async createStudentState(
     @Context() context: any,
@@ -35,6 +38,7 @@ export class CreateStudentStateResolver {
     @Args("classMethod", { type: () => [String], nullable: "itemsAndList" })
     classMethod?: string[],
     @Args("branchId", { type: () => Int, nullable: true }) branchId?: number,
+
     //@Args("today", { type: () => [String], nullable: "itemsAndList" })
     //today?: string[],
   ): Promise<CommonResponse> {
@@ -44,6 +48,7 @@ export class CreateStudentStateResolver {
       agreement,
       subject,
       progress,
+      adviceTypes,
       stName,
       phoneNum1,
       campus,
@@ -62,6 +67,7 @@ export class CreateStudentStateResolver {
       pic,
       classMethod,
       branchId,
+
       //today,
     );
   }

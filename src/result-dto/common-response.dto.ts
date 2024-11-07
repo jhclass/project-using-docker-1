@@ -172,3 +172,17 @@ export class ResultSearchAttendanceRecord {
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }
+
+@ObjectType()
+export class SearchStudentStateResult {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  error?: string;
+  @Field({ nullable: true })
+  message?: string;
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+  @Field(() => [StudentState], { nullable: "itemsAndList" })
+  studentState?: StudentState[];
+}

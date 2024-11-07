@@ -5,6 +5,8 @@ import { SeeStudentStateModule } from "./see-student-state/see-student-state.mod
 import { SeeFavoriteModule } from "./see-favorite/see-favorite.module";
 import { UpdateFavoriteModule } from "./update-favorite/update-favorite.module";
 import { ConsultationMemoModule } from "./consultation-memo/consultation-memo.module";
+import { DeleteStudentStateModule } from "./delete-student-state/delete-student-state.module";
+import { SearchStudentStateModule } from "./search-student-state/search-student-state.module";
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { ConsultationMemoModule } from "./consultation-memo/consultation-memo.mo
     SeeFavoriteModule,
     UpdateFavoriteModule,
     ConsultationMemoModule,
+    DeleteStudentStateModule,
+    SearchStudentStateModule,
   ],
 })
 export class StudentStateModule {}

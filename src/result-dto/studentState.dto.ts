@@ -2,6 +2,7 @@ import { ObjectType, Field, Int } from "@nestjs/graphql";
 import { ManageUser } from "./manageUser.dto";
 import { Branch } from "./branch.dto";
 import { AdviceType } from "./adviceType.dto";
+import { ConsultationMemo } from "./consultationMemo.dto";
 
 //StudentState (상담관리)
 @ObjectType()
@@ -60,6 +61,8 @@ export class StudentState {
   branchId?: number;
   @Field(() => String, { nullable: true })
   lastModifiedTime?: Date;
-  @Field(() => [AdviceType], { nullable: true })
+  @Field(() => [AdviceType], { nullable: "itemsAndList" })
   adviceTypes?: AdviceType[];
+  @Field(() => [ConsultationMemo], { nullable: "itemsAndList" })
+  consultationMemo?: ConsultationMemo[];
 }

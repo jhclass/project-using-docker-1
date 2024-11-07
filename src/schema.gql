@@ -2,6 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ConsultationMemo {
+  id: Int!
+  content: String!
+  createdAt: String!
+  updatedAt: String!
+  studentState: StudentState
+  studentStateId: Int
+  manageUser: ManageUser
+  manageUserId: Int
+  Branch: Branch
+  branchId: Int
+  lastModifiedTime: String
+}
+
 type StudentState {
   id: Int!
   campus: String
@@ -30,7 +44,8 @@ type StudentState {
   Branch: Branch
   branchId: Int
   lastModifiedTime: String
-  adviceTypes: [AdviceType!]
+  adviceTypes: [AdviceType]
+  consultationMemo: [ConsultationMemo]
 }
 
 type AdviceType {
@@ -47,20 +62,6 @@ type AdviceType {
   Branch: Branch
   branchId: Int
   StudentState: [StudentState!]!
-}
-
-type ConsultationMemo {
-  id: Int!
-  content: String!
-  createdAt: String!
-  updatedAt: String!
-  studentState: StudentState
-  studentStateId: Int
-  manageUser: ManageUser
-  manageUserId: Int
-  Branch: Branch
-  branchId: Int
-  lastModifiedTime: String
 }
 
 type Branch {
@@ -679,6 +680,14 @@ type ResultSearchAttendanceRecord {
   totalCount: Int
 }
 
+type SearchStudentStateResult {
+  ok: Boolean!
+  error: String
+  message: String
+  totalCount: Int
+  studentState: [StudentState]
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -718,4 +727,6 @@ type Mutation {
   createConsultationMemo(content: String!, studentStateId: Int!): CommonResponse!
   updateConsultationMemo(id: Int!, content: String!, lastModifiedTime: String): CommonResponse!
   deleteConsultationMemo(id: Int!): CommonResponse!
+  deleteStudentState(id: [Int!]!): CommonResponse!
+  searchStudentState(id: Int, receiptDiv: String, phoneNum1: String, subDiv: String, pic: String, createdAt: [String], stVisit: [String], stName: String, adviceType: String, progress: [Int], page: Int, perPage: Int): SearchStudentStateResult!
 }

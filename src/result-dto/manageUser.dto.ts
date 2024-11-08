@@ -12,12 +12,12 @@ import { Branch } from "./branch.dto";
 //ManageUser
 @ObjectType()
 export class ManageUser {
-  @Field(() => Int)
-  id: number;
-  @Field()
-  mUserId: string;
-  @Field()
-  mUsername: string;
+  @Field(() => Int, { nullable: true })
+  id?: number;
+  @Field({ nullable: true })
+  mUserId?: string;
+  @Field({ nullable: true })
+  mUsername?: string;
   @Field()
   mPassword: string;
   @Field(() => Int, { nullable: true })

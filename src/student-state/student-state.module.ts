@@ -7,9 +7,12 @@ import { UpdateFavoriteModule } from "./update-favorite/update-favorite.module";
 import { ConsultationMemoModule } from "./consultation-memo/consultation-memo.module";
 import { DeleteStudentStateModule } from "./delete-student-state/delete-student-state.module";
 import { SearchStudentStateModule } from "./search-student-state/search-student-state.module";
+import { StudentStateResolver } from "./student-state.resolver";
+import { PrismaModule } from "@src/prisma/prisma.module";
 
 @Module({
   imports: [
+    PrismaModule,
     CreateStudentStateModule,
     EditStudentStateModule,
     SeeStudentStateModule,
@@ -19,5 +22,6 @@ import { SearchStudentStateModule } from "./search-student-state/search-student-
     DeleteStudentStateModule,
     SearchStudentStateModule,
   ],
+  providers: [StudentStateResolver],
 })
 export class StudentStateModule {}

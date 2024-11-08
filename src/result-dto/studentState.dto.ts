@@ -24,7 +24,7 @@ export class StudentState {
   @Field(() => ManageUser, { nullable: true })
   currentManager?: ManageUser;
   @Field(() => Int, { nullable: true })
-  currentManagerInt?: number;
+  currentManagerId?: number;
   @Field(() => [String], { nullable: true })
   subject?: string[];
   @Field({ nullable: true })

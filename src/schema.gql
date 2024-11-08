@@ -25,7 +25,7 @@ type StudentState {
   phoneNum2: String
   phoneNum3: String
   currentManager: ManageUser
-  currentManagerInt: Int
+  currentManagerId: Int
   subject: [String!]
   detail: String
   agreement: String!
@@ -526,9 +526,9 @@ type Stamp {
 }
 
 type ManageUser {
-  id: Int!
-  mUserId: String!
-  mUsername: String!
+  id: Int
+  mUserId: String
+  mUsername: String
   mPassword: String!
   mGrade: Int
   mRank: String

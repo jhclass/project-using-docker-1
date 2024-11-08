@@ -32,10 +32,10 @@ export class Subject {
   teacherName?: string;
   @Field({ nullable: true })
   subjectCode?: string;
-  @Field({ nullable: true })
-  expiresDateStart?: string;
-  @Field({ nullable: true })
-  expiresDateEnd?: string;
+  @Field(() => String, { nullable: true })
+  expiresDateStart?: Date;
+  @Field(() => String, { nullable: true })
+  expiresDateEnd?: Date;
   @Field(() => Int, { nullable: true })
   round?: number;
   @Field(() => [StudentPayment], { nullable: true })

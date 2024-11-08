@@ -5,6 +5,7 @@ import { AdviceType } from "./adviceType.dto";
 import { Alarm } from "./alarm.dto";
 import { AttendanceRecord } from "./attendanceRecord.dto";
 import { StudentState } from "./studentState.dto";
+import { Subject } from "./subject.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -63,7 +64,7 @@ export class SearchManageUserResult {
   @Field({ nullable: true })
   message?: string;
   @Field(() => [ManageUser], { nullable: "itemsAndList" })
-  result?: ManageUser[];
+  data?: ManageUser[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }
@@ -185,4 +186,32 @@ export class SearchStudentStateResult {
   totalCount?: number;
   @Field(() => [StudentState], { nullable: "itemsAndList" })
   studentState?: StudentState[];
+}
+
+@ObjectType()
+export class SearchSubjectResult {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+  @Field({ nullable: true })
+  message?: string;
+  @Field(() => [Subject], { nullable: "itemsAndList" })
+  result?: Subject[];
+}
+
+@ObjectType()
+export class SeeSubjectResult {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  error?: string;
+  @Field({ nullable: true })
+  message?: string;
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+  @Field(() => [Subject], { nullable: "itemsAndList" })
+  subject?: Subject[];
 }

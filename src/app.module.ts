@@ -21,6 +21,7 @@ import { AlarmModule } from "@src/alarm/alarm.module";
 import { WebsocketModule } from "@src/websocket/websocket.module";
 import { AttendanceRecordModule } from "./attendance-record/attendance-record.module";
 import { StudentStateModule } from "./student-state/student-state.module";
+import { SubjectModule } from './subject/subject.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { StudentStateModule } from "./student-state/student-state.module";
     WebsocketModule,
     AttendanceRecordModule,
     StudentStateModule,
+    SubjectModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

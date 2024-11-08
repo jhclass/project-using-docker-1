@@ -19,18 +19,18 @@ export class Lectures {
   temporaryName: string;
   @Field()
   subDiv: string; // null 이면 안됩니다.
-  @Field(() => [ManageUser])
-  teachers: ManageUser[];
+  @Field(() => [ManageUser], { nullable: "itemsAndList" })
+  teachers?: ManageUser[];
   @Field()
   roomNum: string;
   @Field(() => Subject, { nullable: true })
   subject?: Subject;
   @Field(() => Int)
   subjectId: number;
-  @Field()
-  lecturePeriodStart: string;
-  @Field()
-  lecturePeriodEnd: string;
+  @Field(() => String)
+  lecturePeriodStart: Date;
+  @Field(() => String)
+  lecturePeriodEnd: Date;
   @Field(() => [String])
   lectureDetails: string[]; //강의 일자들
   @Field(() => [String])

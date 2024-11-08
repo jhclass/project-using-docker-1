@@ -144,7 +144,7 @@ type Lectures {
   campus: String!
   temporaryName: String!
   subDiv: String!
-  teachers: [ManageUser!]!
+  teachers: [ManageUser]
   roomNum: String!
   subject: Subject
   subjectId: Int!
@@ -612,7 +612,7 @@ type SearchManageUserResult {
   ok: Boolean!
   error: String
   message: String
-  result: [ManageUser]
+  data: [ManageUser]
   totalCount: Int
 }
 
@@ -688,6 +688,22 @@ type SearchStudentStateResult {
   studentState: [StudentState]
 }
 
+type SearchSubjectResult {
+  ok: Boolean!
+  error: String
+  totalCount: Int
+  message: String
+  result: [Subject]
+}
+
+type SeeSubjectResult {
+  ok: Boolean!
+  error: String
+  message: String
+  totalCount: Int
+  subject: [Subject]
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -700,6 +716,7 @@ type Query {
   searchAttendanceRecord(id: Int, period: [String], mUserId: String, mUsername: String, page: Int, limit: Int): ResultSearchAttendanceRecord!
   seeStudentState(page: Int!, limit: Int): StudentStateResponse!
   seeFavorite: [StudentState!]!
+  seeSubject(page: Int, limit: Int): SeeSubjectResult!
 }
 
 type Mutation {
@@ -729,4 +746,8 @@ type Mutation {
   deleteConsultationMemo(id: Int!): CommonResponse!
   deleteStudentState(id: [Int!]!): CommonResponse!
   searchStudentState(id: Int, receiptDiv: String, phoneNum1: String, subDiv: String, pic: String, createdAt: [String], stVisit: [String], stName: String, adviceType: String, progress: [Int], page: Int, perPage: Int): SearchStudentStateResult!
+  createSubject(subDiv: String!, subjectName: String!, fee: Int!, round: Int!, startDate: String, endDate: String, roomNum: String, exposure: Boolean, totalTime: Int, teacherName: String, subjectCode: String, expiresDateStart: String, expiresDateEnd: String): CommonResponse!
+  updateSubject(id: Int!, subDiv: String!, subjectName: String!, fee: Int!, startDate: String, endDate: String, roomNum: String, exposure: Boolean, totalTime: Int, teacherName: String, subjectCode: String, expiresDateStart: String, expiresDateEnd: String, mGrade: Int, round: Int, lastModifiedTime: String): CommonResponse!
+  deleteSubject(id: Int!): CommonResponse!
+  searchSubject(id: Int, subDiv: String, subjectName: String, subjectCode: String, exposure: Boolean, page: Int, limit: Int): SearchSubjectResult!
 }

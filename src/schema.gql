@@ -26,7 +26,7 @@ type StudentState {
   phoneNum3: String
   currentManager: ManageUser
   currentManagerId: Int
-  subject: [String!]
+  subject: [String]
   detail: String
   agreement: String!
   progress: Int!
@@ -586,6 +586,17 @@ type AttendanceRecord {
   branchId: Int
 }
 
+type UserActivityLogs {
+  id: Int!
+  userId: String!
+  eventName: String!
+  description: String
+  createdAt: String
+  updatedAt: String
+  Branch: Branch
+  branchId: Int
+}
+
 type CommonResponse {
   ok: Boolean!
   message: String
@@ -704,6 +715,14 @@ type SeeSubjectResult {
   subject: [Subject]
 }
 
+type UserActivityLogsResponse {
+  ok: Boolean!
+  error: String
+  message: String
+  data: [UserActivityLogs]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -717,6 +736,7 @@ type Query {
   seeStudentState(page: Int!, limit: Int): StudentStateResponse!
   seeFavorite: [StudentState!]!
   seeSubject(page: Int, limit: Int): SeeSubjectResult!
+  seeUserActivityLogs: UserActivityLogsResponse!
 }
 
 type Mutation {
@@ -729,7 +749,7 @@ type Mutation {
   editManageUser(id: Int!, mUsername: String, mPassword: String, mGrade: Int, mRank: String, mPhoneNum: String, mPhoneNumCompany: String, mPhoneNumInside: String, mPhoneNumFriend: String, mPart: [String!], mJoiningDate: String, mAddresses: String, email: String, resign: String, mZipCode: String, mAddressDetail: String, lastModifiedTime: String, branchId: Int): CommonResponse!
   deleteManageUser(id: Int!): CommonResponse!
   refreshToken(refreshToken: String!): ResultRefreshToken!
-  createStudentState(agreement: String!, subject: [String!]!, progress: Int!, adviceTypes: [Int!]!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, subDiv: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String], branchId: Int): CommonResponse!
+  createStudentState(agreement: String!, progress: Int!, adviceTypes: [Int]!, subject: [String]!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, subDiv: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String], branchId: Int, today: [String]): CommonResponse!
   createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
   editPermissionsGranted(lastModifiedTime: String!, id: Int!, manageUserIdsToConnect: [Int!], manageUserIdsToDisconnect: [Int!], smsPermitted: String, readOnly: String, allPermitted: String, permissionName: String, topic: String): CommonResponse!
   deletePermissionsGranted(id: Int!): CommonResponse!
@@ -750,4 +770,5 @@ type Mutation {
   updateSubject(id: Int!, subDiv: String!, subjectName: String!, fee: Int!, startDate: String, endDate: String, roomNum: String, exposure: Boolean, totalTime: Int, teacherName: String, subjectCode: String, expiresDateStart: String, expiresDateEnd: String, mGrade: Int, round: Int, lastModifiedTime: String): CommonResponse!
   deleteSubject(id: Int!): CommonResponse!
   searchSubject(id: Int, subDiv: String, subjectName: String, subjectCode: String, exposure: Boolean, page: Int, limit: Int): SearchSubjectResult!
+  createUserActivityLogs(eventName: String!, description: String): CommonResponse!
 }

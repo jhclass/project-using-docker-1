@@ -7,9 +7,10 @@ export class CreateStudentStateService {
   async createStudentStateFunc(
     context: any,
     agreement: string,
-    subject: string[],
+
     progress: number,
     adviceTypes: number[],
+    subject: string[],
     stName: string,
     phoneNum1: string,
     campus?: string,
@@ -29,13 +30,18 @@ export class CreateStudentStateService {
     classMethod?: string[],
     branchId?: number,
 
-    //today?: string[],
+    today?: string[],
   ) {
     try {
       const { user } = context.req;
       //const { ip } = context.req;
       //console.log("a", ip);
-      //권한 -> 분야관리 -> 소켓 -> 다시 상담관리 -> 상담 메모 순으로 작업.
+      //today 체크
+      if (!Array.isArray(today) || today.length < 2) {
+        throw new Error("오늘 날짜 범위를 정의하는 배열이 필요합니다.");
+      }
+      //현재 ipRecord 없음.
+
       const branchName = await this.client.branch.findUnique({
         where: {
           id: user?.branchId,

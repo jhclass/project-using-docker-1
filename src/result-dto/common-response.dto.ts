@@ -6,6 +6,7 @@ import { Alarm } from "./alarm.dto";
 import { AttendanceRecord } from "./attendanceRecord.dto";
 import { StudentState } from "./studentState.dto";
 import { Subject } from "./subject.dto";
+import { UserActivityLogs } from "./user-activity-logs.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -214,4 +215,18 @@ export class SeeSubjectResult {
   totalCount?: number;
   @Field(() => [Subject], { nullable: "itemsAndList" })
   subject?: Subject[];
+}
+
+@ObjectType()
+export class UserActivityLogsResponse {
+  @Field()
+  ok: boolean;
+  @Field({ nullable: true })
+  error?: string;
+  @Field({ nullable: true })
+  message?: string;
+  @Field(() => [UserActivityLogs], { nullable: "itemsAndList" })
+  data?: UserActivityLogs[];
+  @Field(() => Int, { nullable: true })
+  totalCount: number;
 }

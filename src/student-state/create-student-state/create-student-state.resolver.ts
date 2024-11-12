@@ -14,9 +14,12 @@ export class CreateStudentStateResolver {
   async createStudentState(
     @Context() context: any,
     @Args("agreement") agreement: string,
-    @Args("subject", { type: () => [String] }) subject: string[],
+
     @Args("progress", { type: () => Int }) progress: number,
-    @Args("adviceTypes", { type: () => [Int] }) adviceTypes: number[],
+    @Args("adviceTypes", { type: () => [Int], nullable: "items" })
+    adviceTypes?: number[],
+    @Args("subject", { type: () => [String], nullable: "items" })
+    subject?: string[],
     @Args("stName", { nullable: true })
     stName?: string,
     @Args("phoneNum1", { nullable: true }) phoneNum1?: string,
@@ -39,16 +42,17 @@ export class CreateStudentStateResolver {
     classMethod?: string[],
     @Args("branchId", { type: () => Int, nullable: true }) branchId?: number,
 
-    //@Args("today", { type: () => [String], nullable: "itemsAndList" })
-    //today?: string[],
+    @Args("today", { type: () => [String], nullable: "itemsAndList" })
+    today?: string[],
   ): Promise<CommonResponse> {
     //logger.log(`branchId: ${branchId}`);
     return this.createStudentStateService.createStudentStateFunc(
       context,
       agreement,
-      subject,
+
       progress,
       adviceTypes,
+      subject,
       stName,
       phoneNum1,
       campus,
@@ -68,7 +72,7 @@ export class CreateStudentStateResolver {
       classMethod,
       branchId,
 
-      //today,
+      today,
     );
   }
 }

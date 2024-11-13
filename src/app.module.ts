@@ -23,6 +23,7 @@ import { AttendanceRecordModule } from "./attendance-record/attendance-record.mo
 import { StudentStateModule } from "./student-state/student-state.module";
 import { SubjectModule } from './subject/subject.module';
 import { UserActivityLogsModule } from './user-activity-logs/user-activity-logs.module';
+import { IpRecordModule } from './ip-record/ip-record.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { UserActivityLogsModule } from './user-activity-logs/user-activity-logs.
     StudentStateModule,
     SubjectModule,
     UserActivityLogsModule,
+    IpRecordModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

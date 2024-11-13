@@ -771,4 +771,5 @@ type Mutation {
   deleteSubject(id: Int!): CommonResponse!
   searchSubject(id: Int, subDiv: String, subjectName: String, subjectCode: String, exposure: Boolean, page: Int, limit: Int): SearchSubjectResult!
   createUserActivityLogs(eventName: String!, description: String): CommonResponse!
+  checkingIpRecord(ipRecord: String!, today: [String]!): CommonResponse!
 }

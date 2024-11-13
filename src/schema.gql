@@ -750,7 +750,7 @@ type Mutation {
   deleteManageUser(id: Int!): CommonResponse!
   refreshToken(refreshToken: String!): ResultRefreshToken!
   createStudentState(agreement: String!, progress: Int!, adviceTypes: [Int]!, subject: [String]!, stName: String, phoneNum1: String, campus: String, detail: String, category: String, phoneNum2: String, phoneNum3: String, stEmail: String, stAddr: String, stVisit: String, subDiv: String, expEnrollDate: String, perchase: Boolean, birthday: String, receiptDiv: String, pic: String, classMethod: [String], branchId: Int, today: [String]): CommonResponse!
-  createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int!], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
+  createPermissionGranted(permissionName: String!, topic: String!, manageUserIds: [Int], smsPermitted: String, readOnly: String, allPermitted: String): CommonResponse!
   editPermissionsGranted(lastModifiedTime: String!, id: Int!, manageUserIdsToConnect: [Int!], manageUserIdsToDisconnect: [Int!], smsPermitted: String, readOnly: String, allPermitted: String, permissionName: String, topic: String): CommonResponse!
   deletePermissionsGranted(id: Int!): CommonResponse!
   editAdviceType(id: Int!, onOff: String, category: String, defaultValue: String): CommonResponse!
@@ -772,4 +772,5 @@ type Mutation {
   searchSubject(id: Int, subDiv: String, subjectName: String, subjectCode: String, exposure: Boolean, page: Int, limit: Int): SearchSubjectResult!
   createUserActivityLogs(eventName: String!, description: String): CommonResponse!
   checkingIpRecord(ipRecord: String!, today: [String]!): CommonResponse!
+  createStudent(name: String, phoneNum1: String, phoneNum2: String, smsAgreement: String, birthday: String, department: String): CommonResponse!
 }

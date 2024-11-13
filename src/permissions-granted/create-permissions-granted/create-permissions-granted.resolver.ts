@@ -15,7 +15,7 @@ export class CreatePermissionsGrantedResolver {
     @Context() context: any,
     @Args("permissionName") permissionName: string,
     @Args("topic") topic: string,
-    @Args("manageUserIds", { type: () => [Int], nullable: true })
+    @Args("manageUserIds", { type: () => [Int], nullable: "itemsAndList" })
     manageUserIds?: number[],
     @Args("smsPermitted", { nullable: true }) smsPermitted?: string,
     @Args("readOnly", { nullable: true }) readOnly?: string,

@@ -560,6 +560,7 @@ type ManageUser {
   Lectures: [Lectures!]
   Stamp: [Stamp!]
   lastModifiedBy: String
+  frequentlyUsed: [String]
 }
 
 type Alarm {
@@ -615,7 +616,7 @@ type ResultSeeManageUser {
   ok: Boolean!
   message: String
   error: String
-  result: [ManageUser]
+  data: [ManageUser]
   totalCount: Int
 }
 

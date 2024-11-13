@@ -80,4 +80,6 @@ export class ManageUser {
   Stamp?: Stamp[];
   @Field({ nullable: true })
   lastModifiedBy?: string;
+  @Field(() => [String], { nullable: "itemsAndList" })
+  frequentlyUsed: string[]; //자주 사용하는 문장
 }

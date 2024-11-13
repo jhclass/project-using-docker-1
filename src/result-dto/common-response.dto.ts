@@ -51,7 +51,7 @@ export class ResultSeeManageUser {
   @Field({ nullable: true })
   error?: string;
   @Field(() => [ManageUser], { nullable: "itemsAndList" })
-  result?: ManageUser[];
+  data?: ManageUser[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }

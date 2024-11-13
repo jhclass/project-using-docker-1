@@ -41,6 +41,47 @@ export class CreateStudentStateService {
         throw new Error("오늘 날짜 범위를 정의하는 배열이 필요합니다.");
       }
       //현재 ipRecord 없음.
+      const ipAddr =
+        context?.req?.headers?.["x-forwarded-for"]?.split(",")[0] || // 프록시를 통해 전달된 실제 클라이언트 IP
+        context?.req?.connection?.remoteAddress || // 네트워크 소켓에서 직접 추출한 IP
+        "Unknown";
+      console.log("context?", context.req);
+      console.log(ipAddr);
+      //today 체크
+      if (!Array.isArray(today) || today.length < 2) {
+        throw new Error("오늘 날짜 범위를 정의하는 배열이 필요합니다.");
+      }
+      //ip 체크 / 내부인원은
+      if (!user) {
+        if (ipAddr) {
+          const checkingIp = await this.client.ipRecord.count({
+            where: {
+              ipRecord: ipAddr,
+              createdAt: {
+                gte: today[0],
+                lte: today[1],
+              },
+            },
+          });
+          if (checkingIp >= 10) {
+            throw new Error(
+              "오늘 하루 동안 비정상적으로 많은 게시물이 생성된 ip addr 입니다.",
+            );
+          }
+          // ip log 기록 쌓기.
+
+          await this.client.ipRecord.create({
+            data: {
+              ipRecord: ipAddr,
+              allowed: "Y",
+              details: "상담 문의 등록",
+              branchId: user?.branchId || branchId,
+            },
+          });
+        } else {
+          throw new Error(" ip 주소를 기록할 수 없습니다.");
+        }
+      }
 
       const branchName = await this.client.branch.findUnique({
         where: {

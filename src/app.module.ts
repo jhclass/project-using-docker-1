@@ -21,9 +21,9 @@ import { AlarmModule } from "@src/alarm/alarm.module";
 import { WebsocketModule } from "@src/websocket/websocket.module";
 import { AttendanceRecordModule } from "./attendance-record/attendance-record.module";
 import { StudentStateModule } from "./student-state/student-state.module";
-import { SubjectModule } from './subject/subject.module';
-import { UserActivityLogsModule } from './user-activity-logs/user-activity-logs.module';
-import { IpRecordModule } from './ip-record/ip-record.module';
+import { SubjectModule } from "./subject/subject.module";
+import { UserActivityLogsModule } from "./user-activity-logs/user-activity-logs.module";
+import { IpRecordModule } from "./ip-record/ip-record.module";
 
 @Module({
   imports: [

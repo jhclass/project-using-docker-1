@@ -19,7 +19,7 @@ export class EditManageUserResolver {
     @Args("mPhoneNumCompany", { nullable: true }) mPhoneNumCompany?: string,
     @Args("mPhoneNumInside", { nullable: true }) mPhoneNumInside?: string,
     @Args("mPhoneNumFriend", { nullable: true }) mPhoneNumFriend?: string,
-    @Args({ name: "mPart", type: () => [String], nullable: true })
+    @Args({ name: "mPart", type: () => [String], nullable: "itemsAndList" })
     mPart?: string[],
     @Args("mJoiningDate", { nullable: true }) mJoiningDate?: string,
     @Args("mAddresses", { nullable: true }) mAddresses?: string,
@@ -29,6 +29,7 @@ export class EditManageUserResolver {
     @Args("mAddressDetail", { nullable: true }) mAddressDetail?: string,
     @Args("lastModifiedTime", { nullable: true }) lastModifiedTime?: string,
     @Args("branchId", { type: () => Int, nullable: true }) branchId?: number,
+    @Args("mAvatar", { type: () => String, nullable: true }) mAvatar?: string,
   ): Promise<CommonResponse> {
     return this.editManageUserService.editManageUserFunc(
       context,
@@ -50,6 +51,7 @@ export class EditManageUserResolver {
       mAddressDetail,
       lastModifiedTime,
       branchId,
+      mAvatar,
     );
   }
 }

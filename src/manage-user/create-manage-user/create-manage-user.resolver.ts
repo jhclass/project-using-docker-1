@@ -9,14 +9,14 @@ export class CreateManageUserResolver {
   constructor(private createManageUserService: CreateManageUserService) {}
   @UseGuards(GqlAuthGuard)
   @Mutation(() => CommonResponse)
-  createManageUser(
+  createManagerAccount(
     @Context() context: any,
     @Args("mUserId") mUserId: string,
     @Args("mUsername") mUsername: string,
     @Args("mPassword") mPassword: string,
     @Args("mGrade", { type: () => Int, nullable: true }) mGrade?: number,
     @Args("mRank", { nullable: true }) mRank?: string,
-    @Args({ name: "mPart", type: () => [String], nullable: true })
+    @Args({ name: "mPart", type: () => [String], nullable: "itemsAndList" })
     mPart?: string[],
     @Args("mPhoneNum", { nullable: true }) mPhoneNum?: string,
     @Args("mPhoneNumCompany", { nullable: true }) mPhoneNumCompany?: string,

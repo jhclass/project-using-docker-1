@@ -24,6 +24,7 @@ export class EditManageUserService {
     mAddressDetail?: string,
     lastModifiedTime?: string,
     branchId?: number,
+    mAvatar?: string,
   ) {
     try {
       const { user } = context.req;
@@ -61,6 +62,7 @@ export class EditManageUserService {
           mAddressDetail,
           lastModifiedTime,
           branchId,
+          mAvatar,
         },
       });
       return {

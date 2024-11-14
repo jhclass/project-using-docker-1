@@ -1,13 +1,16 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { WebSocketGatewayService } from "@src/websocket/websocket.gateway";
 
 @Injectable()
 export class CreateStudentStateService {
-  constructor(private readonly client: PrismaService) {}
+  constructor(
+    private readonly client: PrismaService,
+    private readonly gateway: WebSocketGatewayService,
+  ) {}
   async createStudentStateFunc(
     context: any,
     agreement: string,
-
     progress: number,
     adviceTypes: number[],
     subject: string[],
@@ -124,7 +127,49 @@ export class CreateStudentStateService {
       });
 
       //알람등록,
+
+      //매니져 출력
+      const targetManagerIds = await this.client.manageUser.findMany({
+        where: {
+          PermissionsGranted: {
+            some: {
+              id: 10,
+            },
+          },
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      const filterTargetIds = targetManagerIds
+        .filter((manager) => manager.id !== user?.id)
+        .map((manager) => manager.id);
+
+      const createAlarm = await this.client.alarm.create({
+        data: {
+          title: "상담신청",
+          content: `${stName}님이 상담신청을 하였습니다.`,
+          personalTarget: filterTargetIds,
+          branchId: user?.branchId || branchId,
+        },
+      });
+      if (!createAlarm) {
+        throw new Error("알람이 제대로 생성되지 않았습니다.");
+      }
+
       //소켓발송
+      const payload = {
+        type: "NEW_STUDENTSTATE",
+        data: {
+          memo: true,
+          studentname: stName,
+          alarmTitle: "새로운 상담신청 등록",
+          alarmContent: `${stName} 학생이 등록되었습니다.`,
+          filterTargetIds,
+        },
+      };
+      this.gateway.sendNewStudentStateNotification(payload); // Gateway 호출
 
       return {
         ok: true,

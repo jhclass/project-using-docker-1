@@ -88,7 +88,7 @@ export class SearchManageUserService {
       return {
         ok: true,
         message: `정상적으로 검색 완료 되었습니다.`,
-        result: result || [],
+        data: result || [],
         totalCount: totalCount || 0,
       };
     } catch (error) {

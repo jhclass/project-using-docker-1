@@ -15,9 +15,15 @@ export class EditPermissionsGrantedResolver {
     @Context() context: any,
     @Args("lastModifiedTime") lastModifiedTime: string,
     @Args("id", { type: () => Int }) id: number,
-    @Args("manageUserIdsToConnect", { type: () => [Int], nullable: true })
+    @Args("manageUserIdsToConnect", {
+      type: () => [Int],
+      nullable: "itemsAndList",
+    })
     manageUserIdsToConnect?: number[],
-    @Args("manageUserIdsToDisconnect", { type: () => [Int], nullable: true })
+    @Args("manageUserIdsToDisconnect", {
+      type: () => [Int],
+      nullable: "itemsAndList",
+    })
     manageUserIdsToDisconnect?: number[],
     @Args("smsPermitted", { nullable: true }) smsPermitted?: string,
     @Args("readOnly", { nullable: true }) readOnly?: string,

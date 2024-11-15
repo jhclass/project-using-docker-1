@@ -1,8 +1,10 @@
-import { Module } from '@nestjs/common';
-import { DeleteStudentResolver } from './delete-student.resolver';
-import { DeleteStudentService } from './delete-student.service';
+import { Module } from "@nestjs/common";
+import { DeleteStudentResolver } from "./delete-student.resolver";
+import { DeleteStudentService } from "./delete-student.service";
+import { PrismaModule } from "@src/prisma/prisma.module";
 
 @Module({
-  providers: [DeleteStudentResolver, DeleteStudentService]
+  imports: [PrismaModule],
+  providers: [DeleteStudentResolver, DeleteStudentService],
 })
 export class DeleteStudentModule {}

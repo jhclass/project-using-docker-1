@@ -25,7 +25,7 @@ export class EditStudentResolver {
     birthday: string,
     @Args("lastModifiedTime", { nullable: true })
     lastModifiedTime: string, //최근수정시간
-  ) {
+  ): Promise<CommonResponse> {
     return this.editStudentService.editStudentFunc(
       id,
       name,

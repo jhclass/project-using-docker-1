@@ -775,4 +775,5 @@ type Mutation {
   checkingIpRecord(ipRecord: String!, today: [String]!): CommonResponse!
   createStudent(name: String, phoneNum1: String, phoneNum2: String, smsAgreement: String, birthday: String, department: String): CommonResponse!
   editStudent(id: Int!, name: String, phoneNum1: String, phoneNum2: String, smsAgreement: String, birthday: String, lastModifiedTime: String): CommonResponse!
+  deleteStudent(id: Int!): CommonResponse!
 }

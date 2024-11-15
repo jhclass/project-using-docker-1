@@ -74,6 +74,9 @@ export class SearchManageUserService {
       const [result, totalCount] = await Promise.all([
         this.client.manageUser.findMany({
           where: searchConditions,
+          include: {
+            Stamp: true,
+          },
           skip: (pageNum - 1) * take,
           take,
           orderBy: {

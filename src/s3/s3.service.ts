@@ -2,7 +2,7 @@ import {
   DeleteObjectCommand,
   PutObjectCommand,
   S3Client,
-  PutObjectCommandInput,
+  // PutObjectCommandInput,
 } from "@aws-sdk/client-s3";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as path from "path";
 import { DeleteFileResponse } from "@src/result-dto/common-response.dto";
+import { Readable } from "stream";
+import { Upload } from "@aws-sdk/lib-storage";
 @Injectable()
 export class S3Service {
   private s3Client: S3Client;
@@ -24,6 +26,12 @@ export class S3Service {
     });
     this.bucketName = this.configService.get("AWS_S3_BUCKET_NAME");
   }
+  private bufferToStream(buffer: Buffer): Readable {
+    const stream = new Readable();
+    stream.push(buffer);
+    stream.push(null);
+    return stream;
+  }
   async uploadFile(
     file: Express.Multer.File,
     folderName: string,
@@ -37,19 +45,32 @@ export class S3Service {
     //console.log(key);
     console.log("파일 데이터:", file);
     console.log("폴더 이름:", folderName);
-    const params: PutObjectCommandInput = {
-      Bucket: this.bucketName,
-      Key: key,
-      Body: file.buffer,
-      ContentType: file.mimetype,
-      ACL: "public-read", // 퍼블릭 읽기 권한 추가
-    };
-    const command = new PutObjectCommand(params);
+    //const params: PutObjectCommandInput = {
+    // Bucket: this.bucketName,
+    // Key: key,
+    // Body: this.bufferToStream(file.buffer),
+    // ContentType: file.mimetype,
+    //  ACL: "public-read", // 퍼블릭 읽기 권한 추가
+    // };
+    //const command = new PutObjectCommand(params);
+    const fileStream = this.bufferToStream(file.buffer);
     try {
+      const upload = new Upload({
+        client: this.s3Client,
+        params: {
+          Bucket: this.bucketName,
+          Key: key,
+          Body: fileStream,
+          ContentType: file.mimetype,
+          ACL: "public-read",
+        },
+      });
+
+      await upload.done();
       console.log(
         `https://${this.bucketName}.s3.${this.configService.get("AWS_REGION")}.amazonaws.com/${key}`,
       );
-      await this.s3Client.send(command);
+      //await this.s3Client.send(command);
       return `https://${this.bucketName}.s3.${this.configService.get("AWS_REGION")}.amazonaws.com/${key}`;
     } catch (error) {
       console.error(error);

@@ -2,19 +2,14 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { S3Service } from "@src/s3/s3.service";
 import { createCanvas } from "canvas";
-import { Readable } from "stream";
+
 @Injectable()
 export class CreateStampService {
   constructor(
     private readonly client: PrismaService,
     private readonly s3Service: S3Service,
   ) {}
-  private bufferToStream(buffer: Buffer) {
-    const stream = new Readable();
-    stream.push(buffer);
-    stream.push(null);
-    return stream;
-  }
+
   private createVerticalStamp(adminName: string): Buffer {
     const width = 80;
     const height = 100;

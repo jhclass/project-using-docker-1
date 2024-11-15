@@ -57,36 +57,36 @@ export class EditManageUserResolver {
   async devEditManageUser(
     @Context() context: any,
     @Args("mUserId", { type: () => [String], nullable: "itemsAndList" })
-    mUserId: string[],
+    mUserId?: string[],
     @Args("mUsername", { nullable: true })
-    mUsername: string,
+    mUsername?: string,
     @Args("mPassword", { nullable: true })
-    mPassword: string,
+    mPassword?: string,
     @Args("mGrade", { type: () => Int, nullable: true })
-    mGrade: number,
+    mGrade?: number,
     @Args("mRank", { nullable: true })
-    mRank: string,
+    mRank?: string,
     @Args("mPhoneNum", { nullable: true })
-    mPhoneNum: string,
+    mPhoneNum?: string,
     @Args("mPhoneNumCompany", { nullable: true })
-    mPhoneNumCompany: string,
+    mPhoneNumCompany?: string,
     @Args("mPhoneNumInside", { nullable: true })
-    mPhoneNumInside: string,
+    mPhoneNumInside?: string,
     @Args("mPhoneNumFriend", { nullable: true })
-    mPhoneNumFriend: string,
+    mPhoneNumFriend?: string,
     @Args("mPart", { type: () => [String], nullable: "itemsAndList" })
-    mPart: string[],
+    mPart?: string[],
     @Args("mAvatar", { nullable: true })
-    mAvatar: string,
+    mAvatar?: string,
     @Args("mJoiningDate", { nullable: true })
-    mJoiningDate: string,
+    mJoiningDate?: string,
     @Args("mAddresses", { nullable: true })
-    mAddresses: string,
+    mAddresses?: string,
     @Args("resign", { nullable: true })
-    resign: string,
+    resign?: string,
     @Args("email", { nullable: true })
-    email: string,
-  ) {
+    email?: string,
+  ): Promise<CommonResponse> {
     return this.editManageUserService.devEditManageUserFunc(
       context,
       mUserId,

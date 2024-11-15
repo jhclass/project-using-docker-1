@@ -6,12 +6,12 @@ export class EditStudentService {
   constructor(private readonly client: PrismaService) {}
   async editStudentFunc(
     id: number,
-    name: string,
-    phoneNum1: string,
-    phoneNum2: string,
-    smsAgreement: string,
-    birthday: string,
-    lastModifiedTime: string, //최근수정시간
+    name?: string,
+    phoneNum1?: string,
+    phoneNum2?: string,
+    smsAgreement?: string,
+    birthday?: string,
+    lastModifiedTime?: string, //최근수정시간
   ) {
     try {
       if (!id || !lastModifiedTime) {

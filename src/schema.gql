@@ -738,6 +738,7 @@ type Query {
   seeFavorite: [StudentState!]!
   seeSubject(page: Int, limit: Int): SeeSubjectResult!
   seeUserActivityLogs: UserActivityLogsResponse!
+  createStamp(manageUserId: Int!): CommonResponse!
 }
 
 type Mutation {

@@ -6,12 +6,12 @@ export class CreateStudentService {
   constructor(private readonly client: PrismaService) {}
   async createStudentFunc(
     context: any,
-    name: string,
-    phoneNum1: string,
-    phoneNum2: string,
-    smsAgreement: string,
-    birthday: string,
-    department: string,
+    name?: string,
+    phoneNum1?: string,
+    phoneNum2?: string,
+    smsAgreement?: string,
+    birthday?: string,
+    department?: string,
   ) {
     try {
       const { user } = context.req;

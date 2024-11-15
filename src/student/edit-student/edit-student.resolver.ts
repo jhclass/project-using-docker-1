@@ -14,17 +14,17 @@ export class EditStudentResolver {
     @Args("id", { type: () => Int })
     id: number,
     @Args("name", { nullable: true })
-    name: string,
+    name?: string,
     @Args("phoneNum1", { nullable: true })
-    phoneNum1: string,
+    phoneNum1?: string,
     @Args("phoneNum2", { nullable: true })
-    phoneNum2: string,
+    phoneNum2?: string,
     @Args("smsAgreement", { nullable: true })
-    smsAgreement: string,
+    smsAgreement?: string,
     @Args("birthday", { nullable: true })
-    birthday: string,
+    birthday?: string,
     @Args("lastModifiedTime", { nullable: true })
-    lastModifiedTime: string, //최근수정시간
+    lastModifiedTime?: string, //최근수정시간
   ): Promise<CommonResponse> {
     return this.editStudentService.editStudentFunc(
       id,

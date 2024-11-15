@@ -12,17 +12,17 @@ export class CreateStudentResolver {
   async createStudent(
     @Context() context: any,
     @Args("name", { nullable: true })
-    name: string,
+    name?: string,
     @Args("phoneNum1", { nullable: true })
-    phoneNum1: string,
+    phoneNum1?: string,
     @Args("phoneNum2", { nullable: true })
-    phoneNum2: string,
+    phoneNum2?: string,
     @Args("smsAgreement", { nullable: true })
-    smsAgreement: string,
+    smsAgreement?: string,
     @Args("birthday", { nullable: true })
-    birthday: string,
+    birthday?: string,
     @Args("department", { nullable: true })
-    department: string,
+    department?: string,
   ): Promise<CommonResponse> {
     return this.createStudentService.createStudentFunc(
       context,

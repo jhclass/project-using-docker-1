@@ -54,4 +54,56 @@ export class EditManageUserResolver {
       mAvatar,
     );
   }
+  async devEditManageUser(
+    @Context() context: any,
+    @Args("mUserId", { type: () => [String], nullable: "itemsAndList" })
+    mUserId: string[],
+    @Args("mUsername", { nullable: true })
+    mUsername: string,
+    @Args("mPassword", { nullable: true })
+    mPassword: string,
+    @Args("mGrade", { type: () => Int, nullable: true })
+    mGrade: number,
+    @Args("mRank", { nullable: true })
+    mRank: string,
+    @Args("mPhoneNum", { nullable: true })
+    mPhoneNum: string,
+    @Args("mPhoneNumCompany", { nullable: true })
+    mPhoneNumCompany: string,
+    @Args("mPhoneNumInside", { nullable: true })
+    mPhoneNumInside: string,
+    @Args("mPhoneNumFriend", { nullable: true })
+    mPhoneNumFriend: string,
+    @Args("mPart", { type: () => [String], nullable: "itemsAndList" })
+    mPart: string[],
+    @Args("mAvatar", { nullable: true })
+    mAvatar: string,
+    @Args("mJoiningDate", { nullable: true })
+    mJoiningDate: string,
+    @Args("mAddresses", { nullable: true })
+    mAddresses: string,
+    @Args("resign", { nullable: true })
+    resign: string,
+    @Args("email", { nullable: true })
+    email: string,
+  ) {
+    return this.editManageUserService.devEditManageUserFunc(
+      context,
+      mUserId,
+      mUsername,
+      mPassword,
+      mGrade,
+      mRank,
+      mPhoneNum,
+      mPhoneNumCompany,
+      mPhoneNumInside,
+      mPhoneNumFriend,
+      mPart,
+      mAvatar,
+      mJoiningDate,
+      mAddresses,
+      resign,
+      email,
+    );
+  }
 }

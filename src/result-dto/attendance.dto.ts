@@ -1,7 +1,7 @@
 import { ObjectType, Field, Int } from "@nestjs/graphql";
 import { StudentPayment } from "./studentPayment.dto";
 import { Student } from "./student.dto";
-import { Lectures } from "./lectrues.dto";
+import { Lectures } from "./lectures.dto";
 import { Branch } from "./branch.dto";
 
 //Attendance (출석)

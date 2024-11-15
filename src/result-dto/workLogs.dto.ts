@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int } from "@nestjs/graphql";
 import { Branch } from "./branch.dto";
-import { Lectures } from "./lectrues.dto";
+import { Lectures } from "./lectures.dto";
 //WorkLogs(업무일지)
 @ObjectType()
 export class WorkLogs {

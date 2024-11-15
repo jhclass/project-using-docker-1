@@ -6,7 +6,7 @@ import { Student } from "./student.dto";
 import { StudentMemo } from "./studentMemo.dto";
 import { StudentPayment } from "./studentPayment.dto";
 import { PaymentDetail } from "./paymentDetail.dto";
-import { Lectures } from "./lectrues.dto";
+import { Lectures } from "./lectures.dto";
 import { Stamp } from "./stamp.dto";
 import { Branch } from "./branch.dto";
 //ManageUser

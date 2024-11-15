@@ -2,6 +2,7 @@ import {
   DeleteObjectCommand,
   PutObjectCommand,
   S3Client,
+  PutObjectCommandInput,
 } from "@aws-sdk/client-s3";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -34,16 +35,22 @@ export class S3Service {
     const ext = path.extname(file.originalname);
     const key = `${folderName}/${uuidv4()}${ext}`;
     //console.log(key);
-    const params = {
+    console.log("파일 데이터:", file);
+    console.log("폴더 이름:", folderName);
+    const params: PutObjectCommandInput = {
       Bucket: this.bucketName,
       Key: key,
       Body: file.buffer,
       ContentType: file.mimetype,
+      ACL: "public-read", // 퍼블릭 읽기 권한 추가
     };
     const command = new PutObjectCommand(params);
     try {
+      console.log(
+        `https://${this.bucketName}.s3.${this.configService.get("AWS_REGION")}.amazonaws.com/${key}`,
+      );
       await this.s3Client.send(command);
-      return `https://${this.bucketName}.s3.${this.configService.get("AWS_REGION")}.amazons.com/${key}`;
+      return `https://${this.bucketName}.s3.${this.configService.get("AWS_REGION")}.amazonaws.com/${key}`;
     } catch (error) {
       console.error(error);
       throw new Error("file upload failed");

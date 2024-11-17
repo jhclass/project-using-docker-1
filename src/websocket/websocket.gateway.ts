@@ -46,4 +46,8 @@ export class WebSocketGatewayService
     this.server.emit("NEW_STUDENTSTATE", payload);
     console.log(`Notification sent: ${JSON.stringify(payload)}`);
   }
+  sendNewStudentNotification(payload: any) {
+    this.server.emit("NEW_STUDENT", payload);
+    console.log(`Notification sent: ${JSON.stringify(payload)}`);
+  }
 }

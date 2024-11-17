@@ -1,9 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
-
+import { WebSocketGatewayService } from "@src/websocket/websocket.gateway";
 @Injectable()
 export class CreateStudentService {
-  constructor(private readonly client: PrismaService) {}
+  constructor(
+    private readonly client: PrismaService,
+    private readonly gateway: WebSocketGatewayService,
+  ) {}
   async createStudentFunc(
     context: any,
     name?: string,
@@ -75,6 +78,18 @@ export class CreateStudentService {
         throw new Error("알람이 제대로 생성되지 않았습니다.");
       }
 
+      //소켓발송
+      const payload = {
+        type: "NEW_STUDENT",
+        data: {
+          memo: Boolean(true),
+          studentname: name,
+          alarmTitle: "새로운 수강생 등록",
+          alarmContent: `${name} 학생이 등록되었습니다.`,
+          filterTargetIds,
+        },
+      };
+      this.gateway.sendNewStudentNotification(payload);
       return {
         ok: true,
         message: ` ${name} 학생데이터가 생성되었습니다. `,

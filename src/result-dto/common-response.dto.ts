@@ -7,6 +7,7 @@ import { AttendanceRecord } from "./attendanceRecord.dto";
 import { StudentState } from "./studentState.dto";
 import { Subject } from "./subject.dto";
 import { UserActivityLogs } from "./user-activity-logs.dto";
+import { Student } from "./student.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -43,7 +44,7 @@ export class ResultLogin {
 }
 
 @ObjectType()
-export class ResultSeeManageUser {
+export class SeeManageUserResult {
   @Field()
   ok: boolean;
   @Field({ nullable: true })
@@ -289,4 +290,18 @@ export class DashboardRDResult {
   receiptDiv?: string;
   @Field(() => Int, { nullable: true })
   count?: number;
+}
+
+@ObjectType()
+export class SeeStudentResult {
+  @Field({ nullable: true })
+  ok?: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+  @Field(() => [Student], { nullable: "itemsAndList" })
+  student?: Student[];
 }

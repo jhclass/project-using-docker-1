@@ -24,6 +24,7 @@ export class CreateStudentService {
         where: {
           name,
           phoneNum1,
+          branchId: user?.branchId,
         },
       });
       if (existingStudent > 0) {
@@ -71,7 +72,7 @@ export class CreateStudentService {
           title: "수강생 등록",
           content: `새로운 수강생 ${name}님이 등록되었습니다.`,
           personalTarget: filterTargetIds,
-          branchId: context.loggedInManager.branchId,
+          branchId: user?.branchId,
         },
       });
       if (!createAlarm) {

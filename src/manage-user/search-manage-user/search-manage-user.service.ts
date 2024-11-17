@@ -87,7 +87,7 @@ export class SearchManageUserService {
           where: searchConditions,
         }),
       ]);
-
+      console.log(JSON.stringify(result, null, 2));
       return {
         ok: true,
         message: `정상적으로 검색 완료 되었습니다.`,

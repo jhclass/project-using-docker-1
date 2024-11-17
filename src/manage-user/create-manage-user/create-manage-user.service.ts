@@ -50,6 +50,7 @@ export class CreateManageUserService {
           mGrade,
           mRank,
           mPart,
+          mPhoneNum,
           mPhoneNumCompany,
           mPhoneNumFriend,
           mPhoneNumInside,

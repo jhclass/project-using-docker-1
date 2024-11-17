@@ -612,7 +612,7 @@ type ResultLogin {
   refreshToken: String
 }
 
-type ResultSeeManageUser {
+type SeeManageUserResult {
   ok: Boolean!
   message: String
   error: String
@@ -760,10 +760,18 @@ type DashboardRDResult {
   count: Int
 }
 
+type SeeStudentResult {
+  ok: Boolean
+  message: String
+  error: String
+  totalCount: Int
+  student: [Student]
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
-  seeManageUser(limit: Int, page: Int, resign: String): ResultSeeManageUser!
+  seeManageUser(limit: Int, page: Int, resign: String): SeeManageUserResult!
   mMe: ManageUser!
   isMme: ResultIsMe!
   searchPermissionsGranted(id: Int, permissionName: String, topic: String, manageUserId: Int): ResultSearchPermissionsGranted!
@@ -774,6 +782,7 @@ type Query {
   seeFavorite: [StudentState!]!
   seeSubject(page: Int, limit: Int): SeeSubjectResult!
   seeUserActivityLogs: UserActivityLogsResponse!
+  seeStudent(page: Int, limit: Int): SeeStudentResult!
   createStamp(manageUserId: Int!): CommonResponse!
   dashboardToday(today: [String], yesterday: [String]): DashboardTodayResult!
   dashboardMonth: DashboardMonthResult!
@@ -818,4 +827,5 @@ type Mutation {
   createStudent(name: String, phoneNum1: String, phoneNum2: String, smsAgreement: String, birthday: String, department: String): CommonResponse!
   editStudent(id: Int!, name: String, phoneNum1: String, phoneNum2: String, smsAgreement: String, birthday: String, lastModifiedTime: String): CommonResponse!
   deleteStudent(id: Int!): CommonResponse!
+  doubleCheck(name: String!, phoneNum1: String!): CommonResponse!
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
-import { ResultSeeManageUser } from "@src/result-dto/common-response.dto";
+import { SeeManageUserResult } from "@src/result-dto/common-response.dto";
 
 @Injectable()
 export class SeeManageUserService {
@@ -10,7 +10,7 @@ export class SeeManageUserService {
     limit?: number,
     page?: number,
     resign?: string,
-  ): Promise<ResultSeeManageUser> {
+  ): Promise<SeeManageUserResult> {
     try {
       const take = limit ?? 10;
       const pageNum = page ?? 1;

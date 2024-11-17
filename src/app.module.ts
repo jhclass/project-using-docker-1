@@ -26,6 +26,7 @@ import { UserActivityLogsModule } from "./user-activity-logs/user-activity-logs.
 import { IpRecordModule } from "./ip-record/ip-record.module";
 import { StudentModule } from "./student/student.module";
 import { StampModule } from "./stamp/stamp.module";
+import { DashboardModule } from "./dashboard/dashboard.module";
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { StampModule } from "./stamp/stamp.module";
     IpRecordModule,
     StudentModule,
     StampModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

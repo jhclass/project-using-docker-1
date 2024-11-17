@@ -724,6 +724,42 @@ type UserActivityLogsResponse {
   totalCount: Int
 }
 
+type DashboardTodayResult {
+  ok: Boolean
+  today: Int
+  compareToday: Int
+  message: String
+  error: String
+}
+
+type DashboardMonthResult {
+  ok: Boolean
+  month: Int
+  compareMonth: Int
+  message: String
+  error: String
+}
+
+type DashboardUnpResult {
+  ok: Boolean
+  unpCount: Int
+  message: String
+  error: String
+}
+
+type DashboardATResult {
+  topFiveName: [String]
+  count: [Int!]
+  totalStudentState: Int
+  message: String
+  error: String
+}
+
+type DashboardRDResult {
+  receiptDiv: String
+  count: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -739,6 +775,11 @@ type Query {
   seeSubject(page: Int, limit: Int): SeeSubjectResult!
   seeUserActivityLogs: UserActivityLogsResponse!
   createStamp(manageUserId: Int!): CommonResponse!
+  dashboardToday(today: [String], yesterday: [String]): DashboardTodayResult!
+  dashboardMonth: DashboardMonthResult!
+  dashboardUnp: DashboardUnpResult!
+  dashboardAT(period: [String]): DashboardATResult!
+  dashboardRD(period: [String]): [DashboardRDResult]
 }
 
 type Mutation {

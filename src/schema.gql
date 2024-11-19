@@ -768,6 +768,14 @@ type SeeStudentResult {
   student: [Student]
 }
 
+type SearchStudentResult {
+  ok: Boolean
+  message: String
+  error: String
+  student: [Student!]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -828,4 +836,5 @@ type Mutation {
   editStudent(id: Int!, name: String, phoneNum1: String, phoneNum2: String, smsAgreement: String, birthday: String, lastModifiedTime: String): CommonResponse!
   deleteStudent(id: Int!): CommonResponse!
   doubleCheck(name: String!, phoneNum1: String!): CommonResponse!
+  searchStudent(id: Int, studentName: String, createdAt: [String], birthday: [String], phoneNum: String, page: Int, limit: Int): SearchStudentResult!
 }

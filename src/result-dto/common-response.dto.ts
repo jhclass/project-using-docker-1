@@ -305,3 +305,17 @@ export class SeeStudentResult {
   @Field(() => [Student], { nullable: "itemsAndList" })
   student?: Student[];
 }
+
+@ObjectType()
+export class SearchStudentResult {
+  @Field({ nullable: true })
+  ok?: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => [Student], { nullable: true })
+  student?: Student[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}

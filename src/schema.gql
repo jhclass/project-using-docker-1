@@ -220,9 +220,9 @@ type EmploymentStatus {
   proofOfImployment: String!
   relatedFields: String!
   completionType: String!
-  Subject: Subject!
+  Subject: Subject
   subjectId: Int!
-  StudentPayment: StudentPayment!
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
@@ -242,8 +242,8 @@ type EduInfomation {
   eduName: String!
   major: String
   graduationStatus: String!
-  Subject: Subject!
-  StudentPayment: StudentPayment!
+  Subject: Subject
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
@@ -262,9 +262,9 @@ type Certificate {
   certificateName: String!
   certificateLevel: String
   CertificateIssuer: String!
-  Subject: Subject!
+  Subject: Subject
   subjectId: Int!
-  StudentPayment: StudentPayment!
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
@@ -283,9 +283,9 @@ type StudentConsultation {
   typeOfConsultation: String!
   dateOfConsultation: String!
   detailsOfConsultation: String!
-  Subject: Subject!
+  Subject: Subject
   subjectId: Int!
-  StudentPayment: StudentPayment!
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
@@ -307,9 +307,9 @@ type HopeForEmployment {
   workType: String!
   workingHours: Int!
   opinion: String!
-  Subject: Subject!
+  Subject: Subject
   subjectId: Int!
-  StudentPayment: StudentPayment!
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
@@ -334,9 +334,9 @@ type EmploymentRecommendation {
   employmentStatus: String!
   reasonForNonEmployment: String!
   certificateOfEmploymentStatus: String!
-  Subject: Subject!
+  Subject: Subject
   subjectId: Int!
-  StudentPayment: StudentPayment!
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
@@ -356,9 +356,9 @@ type PreInspection {
   preScreenerType: String
   preInspectionDetails: String
   actionTaken: String
-  Subject: Subject!
+  Subject: Subject
   subjectId: Int!
-  StudentPayment: StudentPayment!
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
@@ -377,12 +377,12 @@ type StudentPortfolio {
   isBest: String!
   filePath: [String!]!
   details: String
-  url: [String!]
+  url: [String]
   createdAt: String!
   updatedAt: String!
-  StudentPayment: StudentPayment!
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
-  Subject: Subject!
+  Subject: Subject
   subjectId: Int!
   Branch: Branch
   branchId: Int
@@ -419,7 +419,7 @@ type PaymentDetail {
   updatedAt: String!
   studentId: Int
   stName: String
-  cashReceipts: [String!]
+  cashReceipts: [String]
   Branch: Branch
   branchId: Int
   lastModifiedTime: String
@@ -431,8 +431,8 @@ type Career {
   studentId: Int!
   stName: String!
   careerDetails: String!
-  Subject: Subject!
-  StudentPayment: StudentPayment!
+  Subject: Subject
+  StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
@@ -452,11 +452,11 @@ type StudentPayment {
   cardAmount: Int
   actualAmount: Int
   unCollectedAmount: Int
-  receiptClassification: [String!]
+  receiptClassification: [String]
   paymentDate: String
   student: Student
   studentId: Int!
-  paymentDetail: [PaymentDetail!]
+  paymentDetail: [PaymentDetail]
   processingManager: ManageUser
   processingManagerId: Int
   situationReport: Boolean
@@ -473,7 +473,7 @@ type StudentPayment {
   createdAt: String
   updatedAt: String
   isWeekend: String
-  attendance: [Attendance!]
+  attendance: [Attendance]
   Branch: Branch
   branchId: Int
   mZipCode: String
@@ -481,15 +481,15 @@ type StudentPayment {
   mAddressDetail: String
   dateOfDroppingOut: String
   reasonFordroppingOut: String
-  EmploymentStatus: [EmploymentStatus!]
-  EduInfomation: [EduInfomation!]
-  Career: [Career!]
-  Certificate: [Certificate!]
-  StudentConsultation: [StudentConsultation!]
-  HopeForEmployment: [HopeForEmployment!]
-  EmploymentRecommendation: [EmploymentRecommendation!]
-  PreInspection: [PreInspection!]
-  StudentPortfolio: [StudentPortfolio!]
+  EmploymentStatus: [EmploymentStatus]
+  EduInfomation: [EduInfomation]
+  Career: [Career]
+  Certificate: [Certificate]
+  StudentConsultation: [StudentConsultation]
+  HopeForEmployment: [HopeForEmployment]
+  EmploymentRecommendation: [EmploymentRecommendation]
+  PreInspection: [PreInspection]
+  StudentPortfolio: [StudentPortfolio]
   supportType: String
   lastModifiedTime: String
   lastModifiedByName: String
@@ -776,6 +776,22 @@ type SearchStudentResult {
   totalCount: Int
 }
 
+type StudentPaymentResult {
+  ok: Boolean
+  message: String
+  error: String
+  totalCount: Int
+  StudentPayment: [StudentPayment]
+}
+
+type SearchStudentPaymentResult {
+  ok: Boolean
+  message: String
+  error: String
+  data: [StudentPayment]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -797,6 +813,7 @@ type Query {
   dashboardUnp: DashboardUnpResult!
   dashboardAT(period: [String]): DashboardATResult!
   dashboardRD(period: [String]): [DashboardRDResult]
+  seeStudentPayment(page: Int, limit: Int): StudentPaymentResult!
 }
 
 type Mutation {
@@ -837,4 +854,8 @@ type Mutation {
   deleteStudent(id: Int!): CommonResponse!
   doubleCheck(name: String!, phoneNum1: String!): CommonResponse!
   searchStudent(id: Int, studentName: String, createdAt: [String], birthday: [String], phoneNum: String, page: Int, limit: Int): SearchStudentResult!
+  createStudentPayment(campus: String!, tuitionFee: Int!, studentId: Int!, processingManagerId: Int!, subjectId: Int!, seScore: Int, discountAmount: String, cashAmount: Float, cardAmount: Int, actualAmount: Int, unCollectedAmount: Int, receiptClassification: [String], paymentDate: String, situationReport: Boolean, amountReceived: Int, subDiv: String, courseComplete: String, employment: String, dueDate: String, classCode: String, lectureAssignment: String, isWeekend: String, supportType: String): CommonResponse!
+  editStudentPayment(id: Int!, subjectId: Int!, campus: String, seScore: Int, subject: String, tuitionFee: Int, discountAmount: String, cashAmount: Int, cardAmount: Int, actualAmount: Int, unCollectedAmount: Int, receiptClassification: [String], paymentDate: String, processingManagerId: Int, situationReport: Boolean, amountReceived: Int, subDiv: String, courseComplete: String, employment: String, dueDate: String, classCode: String, lectureAssignment: String, isWeekend: String, mZipCode: String, mAddresses: String, mAddressDetail: String, supportType: String, lastModifiedTime: String): CommonResponse!
+  deleteStudentPayment(id: Int!): CommonResponse!
+  searchStudentPayment(id: Int, page: Int, limit: Int, studentName: String, period: [String!], createdPeriod: [String!], subDiv: String, employment: String, lectureAssignment: String): SearchStudentPaymentResult!
 }

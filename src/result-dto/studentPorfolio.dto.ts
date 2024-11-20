@@ -20,18 +20,18 @@ export class StudentPortfolio {
   filePath: string[]; //포트폴리오링크 배열
   @Field({ nullable: true })
   details?: string; //한줄평
-  @Field(() => [String], { nullable: true })
+  @Field(() => [String], { nullable: "itemsAndList" })
   url?: string[];
   @Field(() => String)
   createdAt: Date;
   @Field(() => String)
   updatedAt: Date;
-  @Field(() => StudentPayment)
-  StudentPayment: StudentPayment;
+  @Field(() => StudentPayment, { nullable: true })
+  StudentPayment?: StudentPayment;
   @Field(() => Int)
   studentPaymentId: number;
-  @Field(() => Subject)
-  Subject: Subject;
+  @Field(() => Subject, { nullable: true })
+  Subject?: Subject;
   @Field(() => Int)
   subjectId: number;
   @Field(() => Branch, { nullable: true })

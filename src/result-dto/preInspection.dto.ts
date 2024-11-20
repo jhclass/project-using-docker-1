@@ -14,20 +14,20 @@ export class PreInspection {
   studentId: number; // 학생id
   @Field()
   stName: string; // 학생이름
-  @Field({ nullable: true })
-  dateOfPreInspection?: string; //사전점검일
+  @Field(() => String, { nullable: true })
+  dateOfPreInspection?: Date; //사전점검일
   @Field({ nullable: true })
   preScreenerType?: string; // 사전검사구분 "강사","교무팀"
   @Field({ nullable: true })
   preInspectionDetails?: string; // 사전점검내용
   @Field({ nullable: true })
   actionTaken?: string; //조치사항
-  @Field(() => Subject)
-  Subject: Subject;
+  @Field(() => Subject, { nullable: true })
+  Subject?: Subject;
   @Field(() => Int)
   subjectId: number;
-  @Field(() => StudentPayment)
-  StudentPayment: StudentPayment;
+  @Field(() => StudentPayment, { nullable: true })
+  StudentPayment?: StudentPayment;
   @Field(() => Int)
   studentPaymentId: number;
   @Field(() => String)

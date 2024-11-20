@@ -5,8 +5,8 @@ import {
   OnGatewayDisconnect,
   ConnectedSocket,
   WebSocketServer,
-  MessageBody,
-  SubscribeMessage,
+  //MessageBody,
+  //SubscribeMessage,
 } from "@nestjs/websockets";
 import { Server, Socket } from "socket.io";
 
@@ -26,7 +26,8 @@ export class WebSocketGatewayService
   server: Server;
 
   afterInit(server: Server) {
-    console.log(`WebSocket Server Initialized,${server}`);
+    const path = Reflect.get(server, "opts")?.path;
+    console.log("WebSocket Server Path:", path || "default path");
   }
 
   handleConnection(@ConnectedSocket() client: Socket) {

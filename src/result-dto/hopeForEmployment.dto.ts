@@ -25,12 +25,12 @@ export class HopeForEmployment {
   workingHours: number; // 근무시간 (int)
   @Field()
   opinion: string; // 의견
-  @Field(() => Subject)
-  Subject: Subject;
+  @Field(() => Subject, { nullable: true })
+  Subject?: Subject;
   @Field(() => Int)
   subjectId: number;
-  @Field(() => StudentPayment)
-  StudentPayment: StudentPayment;
+  @Field(() => StudentPayment, { nullable: true })
+  StudentPayment?: StudentPayment;
   @Field(() => Int)
   studentPaymentId: number;
   @Field(() => String)

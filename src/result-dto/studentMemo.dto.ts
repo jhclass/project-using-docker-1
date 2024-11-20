@@ -18,10 +18,10 @@ export class StudentMemo {
   manageUser?: ManageUser;
   @Field(() => Int, { nullable: true })
   manageUserId?: number;
-  @Field({ nullable: true })
-  createdAt?: string;
-  @Field({ nullable: true })
-  updatedAt?: string;
-  @Field({ nullable: true })
-  lastModifiedTime?: string;
+  @Field(() => String, { nullable: true })
+  createdAt?: Date;
+  @Field(() => String, { nullable: true })
+  updatedAt?: Date;
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date;
 }

@@ -20,12 +20,12 @@ export class StudentConsultation {
   dateOfConsultation: Date; // 상담일자
   @Field()
   detailsOfConsultation: string; // 상담내용
-  @Field(() => Subject)
-  Subject: Subject;
+  @Field(() => Subject, { nullable: true })
+  Subject?: Subject;
   @Field(() => Int)
   subjectId: number;
-  @Field(() => StudentPayment)
-  StudentPayment: StudentPayment;
+  @Field(() => StudentPayment, { nullable: true })
+  StudentPayment?: StudentPayment;
   @Field(() => Int)
   studentPaymentId: number;
   @Field(() => String)

@@ -27,7 +27,7 @@ import { IpRecordModule } from "./ip-record/ip-record.module";
 import { StudentModule } from "./student/student.module";
 import { StampModule } from "./stamp/stamp.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
-import { StudentPaymentModule } from './student-payment/student-payment.module';
+import { StudentPaymentModule } from "./student-payment/student-payment.module";
 
 @Module({
   imports: [

@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { ManageUser } from "./manageUser.dto";
 import { PermissionsGranted } from "./permissionsGranted.dto";
 import { AdviceType } from "./adviceType.dto";
@@ -8,6 +8,7 @@ import { StudentState } from "./studentState.dto";
 import { Subject } from "./subject.dto";
 import { UserActivityLogs } from "./user-activity-logs.dto";
 import { Student } from "./student.dto";
+import { StudentPayment } from "./studentPayment.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -316,6 +317,34 @@ export class SearchStudentResult {
   error?: string;
   @Field(() => [Student], { nullable: true })
   student?: Student[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}
+
+@ObjectType()
+export class StudentPaymentResult {
+  @Field({ nullable: true })
+  ok?: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+  @Field(() => [StudentPayment], { nullable: "itemsAndList" })
+  StudentPayment?: StudentPayment[];
+}
+
+@ObjectType()
+export class SearchStudentPaymentResult {
+  @Field({ nullable: true })
+  ok?: boolean;
+  @Field({ nullable: true })
+  message?: string;
+  @Field({ nullable: true })
+  error?: string;
+  @Field(() => [StudentPayment], { nullable: "itemsAndList" })
+  data?: StudentPayment[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }

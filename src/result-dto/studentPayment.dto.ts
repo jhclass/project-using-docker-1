@@ -36,15 +36,15 @@ export class StudentPayment {
   actualAmount?: number;
   @Field(() => Int, { nullable: true })
   unCollectedAmount?: number;
-  @Field(() => [String], { nullable: true })
+  @Field(() => [String], { nullable: "itemsAndList" })
   receiptClassification?: string[];
-  @Field({ nullable: true })
-  paymentDate?: string;
+  @Field(() => String, { nullable: true })
+  paymentDate?: Date;
   @Field(() => Student, { nullable: true })
   student?: Student;
   @Field(() => Int)
   studentId: number;
-  @Field(() => [PaymentDetail], { nullable: true })
+  @Field(() => [PaymentDetail], { nullable: "itemsAndList" })
   paymentDetail?: PaymentDetail[];
   @Field(() => ManageUser, { nullable: true })
   processingManager?: ManageUser;
@@ -66,19 +66,19 @@ export class StudentPayment {
   courseComplete?: string;
   @Field({ nullable: true })
   employment?: string;
-  @Field({ nullable: true })
-  dueDate?: string;
+  @Field(() => String, { nullable: true })
+  dueDate?: Date;
   @Field({ nullable: true })
   classCode?: string;
   @Field({ nullable: true })
   lectureAssignment?: string;
-  @Field({ nullable: true })
-  createdAt?: string;
-  @Field({ nullable: true })
-  updatedAt?: string;
+  @Field(() => String, { nullable: true })
+  createdAt?: Date;
+  @Field(() => String, { nullable: true })
+  updatedAt?: Date;
   @Field({ nullable: true })
   isWeekend?: string;
-  @Field(() => [Attendance], { nullable: true })
+  @Field(() => [Attendance], { nullable: "itemsAndList" })
   attendance?: Attendance[];
   @Field(() => Branch, { nullable: true })
   Branch?: Branch;
@@ -90,32 +90,32 @@ export class StudentPayment {
   mAddresses?: string;
   @Field({ nullable: true })
   mAddressDetail?: string;
-  @Field({ nullable: true })
-  dateOfDroppingOut?: string;
+  @Field(() => String, { nullable: true })
+  dateOfDroppingOut?: Date;
   @Field({ nullable: true })
   reasonFordroppingOut?: string;
-  @Field(() => [EmploymentStatus], { nullable: true })
+  @Field(() => [EmploymentStatus], { nullable: "itemsAndList" })
   EmploymentStatus?: EmploymentStatus[];
-  @Field(() => [EduInfomation], { nullable: true })
+  @Field(() => [EduInfomation], { nullable: "itemsAndList" })
   EduInfomation?: EduInfomation[];
-  @Field(() => [Career], { nullable: true })
+  @Field(() => [Career], { nullable: "itemsAndList" })
   Career?: Career[];
-  @Field(() => [Certificate], { nullable: true })
+  @Field(() => [Certificate], { nullable: "itemsAndList" })
   Certificate?: Certificate[];
-  @Field(() => [StudentConsultation], { nullable: true })
+  @Field(() => [StudentConsultation], { nullable: "itemsAndList" })
   StudentConsultation?: StudentConsultation[];
-  @Field(() => [HopeForEmployment], { nullable: true })
+  @Field(() => [HopeForEmployment], { nullable: "itemsAndList" })
   HopeForEmployment?: HopeForEmployment[];
-  @Field(() => [EmploymentRecommendation], { nullable: true })
-  EmploymentRecommendation?: [EmploymentRecommendation];
-  @Field(() => [PreInspection], { nullable: true })
+  @Field(() => [EmploymentRecommendation], { nullable: "itemsAndList" })
+  EmploymentRecommendation?: EmploymentRecommendation[];
+  @Field(() => [PreInspection], { nullable: "itemsAndList" })
   PreInspection?: PreInspection[];
-  @Field(() => [StudentPortfolio], { nullable: true })
+  @Field(() => [StudentPortfolio], { nullable: "itemsAndList" })
   StudentPortfolio?: StudentPortfolio[];
   @Field({ nullable: true })
   supportType?: string;
-  @Field({ nullable: true })
-  lastModifiedTime?: string;
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date;
   @Field({ nullable: true })
   lastModifiedByName?: string;
   @Field({ nullable: true })

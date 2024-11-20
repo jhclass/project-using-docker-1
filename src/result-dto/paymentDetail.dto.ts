@@ -19,8 +19,8 @@ export class PaymentDetail {
   amountPayment?: number; //결제금액
   //@Field(() => Int, { nullable: true })
   //unpaidPayment?: number; //미수납액
-  @Field({ nullable: true })
-  paymentDate?: string; //결제일
+  @Field(() => String, { nullable: true })
+  paymentDate?: Date; //결제일
   @Field({ nullable: true })
   bankName?: string; //은행이름
   @Field({ nullable: true })
@@ -45,14 +45,14 @@ export class PaymentDetail {
   reqRefundManager?: string; // 환불신청자
   @Field(() => Int, { nullable: true })
   reqRefundManagerId?: number; // 환불신청한 매니저 아이디
-  @Field({ nullable: true })
-  reqRefundDate?: string; //환불신청일
+  @Field(() => String, { nullable: true })
+  reqRefundDate?: Date; //환불신청일
   @Field({ nullable: true })
   refundApproval?: boolean;
   @Field({ nullable: true })
   refundManager?: string; //환불승인자
-  @Field({ nullable: true })
-  refundApprovalDate?: string; //환불승인일
+  @Field(() => String, { nullable: true })
+  refundApprovalDate?: Date; //환불승인일
   @Field(() => String)
   createdAt: Date;
   @Field(() => String)
@@ -61,12 +61,12 @@ export class PaymentDetail {
   studentId?: number;
   @Field({ nullable: true })
   stName?: string;
-  @Field(() => [String], { nullable: true })
+  @Field(() => [String], { nullable: "itemsAndList" })
   cashReceipts?: string[];
   @Field(() => Branch, { nullable: true })
   Branch?: Branch;
   @Field(() => Int, { nullable: true })
   branchId?: number;
-  @Field({ nullable: true })
-  lastModifiedTime?: string; //최근수정시간
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date; //최근수정시간
 }

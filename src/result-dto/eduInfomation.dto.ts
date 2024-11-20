@@ -22,10 +22,10 @@ export class EduInfomation {
   major?: string; // 전공
   @Field()
   graduationStatus: string; // 졸업여부
-  @Field(() => Subject)
-  Subject: Subject;
-  @Field(() => StudentPayment)
-  StudentPayment: StudentPayment;
+  @Field(() => Subject, { nullable: true })
+  Subject?: Subject;
+  @Field(() => StudentPayment, { nullable: true })
+  StudentPayment?: StudentPayment;
   @Field(() => Int)
   studentPaymentId: number;
   @Field(() => String)

@@ -16,10 +16,10 @@ export class Career {
   stName: string; // 학생이름
   @Field()
   careerDetails: string; // 경력내용
-  @Field(() => Subject)
-  Subject: Subject;
-  @Field(() => StudentPayment)
-  StudentPayment: StudentPayment;
+  @Field(() => Subject, { nullable: true })
+  Subject?: Subject;
+  @Field(() => StudentPayment, { nullable: true })
+  StudentPayment?: StudentPayment;
   @Field(() => Int)
   studentPaymentId: number;
   @Field(() => String)

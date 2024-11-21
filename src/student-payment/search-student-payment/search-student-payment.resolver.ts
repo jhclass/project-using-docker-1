@@ -21,9 +21,9 @@ export class SearchStudentPaymentResolver {
     limit?: number,
     @Args("studentName", { nullable: true })
     studentName?: string,
-    @Args("period", { type: () => [String], nullable: true })
+    @Args("period", { type: () => [String], nullable: "itemsAndList" })
     period?: string[],
-    @Args("createdPeriod", { type: () => [String], nullable: true })
+    @Args("createdPeriod", { type: () => [String], nullable: "itemsAndList" })
     createdPeriod?: string[],
     @Args("subDiv", { nullable: true })
     subDiv?: string,

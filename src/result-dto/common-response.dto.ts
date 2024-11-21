@@ -9,6 +9,7 @@ import { Subject } from "./subject.dto";
 import { UserActivityLogs } from "./user-activity-logs.dto";
 import { Student } from "./student.dto";
 import { StudentPayment } from "./studentPayment.dto";
+import { PaymentDetail } from "./paymentDetail.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -21,23 +22,10 @@ export class CommonResponse {
 }
 
 @ObjectType()
-export class DeleteFileResponse {
-  @Field()
-  ok: boolean;
-  @Field({ nullable: true })
-  message?: string;
-  @Field({ nullable: true })
-  error?: string;
-}
+export class DeleteFileResponse extends CommonResponse {}
 
 @ObjectType()
-export class ResultLogin {
-  @Field()
-  ok: boolean;
-  @Field({ nullable: true })
-  message?: string;
-  @Field({ nullable: true })
-  error?: string;
+export class ResultLogin extends CommonResponse {
   @Field({ nullable: true })
   token?: string;
   @Field({ nullable: true })
@@ -322,13 +310,7 @@ export class SearchStudentResult {
 }
 
 @ObjectType()
-export class StudentPaymentResult {
-  @Field({ nullable: true })
-  ok?: boolean;
-  @Field({ nullable: true })
-  message?: string;
-  @Field({ nullable: true })
-  error?: string;
+export class StudentPaymentResult extends CommonResponse {
   @Field(() => Int, { nullable: true })
   totalCount?: number;
   @Field(() => [StudentPayment], { nullable: "itemsAndList" })
@@ -336,15 +318,17 @@ export class StudentPaymentResult {
 }
 
 @ObjectType()
-export class SearchStudentPaymentResult {
-  @Field({ nullable: true })
-  ok?: boolean;
-  @Field({ nullable: true })
-  message?: string;
-  @Field({ nullable: true })
-  error?: string;
+export class SearchStudentPaymentResult extends CommonResponse {
   @Field(() => [StudentPayment], { nullable: "itemsAndList" })
   data?: StudentPayment[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}
+
+@ObjectType()
+export class PaymentDetailResult extends CommonResponse {
+  @Field(() => [PaymentDetail], { nullable: "itemsAndList" })
+  PaymentDetail?: PaymentDetail[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }

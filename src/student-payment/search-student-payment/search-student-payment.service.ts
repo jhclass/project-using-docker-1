@@ -85,6 +85,7 @@ export class SearchStudentPaymentService {
           EmploymentStatus: true,
           HopeForEmployment: true,
           PreInspection: true,
+          student: true,
           StudentConsultation: true,
           StudentPortfolio: true,
           subject: {
@@ -96,6 +97,7 @@ export class SearchStudentPaymentService {
               },
             },
           },
+          paymentDetail: true,
         },
         skip: (pageNum - 1) * take,
         take,

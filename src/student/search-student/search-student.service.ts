@@ -80,6 +80,9 @@ export class SearchStudentService {
           orderBy: {
             id: "desc",
           },
+          include: {
+            studentPayment: true,
+          },
         }),
         await this.client.student.count({
           where: searchConditions,

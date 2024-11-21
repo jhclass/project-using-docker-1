@@ -8,6 +8,8 @@ export class PaymentDetail {
   @Field(() => Int)
   id: number;
   @Field({ nullable: true })
+  cashOrCard?: string;
+  @Field({ nullable: true })
   cardCompany?: string; // 카드회사
   @Field({ nullable: true })
   cardNum?: string; //카드번호
@@ -27,12 +29,12 @@ export class PaymentDetail {
   depositorName?: string; // 입금자명
   @Field(() => Int, { nullable: true })
   depositAmount?: number; //입금금액
-  @Field({ nullable: true })
-  depositDate?: string; //입금일
-  @Field(() => StudentPayment)
-  studentPayment: StudentPayment;
-  @Field(() => Int)
-  studentPaymentId: number; //연결된 학생결제(StudentPayment 의 id)
+  @Field(() => String, { nullable: true })
+  depositDate?: Date; //입금일
+  @Field(() => StudentPayment, { nullable: true })
+  studentPayment?: StudentPayment;
+  @Field(() => Int, { nullable: true })
+  studentPaymentId?: number; //연결된 학생결제(StudentPayment 의 id)
   @Field(() => ManageUser, { nullable: true })
   receiver?: ManageUser;
   @Field(() => Int, { nullable: true })
@@ -45,14 +47,14 @@ export class PaymentDetail {
   reqRefundManager?: string; // 환불신청자
   @Field(() => Int, { nullable: true })
   reqRefundManagerId?: number; // 환불신청한 매니저 아이디
-  @Field(() => String, { nullable: true })
-  reqRefundDate?: Date; //환불신청일
+  @Field({ nullable: true })
+  reqRefundDate?: string; //환불신청일
   @Field({ nullable: true })
   refundApproval?: boolean;
   @Field({ nullable: true })
   refundManager?: string; //환불승인자
-  @Field(() => String, { nullable: true })
-  refundApprovalDate?: Date; //환불승인일
+  @Field({ nullable: true })
+  refundApprovalDate?: string; //환불승인일
   @Field(() => String)
   createdAt: Date;
   @Field(() => String)

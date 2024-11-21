@@ -393,6 +393,7 @@ type StudentPortfolio {
 
 type PaymentDetail {
   id: Int!
+  cashOrCard: String
   cardCompany: String
   cardNum: String
   installment: Int
@@ -403,8 +404,8 @@ type PaymentDetail {
   depositorName: String
   depositAmount: Int
   depositDate: String
-  studentPayment: StudentPayment!
-  studentPaymentId: Int!
+  studentPayment: StudentPayment
+  studentPaymentId: Int
   receiver: ManageUser
   receiverId: Int
   accountingManager: String
@@ -777,7 +778,7 @@ type SearchStudentResult {
 }
 
 type StudentPaymentResult {
-  ok: Boolean
+  ok: Boolean!
   message: String
   error: String
   totalCount: Int
@@ -785,10 +786,18 @@ type StudentPaymentResult {
 }
 
 type SearchStudentPaymentResult {
-  ok: Boolean
+  ok: Boolean!
   message: String
   error: String
   data: [StudentPayment]
+  totalCount: Int
+}
+
+type PaymentDetailResult {
+  ok: Boolean!
+  message: String
+  error: String
+  PaymentDetail: [PaymentDetail]
   totalCount: Int
 }
 
@@ -814,6 +823,7 @@ type Query {
   dashboardAT(period: [String]): DashboardATResult!
   dashboardRD(period: [String]): [DashboardRDResult]
   seeStudentPayment(page: Int, limit: Int): StudentPaymentResult!
+  seePaymentDetail(page: Int, limit: Int): PaymentDetailResult!
 }
 
 type Mutation {
@@ -857,5 +867,9 @@ type Mutation {
   createStudentPayment(campus: String!, tuitionFee: Int!, studentId: Int!, processingManagerId: Int!, subjectId: Int!, seScore: Int, discountAmount: String, cashAmount: Float, cardAmount: Int, actualAmount: Int, unCollectedAmount: Int, receiptClassification: [String], paymentDate: String, situationReport: Boolean, amountReceived: Int, subDiv: String, courseComplete: String, employment: String, dueDate: String, classCode: String, lectureAssignment: String, isWeekend: String, supportType: String): CommonResponse!
   editStudentPayment(id: Int!, subjectId: Int!, campus: String, seScore: Int, subject: String, tuitionFee: Int, discountAmount: String, cashAmount: Int, cardAmount: Int, actualAmount: Int, unCollectedAmount: Int, receiptClassification: [String], paymentDate: String, processingManagerId: Int, situationReport: Boolean, amountReceived: Int, subDiv: String, courseComplete: String, employment: String, dueDate: String, classCode: String, lectureAssignment: String, isWeekend: String, mZipCode: String, mAddresses: String, mAddressDetail: String, supportType: String, lastModifiedTime: String): CommonResponse!
   deleteStudentPayment(id: Int!): CommonResponse!
-  searchStudentPayment(id: Int, page: Int, limit: Int, studentName: String, period: [String!], createdPeriod: [String!], subDiv: String, employment: String, lectureAssignment: String): SearchStudentPaymentResult!
+  searchStudentPayment(id: Int, page: Int, limit: Int, studentName: String, period: [String], createdPeriod: [String], subDiv: String, employment: String, lectureAssignment: String): SearchStudentPaymentResult!
+  createPaymentDetail(cashOrCard: String!, studentPaymentId: Int!, receiverId: Int!, cardCompany: String, cardNum: String, installment: Int, ApprovalNum: String, amountPayment: Int, paymentDate: String, bankName: String, depositorName: String, depositAmount: Int, depositDate: String, cashReceipts: [String]): CommonResponse!
+  editPaymentDetail(id: Int!, cashOrCard: String!, studentPaymentId: Int!, receiverId: Int!, lastModifiedTime: String!, cardCompany: String, cardNum: String, installment: Int, ApprovalNum: String, amountPayment: Int, paymentDate: String, bankName: String, depositorName: String, depositAmount: Int, depositDate: String, cashReceipts: [String]): CommonResponse!
+  deletePaymentDetail(id: Int!): CommonResponse!
+  searchPaymentDetail(id: Int, period: [String], stName: String, page: Int, limit: Int, reqRefund: Boolean, refundApproval: Boolean, reqRefundDate: [String], receiverId: Int, refundApprovalDate: [String], ApprovalNum: String, sortOf: String, paymentDate: [String]): PaymentDetailResult!
 }

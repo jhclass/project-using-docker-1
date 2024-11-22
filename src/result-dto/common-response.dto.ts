@@ -10,6 +10,7 @@ import { UserActivityLogs } from "./user-activity-logs.dto";
 import { Student } from "./student.dto";
 import { StudentPayment } from "./studentPayment.dto";
 import { PaymentDetail } from "./paymentDetail.dto";
+import { HourlyData } from "./hourlyData.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -331,4 +332,56 @@ export class PaymentDetailResult extends CommonResponse {
   PaymentDetail?: PaymentDetail[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
+}
+
+@ObjectType()
+export class HourlySalesData extends CommonResponse {
+  @Field(() => [HourlyData], { nullable: "itemsAndList" })
+  hourlyDetails?: HourlyData[];
+  @Field(() => Int, { nullable: true })
+  hourlyTotalCard?: number;
+  @Field(() => Int, { nullable: true })
+  hourlyTotalCardRefund?: number;
+  @Field(() => Int, { nullable: true })
+  hourlyTotalCash?: number;
+  @Field(() => Int, { nullable: true })
+  hourlyTotalCashRefund?: number;
+  @Field(() => Int, { nullable: true })
+  thisTimeRefundTotal?: number;
+  @Field(() => Int, { nullable: true })
+  thisTimeAmountTotal?: number;
+  @Field(() => Int, { nullable: true })
+  thisTimeRealTotal?: number;
+}
+
+@ObjectType()
+export class SalesStatisticsResult extends CommonResponse {
+  @Field(() => [ProcessingManagerGroupResult], { nullable: "itemsAndList" })
+  data?: ProcessingManagerGroupResult[];
+}
+
+@ObjectType()
+export class SalesStatisticsListResult extends CommonResponse {
+  @Field(() => [PaymentDetail], { nullable: "itemsAndList" })
+  paymentData?: [PaymentDetail];
+  @Field(() => [PaymentDetail], { nullable: "itemsAndList" })
+  refundData?: [PaymentDetail];
+  @Field(() => Int, { nullable: true })
+  receiverId?: number;
+}
+
+@ObjectType()
+export class ProcessingManagerGroupResult {
+  @Field(() => Int, { nullable: true })
+  receiverId?: number;
+  @Field(() => Int, { nullable: true })
+  totalAmount?: number;
+  @Field(() => Int, { nullable: true })
+  totalRefundAmount?: number;
+  @Field(() => Int, { nullable: true })
+  totalActualAmount?: number;
+  @Field(() => Int, { nullable: true })
+  totalPaymentCount?: number;
+  @Field(() => Int, { nullable: true })
+  totalRefundCount?: number;
 }

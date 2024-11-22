@@ -599,6 +599,13 @@ type UserActivityLogs {
   branchId: Int
 }
 
+type HourlyData {
+  nowDate: String
+  cashOrCard: String
+  currentState: String
+  amount: Int
+}
+
 type CommonResponse {
   ok: Boolean!
   message: String
@@ -801,6 +808,36 @@ type PaymentDetailResult {
   totalCount: Int
 }
 
+type HourlySalesData {
+  ok: Boolean!
+  message: String
+  error: String
+  hourlyDetails: [HourlyData]
+  hourlyTotalCard: Int
+  hourlyTotalCardRefund: Int
+  hourlyTotalCash: Int
+  hourlyTotalCashRefund: Int
+  thisTimeRefundTotal: Int
+  thisTimeAmountTotal: Int
+  thisTimeRealTotal: Int
+}
+
+type SalesStatisticsResult {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [ProcessingManagerGroupResult]
+}
+
+type ProcessingManagerGroupResult {
+  receiverId: Int
+  totalAmount: Int
+  totalRefundAmount: Int
+  totalActualAmount: Int
+  totalPaymentCount: Int
+  totalRefundCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -874,4 +911,6 @@ type Mutation {
   searchPaymentDetail(id: Int, period: [String], stName: String, page: Int, limit: Int, reqRefund: Boolean, refundApproval: Boolean, reqRefundDate: [String], receiverId: Int, refundApprovalDate: [String], ApprovalNum: String, sortOf: String, paymentDate: [String]): PaymentDetailResult!
   reqRefund(id: Int!, reqRefund: Boolean!, reqRefundDate: String!): CommonResponse!
   refundApproval(id: Int!, refundApproval: Boolean!, refundApprovalDate: String!, studentPaymentId: Int!): CommonResponse!
+  getHourlySalesData(date: [String]!): HourlySalesData!
+  salesStatistics(period: [String]!, receiverId: [Int]!): SalesStatisticsResult!
 }

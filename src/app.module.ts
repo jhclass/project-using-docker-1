@@ -30,6 +30,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { StudentPaymentModule } from "./student-payment/student-payment.module";
 import { PaymentDetailModule } from './payment-detail/payment-detail.module';
 import { RefundModule } from './refund/refund.module';
+import { SalesModule } from './sales/sales.module';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { RefundModule } from './refund/refund.module';
     StudentPaymentModule,
     PaymentDetailModule,
     RefundModule,
+    SalesModule,
   ],
   controllers: [AppController],
   providers: [AppService, SampleResolver, PrismaService, JwtStrategy],

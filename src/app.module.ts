@@ -28,9 +28,10 @@ import { StudentModule } from "./student/student.module";
 import { StampModule } from "./stamp/stamp.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { StudentPaymentModule } from "./student-payment/student-payment.module";
-import { PaymentDetailModule } from './payment-detail/payment-detail.module';
-import { RefundModule } from './refund/refund.module';
-import { SalesModule } from './sales/sales.module';
+import { PaymentDetailModule } from "./payment-detail/payment-detail.module";
+import { RefundModule } from "./refund/refund.module";
+import { SalesModule } from "./sales/sales.module";
+import { BatchService } from "./batch/batch.service";
 
 @Module({
   imports: [
@@ -76,6 +77,12 @@ import { SalesModule } from './sales/sales.module';
     SalesModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SampleResolver, PrismaService, JwtStrategy],
+  providers: [
+    AppService,
+    SampleResolver,
+    PrismaService,
+    JwtStrategy,
+    BatchService,
+  ],
 })
 export class AppModule {}

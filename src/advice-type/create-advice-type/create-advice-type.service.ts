@@ -46,11 +46,19 @@ export class CreateAdviceTypeService {
       };
     } catch (error) {
       console.error(error.message);
-      return {
-        ok: false,
-        message: `에러발생! 에러메세지를 확인하세요.`,
-        error: `Error:${error.message}`,
-      };
+      if (error.message.includes("중복되는 분야 입니다.")) {
+        return {
+          ok: false,
+          message: `${error.message}`,
+          error: `Error:${error.message}`,
+        };
+      } else {
+        return {
+          ok: false,
+          message: `에러발생! 에러메세지를 확인하세요.`,
+          error: `Error:${error.message}`,
+        };
+      }
     }
   }
 }

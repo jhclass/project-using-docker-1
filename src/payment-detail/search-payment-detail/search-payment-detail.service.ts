@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { validateIdExists } from "@src/utils/shared.utils";
 interface IOrderByType {
   id: "desc";
   reqRefundDate: "desc";
@@ -58,10 +59,8 @@ export class SearchPaymentDetailService {
       const client = this.client;
       const pageNum = page || 1;
       const take = limit || 10;
-      const existingId = await client.paymentDetail.findUnique({
-        where: { id },
-      });
-      console.log(existingId);
+
+      //console.log(existingId);
       //기간
       //이름
       const searchConditions = {
@@ -85,6 +84,10 @@ export class SearchPaymentDetailService {
       //searchConditions
 
       if (id) {
+        const existingId = await client.paymentDetail.findUnique({
+          where: { id },
+        });
+        validateIdExists(existingId);
         searchConditions.id = id;
       }
       if (period) {

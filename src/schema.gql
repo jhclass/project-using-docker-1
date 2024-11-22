@@ -872,4 +872,6 @@ type Mutation {
   editPaymentDetail(id: Int!, cashOrCard: String!, studentPaymentId: Int!, receiverId: Int!, lastModifiedTime: String!, cardCompany: String, cardNum: String, installment: Int, ApprovalNum: String, amountPayment: Int, paymentDate: String, bankName: String, depositorName: String, depositAmount: Int, depositDate: String, cashReceipts: [String]): CommonResponse!
   deletePaymentDetail(id: Int!): CommonResponse!
   searchPaymentDetail(id: Int, period: [String], stName: String, page: Int, limit: Int, reqRefund: Boolean, refundApproval: Boolean, reqRefundDate: [String], receiverId: Int, refundApprovalDate: [String], ApprovalNum: String, sortOf: String, paymentDate: [String]): PaymentDetailResult!
+  reqRefund(id: Int!, reqRefund: Boolean!, reqRefundDate: String!): CommonResponse!
+  refundApproval(id: Int!, refundApproval: Boolean!, refundApprovalDate: String!, studentPaymentId: Int!): CommonResponse!
 }

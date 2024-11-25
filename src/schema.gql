@@ -901,6 +901,9 @@ type Mutation {
   deleteStudent(id: Int!): CommonResponse!
   doubleCheck(name: String!, phoneNum1: String!): CommonResponse!
   searchStudent(id: Int, studentName: String, createdAt: [String], birthday: [String], phoneNum: String, page: Int, limit: Int): SearchStudentResult!
+  createStudentMemo(content: String!, studentId: Int!): CommonResponse!
+  editStudentMemo(id: Int!, content: String!, lastModifiedTime: String!): CommonResponse!
+  deleteStudentMemo(id: Int!): CommonResponse!
   createStudentPayment(campus: String!, tuitionFee: Int!, studentId: Int!, processingManagerId: Int!, subjectId: Int!, seScore: Int, discountAmount: String, cashAmount: Float, cardAmount: Int, actualAmount: Int, unCollectedAmount: Int, receiptClassification: [String], paymentDate: String, situationReport: Boolean, amountReceived: Int, subDiv: String, courseComplete: String, employment: String, dueDate: String, classCode: String, lectureAssignment: String, isWeekend: String, supportType: String): CommonResponse!
   editStudentPayment(id: Int!, subjectId: Int!, campus: String, seScore: Int, subject: String, tuitionFee: Int, discountAmount: String, cashAmount: Int, cardAmount: Int, actualAmount: Int, unCollectedAmount: Int, receiptClassification: [String], paymentDate: String, processingManagerId: Int, situationReport: Boolean, amountReceived: Int, subDiv: String, courseComplete: String, employment: String, dueDate: String, classCode: String, lectureAssignment: String, isWeekend: String, mZipCode: String, mAddresses: String, mAddressDetail: String, supportType: String, lastModifiedTime: String): CommonResponse!
   deleteStudentPayment(id: Int!): CommonResponse!
@@ -909,8 +912,8 @@ type Mutation {
   editPaymentDetail(id: Int!, cashOrCard: String!, studentPaymentId: Int!, receiverId: Int!, lastModifiedTime: String!, cardCompany: String, cardNum: String, installment: Int, ApprovalNum: String, amountPayment: Int, paymentDate: String, bankName: String, depositorName: String, depositAmount: Int, depositDate: String, cashReceipts: [String]): CommonResponse!
   deletePaymentDetail(id: Int!): CommonResponse!
   searchPaymentDetail(id: Int, period: [String], stName: String, page: Int, limit: Int, reqRefund: Boolean, refundApproval: Boolean, reqRefundDate: [String], receiverId: Int, refundApprovalDate: [String], ApprovalNum: String, sortOf: String, paymentDate: [String]): PaymentDetailResult!
-  reqRefund(id: Int!, reqRefund: Boolean!, reqRefundDate: String!): CommonResponse!
-  refundApproval(id: Int!, refundApproval: Boolean!, refundApprovalDate: String!, studentPaymentId: Int!): CommonResponse!
   getHourlySalesData(date: [String]!): HourlySalesData!
   salesStatistics(period: [String]!, receiverId: [Int]!): SalesStatisticsResult!
+  reqRefund(id: Int!, reqRefund: Boolean!, reqRefundDate: String!): CommonResponse!
+  refundApproval(id: Int!, refundApproval: Boolean!, refundApprovalDate: String!, studentPaymentId: Int!): CommonResponse!
 }

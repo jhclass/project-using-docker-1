@@ -82,6 +82,11 @@ export class SearchStudentService {
           },
           include: {
             studentPayment: true,
+            studentMemo: {
+              include: {
+                manageUser: true,
+              },
+            },
           },
         }),
         await this.client.student.count({

@@ -29,8 +29,6 @@ import { StampModule } from "./stamp/stamp.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { StudentPaymentModule } from "./student-payment/student-payment.module";
 import { PaymentDetailModule } from "./payment-detail/payment-detail.module";
-import { RefundModule } from "./refund/refund.module";
-import { SalesModule } from "./sales/sales.module";
 import { BatchService } from "./batch/batch.service";
 
 @Module({
@@ -73,8 +71,6 @@ import { BatchService } from "./batch/batch.service";
     DashboardModule,
     StudentPaymentModule,
     PaymentDetailModule,
-    RefundModule,
-    SalesModule,
   ],
   controllers: [AppController],
   providers: [

@@ -30,6 +30,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { StudentPaymentModule } from "./student-payment/student-payment.module";
 import { PaymentDetailModule } from "./payment-detail/payment-detail.module";
 import { BatchService } from "./batch/batch.service";
+import { LectureModule } from "./lecture/lecture.module";
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import { BatchService } from "./batch/batch.service";
     DashboardModule,
     StudentPaymentModule,
     PaymentDetailModule,
+    LectureModule,
   ],
   controllers: [AppController],
   providers: [

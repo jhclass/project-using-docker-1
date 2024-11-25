@@ -110,16 +110,16 @@ type WorkLogs {
   paymentOne: String
   paymentTwo: String
   paymentThree: String
-  trainingInfoOne: [String!]!
-  trainingInfoTwo: [String!]!
-  trainingInfoThree: [String!]!
-  trainingInfoFour: [String!]!
-  trainingInfoFive: [String!]!
-  trainingInfoSix: [String!]!
-  trainingInfoSeven: [String!]!
-  trainingInfoEight: [String!]!
-  trainingTimeOneday: [Int!]!
-  trainingTimeTotal: [Int!]!
+  trainingInfoOne: [String]
+  trainingInfoTwo: [String]
+  trainingInfoThree: [String]
+  trainingInfoFour: [String]
+  trainingInfoFive: [String]
+  trainingInfoSix: [String]
+  trainingInfoSeven: [String]
+  trainingInfoEight: [String]
+  trainingTimeOneday: [Int]
+  trainingTimeTotal: [Int]
   instruction: String
   absentSt: String
   tardySt: String
@@ -129,11 +129,11 @@ type WorkLogs {
   lectures: Lectures
   lecturesId: Int!
   workLogsDate: String!
-  attendanceCount: [Int!]!
+  attendanceCount: [Int]
   Branch: Branch
   BranchId: Int
-  checkList: [String!]!
-  checkContext: [String!]
+  checkList: [String]
+  checkContext: [String]
   lastModifiedTime: String
 }
 
@@ -838,6 +838,22 @@ type ProcessingManagerGroupResult {
   totalRefundCount: Int
 }
 
+type SeeLecturesResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  data: [Lectures]
+}
+
+type SearchLecturesResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  data: [Lectures]
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -861,6 +877,7 @@ type Query {
   dashboardRD(period: [String]): [DashboardRDResult]
   seeStudentPayment(page: Int, limit: Int): StudentPaymentResult!
   seePaymentDetail(page: Int, limit: Int): PaymentDetailResult!
+  seeLectures(page: Int, limit: Int): SeeLecturesResult!
 }
 
 type Mutation {
@@ -916,4 +933,8 @@ type Mutation {
   salesStatistics(period: [String]!, receiverId: [Int]!): SalesStatisticsResult!
   reqRefund(id: Int!, reqRefund: Boolean!, reqRefundDate: String!): CommonResponse!
   refundApproval(id: Int!, refundApproval: Boolean!, refundApprovalDate: String!, studentPaymentId: Int!): CommonResponse!
+  createLectures(campus: String!, temporaryName: String!, subDiv: String!, teachersId: [Int]!, roomNum: String!, subjectId: Int!, lecturePeriodStart: String!, lecturePeriodEnd: String!, lectureDetails: [String]!, lectureTime: [String]!, eduStatusReport: String!, ApprovedNum: Int!, confirmedNum: Int!, sessionNum: Int!, timetableAttached: String): CommonResponse!
+  editLectures(id: Int!, lastModifiedTime: String!, campus: String, temporaryName: String, subDiv: String, teachersId: [Int], roomNum: String, subjectId: Int, lecturePeriodStart: String, lecturePeriodEnd: String, lectureDetails: [String], lectureTime: [String], eduStatusReport: String, ApprovedNum: Int, confirmedNum: Int, sessionNum: Int, timetableAttached: String): CommonResponse!
+  deleteLectures(id: Int!): CommonResponse!
+  searchLectures(id: Int, periodStart: String, periodEnd: String, temporaryName: String, subjectId: Int, teacherId: Int, limit: Int, page: Int): SearchLecturesResult!
 }

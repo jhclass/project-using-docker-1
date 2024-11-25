@@ -2,12 +2,13 @@ import { Resolver, Mutation, Args } from "@nestjs/graphql";
 import { RefreshTokenService } from "./refresh-token.service";
 import { ResultRefreshToken } from "@src/result-dto/common-response.dto";
 import { UseGuards } from "@nestjs/common";
-import { RefreshTokenGuard } from "@src/auth/refresh-token-guard";
+
+import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 
 @Resolver()
 export class RefreshTokenResolver {
   constructor(private readonly refreshTokenService: RefreshTokenService) {}
-  @UseGuards(RefreshTokenGuard)
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => ResultRefreshToken)
   async refreshToken(
     @Args("refreshToken") refreshToken: string,

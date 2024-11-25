@@ -11,6 +11,7 @@ import { Student } from "./student.dto";
 import { StudentPayment } from "./studentPayment.dto";
 import { PaymentDetail } from "./paymentDetail.dto";
 import { HourlyData } from "./hourlyData.dto";
+import { Lectures } from "./lectures.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -384,4 +385,20 @@ export class ProcessingManagerGroupResult {
   totalPaymentCount?: number;
   @Field(() => Int, { nullable: true })
   totalRefundCount?: number;
+}
+
+@ObjectType()
+export class SeeLecturesResult extends CommonResponse {
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+  @Field(() => [Lectures], { nullable: "itemsAndList" })
+  data?: Lectures[];
+}
+
+@ObjectType()
+export class SearchLecturesResult extends CommonResponse {
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+  @Field(() => [Lectures], { nullable: "itemsAndList" })
+  data?: Lectures[];
 }

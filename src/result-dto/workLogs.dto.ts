@@ -16,26 +16,26 @@ export class WorkLogs {
   paymentTwo?: string; //#결제2 (담당직원)
   @Field({ nullable: true })
   paymentThree?: string; //#결제3 (관리자)
-  @Field(() => [String])
-  trainingInfoOne: string[]; //# 교시, 담당교사, 교과목명, 능력단위명, 훈련내용
-  @Field(() => [String])
-  trainingInfoTwo: string[];
-  @Field(() => [String])
-  trainingInfoThree: string[];
-  @Field(() => [String])
-  trainingInfoFour: string[];
-  @Field(() => [String])
-  trainingInfoFive: string[];
-  @Field(() => [String])
-  trainingInfoSix: string[];
-  @Field(() => [String])
-  trainingInfoSeven: string[];
-  @Field(() => [String])
-  trainingInfoEight: string[];
-  @Field(() => [Int])
-  trainingTimeOneday: number[]; //#일계 - 교양, 전공, 실습, 기타, 계
-  @Field(() => [Int])
-  trainingTimeTotal: number[]; //#누계 - 교양, 전공, 실습, 기타, 계
+  @Field(() => [String], { nullable: "itemsAndList" })
+  trainingInfoOne?: string[]; //# 교시, 담당교사, 교과목명, 능력단위명, 훈련내용
+  @Field(() => [String], { nullable: "itemsAndList" })
+  trainingInfoTwo?: string[];
+  @Field(() => [String], { nullable: "itemsAndList" })
+  trainingInfoThree?: string[];
+  @Field(() => [String], { nullable: "itemsAndList" })
+  trainingInfoFour?: string[];
+  @Field(() => [String], { nullable: "itemsAndList" })
+  trainingInfoFive?: string[];
+  @Field(() => [String], { nullable: "itemsAndList" })
+  trainingInfoSix?: string[];
+  @Field(() => [String], { nullable: "itemsAndList" })
+  trainingInfoSeven?: string[];
+  @Field(() => [String], { nullable: "itemsAndList" })
+  trainingInfoEight?: string[];
+  @Field(() => [Int], { nullable: "itemsAndList" })
+  trainingTimeOneday?: number[]; //#일계 - 교양, 전공, 실습, 기타, 계
+  @Field(() => [Int], { nullable: "itemsAndList" })
+  trainingTimeTotal?: number[]; //#누계 - 교양, 전공, 실습, 기타, 계
   @Field({ nullable: true })
   instruction?: string; //# 지시사항
   @Field({ nullable: true })
@@ -54,16 +54,16 @@ export class WorkLogs {
   lecturesId: number;
   @Field()
   workLogsDate: string;
-  @Field(() => [Int])
-  attendanceCount: number; // #출석 카운트 [재적,출석,결석,지각,조퇴,외출]
+  @Field(() => [Int], { nullable: "itemsAndList" })
+  attendanceCount: number[]; // #출석 카운트 [재적,출석,결석,지각,조퇴,외출]
   @Field(() => Branch, { nullable: true })
   Branch?: Branch;
   @Field(() => Int, { nullable: true })
   BranchId?: number;
-  @Field(() => [String])
-  checkList: string[];
-  @Field(() => [String], { nullable: true })
+  @Field(() => [String], { nullable: "itemsAndList" })
+  checkList?: string[];
+  @Field(() => [String], { nullable: "itemsAndList" })
   checkContext?: string[];
-  @Field({ nullable: true })
-  lastModifiedTime?: string; //#최근수정시간
+  @Field(() => String, { nullable: true })
+  lastModifiedTime?: Date; //#최근수정시간
 }

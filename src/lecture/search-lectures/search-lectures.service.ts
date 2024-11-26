@@ -1,14 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 interface ISearchConditions {
-  branchId?: number;
-  id?: number;
-  subjectId?: number;
-  temporaryName?: {
+  branchId: number;
+  id: number;
+  subjectId: number;
+  temporaryName: {
     contains: string;
     mode: "insensitive" | "default";
   };
-  teachers?: {
+  teachers: {
     some: {
       id: number;
     };
@@ -23,8 +23,8 @@ interface ISearchConditions {
     lecturePeriodEnd?: { gte?: string; lte?: string };
   }>;
 
-  lecturePeriodStart?: { gte?: string; lte?: string };
-  lecturePeriodEnd?: { gte?: string; lte?: string };
+  lecturePeriodStart: { gte: string; lte: string };
+  lecturePeriodEnd: { gte: string; lte: string };
 }
 @Injectable()
 export class SearchLecturesService {

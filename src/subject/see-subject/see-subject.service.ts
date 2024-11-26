@@ -10,7 +10,7 @@ export class SeeSubjectService {
       const skip = (page - 1) * limit;
       const getSubject = await this.client.subject.findMany({
         where: {
-          branchId: context.loggedInManager?.branchId,
+          branchId: user?.branchId,
         },
         skip,
         take: limit,

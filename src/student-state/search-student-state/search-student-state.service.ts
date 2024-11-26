@@ -125,6 +125,7 @@ export class SearchStudentStateService {
           },
           include: {
             ConsultationMemo: true,
+            adviceTypes: true,
           },
         }),
         await this.client.studentState.count({ where: searchConditions }),

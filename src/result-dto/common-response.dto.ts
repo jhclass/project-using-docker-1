@@ -12,6 +12,7 @@ import { StudentPayment } from "./studentPayment.dto";
 import { PaymentDetail } from "./paymentDetail.dto";
 import { HourlyData } from "./hourlyData.dto";
 import { Lectures } from "./lectures.dto";
+import { Attendance } from "./attendance.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -401,4 +402,40 @@ export class SearchLecturesResult extends CommonResponse {
   totalCount?: number;
   @Field(() => [Lectures], { nullable: "itemsAndList" })
   data?: Lectures[];
+}
+
+@ObjectType()
+export class SeeAttendanceResult extends CommonResponse {
+  @Field(() => [Attendance], { nullable: "itemsAndList" })
+  enrollData?: Attendance[]; //전체
+  @Field(() => Int, { nullable: true })
+  enrollCount?: number;
+  @Field(() => [Attendance], { nullable: "itemsAndList" })
+  attendanceData?: Attendance[]; //출석
+  @Field(() => Int, { nullable: true })
+  attendanceCount?: number;
+  @Field(() => [Attendance], { nullable: "itemsAndList" })
+  absentData?: Attendance[]; //결석
+  @Field(() => Int, { nullable: true })
+  absentCount?: number;
+  @Field(() => [Attendance], { nullable: "itemsAndList" })
+  leaveEarlyData?: Attendance[]; //조퇴
+  @Field(() => Int, { nullable: true })
+  leaveEarlyCount?: number;
+  @Field(() => [Attendance], { nullable: "itemsAndList" })
+  outingData?: [Attendance]; //외출
+  @Field(() => Int, { nullable: true })
+  outingCount?: number;
+  @Field(() => [Attendance], { nullable: "itemsAndList" })
+  tardyData?: [Attendance]; //지각
+  @Field(() => Int, { nullable: true })
+  tardyCount?: number;
+}
+
+@ObjectType()
+export class SearchAttendanceResult extends CommonResponse {
+  @Field(() => [Attendance], { nullable: "itemsAndList" })
+  data?: Attendance[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
 }

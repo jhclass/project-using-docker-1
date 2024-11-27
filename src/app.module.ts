@@ -31,6 +31,7 @@ import { StudentPaymentModule } from "./student-payment/student-payment.module";
 import { PaymentDetailModule } from "./payment-detail/payment-detail.module";
 import { BatchService } from "./batch/batch.service";
 import { LectureModule } from "./lecture/lecture.module";
+import { AttendanceModule } from "./attendance/attendance.module";
 
 @Module({
   imports: [
@@ -73,6 +74,7 @@ import { LectureModule } from "./lecture/lecture.module";
     StudentPaymentModule,
     PaymentDetailModule,
     LectureModule,
+    AttendanceModule,
   ],
   controllers: [AppController],
   providers: [

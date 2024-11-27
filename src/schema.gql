@@ -854,6 +854,32 @@ type SearchLecturesResult {
   data: [Lectures]
 }
 
+type SeeAttendanceResult {
+  ok: Boolean!
+  message: String
+  error: String
+  enrollData: [Attendance]
+  enrollCount: Int
+  attendanceData: [Attendance]
+  attendanceCount: Int
+  absentData: [Attendance]
+  absentCount: Int
+  leaveEarlyData: [Attendance]
+  leaveEarlyCount: Int
+  outingData: [Attendance]
+  outingCount: Int
+  tardyData: [Attendance]
+  tardyCount: Int
+}
+
+type SearchAttendanceResult {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [Attendance]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -878,6 +904,8 @@ type Query {
   seeStudentPayment(page: Int, limit: Int): StudentPaymentResult!
   seePaymentDetail(page: Int, limit: Int): PaymentDetailResult!
   seeLectures(page: Int, limit: Int): SeeLecturesResult!
+  seeAttendance(attendanceDate: String!, lecturesId: Int!): SeeAttendanceResult!
+  searchAttendanceResult(lecturesId: Int!, id: Int, attendanceDate: [String], studentId: Int, studentPaymentId: Int): SearchAttendanceResult!
 }
 
 type Mutation {
@@ -937,4 +965,7 @@ type Mutation {
   editLectures(id: Int!, lastModifiedTime: String!, campus: String, temporaryName: String, subDiv: String, teachersId: [Int], roomNum: String, subjectId: Int, lecturePeriodStart: String, lecturePeriodEnd: String, lectureDetails: [String], lectureTime: [String], eduStatusReport: String, ApprovedNum: Int, confirmedNum: Int, sessionNum: Int, timetableAttached: String): CommonResponse!
   deleteLectures(id: Int!): CommonResponse!
   searchLectures(id: Int, periodStart: String, periodEnd: String, temporaryName: String, subjectId: Int, teacherId: Int, limit: Int, page: Int): SearchLecturesResult!
+  createAttendance(attendanceDate: String!, lecturesId: Int!, studentPaymentId: [Int]!, studentId: [Int]!, attendanceState: [String]!): CommonResponse!
+  editAttendance(lastModifiedTime: String!, id: [Int]!, attendanceState: [String]!): CommonResponse!
+  deleteAttendance(id: Int!): CommonResponse!
 }

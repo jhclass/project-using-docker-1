@@ -966,6 +966,7 @@ type Mutation {
   deleteLectures(id: Int!): CommonResponse!
   searchLectures(id: Int, periodStart: String, periodEnd: String, temporaryName: String, subjectId: Int, teacherId: Int, limit: Int, page: Int): SearchLecturesResult!
   duplicateCheck(studentId: Int!, subjectId: Int!): CommonResponse!
+  classCancellation(id: Int!, courseComplete: String!, dateOfDroppingOut: String, reasonFordroppingOut: String, lastModifiedTime: String): CommonResponse!
   createAttendance(attendanceDate: String!, lecturesId: Int!, studentPaymentId: [Int]!, studentId: [Int]!, attendanceState: [String]!): CommonResponse!
   editAttendance(lastModifiedTime: String!, id: [Int]!, attendanceState: [String]!): CommonResponse!
   deleteAttendance(id: Int!): CommonResponse!

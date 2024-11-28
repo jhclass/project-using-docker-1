@@ -81,7 +81,15 @@ export class SearchStudentService {
             id: "desc",
           },
           include: {
-            studentPayment: true,
+            studentPayment: {
+              include: {
+                subject: {
+                  include: {
+                    lectures: true,
+                  },
+                },
+              },
+            },
             studentMemo: {
               include: {
                 manageUser: true,

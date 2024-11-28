@@ -4,6 +4,7 @@ import { EditLecturesModule } from "./edit-lectures/edit-lectures.module";
 import { DeleteLecturesModule } from "./delete-lectures/delete-lectures.module";
 import { SeeLecturesModule } from "./see-lectures/see-lectures.module";
 import { SearchLecturesModule } from "./search-lectures/search-lectures.module";
+import { DuplicateCheckModule } from "./duplicate-check/duplicate-check.module";
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { SearchLecturesModule } from "./search-lectures/search-lectures.module";
     DeleteLecturesModule,
     SeeLecturesModule,
     SearchLecturesModule,
+    DuplicateCheckModule,
   ],
 })
 export class LectureModule {}

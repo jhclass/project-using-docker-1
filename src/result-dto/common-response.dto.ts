@@ -13,6 +13,7 @@ import { PaymentDetail } from "./paymentDetail.dto";
 import { HourlyData } from "./hourlyData.dto";
 import { Lectures } from "./lectures.dto";
 import { Attendance } from "./attendance.dto";
+import { WorkLogs } from "./workLogs.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -436,6 +437,14 @@ export class SeeAttendanceResult extends CommonResponse {
 export class SearchAttendanceResult extends CommonResponse {
   @Field(() => [Attendance], { nullable: "itemsAndList" })
   data?: Attendance[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}
+
+@ObjectType()
+export class SearchWorkLogsResult extends CommonResponse {
+  @Field(() => [WorkLogs], { nullable: "itemsAndList" })
+  data?: WorkLogs[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }

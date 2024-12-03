@@ -114,6 +114,8 @@ export class AcademyRecordService {
           EmploymentStatus: true,
           StudentConsultation: true,
           StudentPortfolio: true,
+          student: true,
+          subject: true,
         },
         skip: (pageNum - 1) * take,
         take,

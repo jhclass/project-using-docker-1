@@ -33,6 +33,7 @@ import { BatchService } from "./batch/batch.service";
 import { LectureModule } from "./lecture/lecture.module";
 import { AttendanceModule } from "./attendance/attendance.module";
 import { WorklogsModule } from "./work-log/worklogs.module";
+import { StudentManagementModule } from "./student-management/student-management.module";
 
 @Module({
   imports: [
@@ -77,6 +78,7 @@ import { WorklogsModule } from "./work-log/worklogs.module";
     LectureModule,
     AttendanceModule,
     WorklogsModule,
+    StudentManagementModule,
   ],
   controllers: [AppController],
   providers: [

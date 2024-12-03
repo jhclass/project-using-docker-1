@@ -66,7 +66,7 @@ export class EditWorkLogsResolver {
     etc?: string,
     @Args("lecturesId", { type: () => Int, nullable: true })
     lecturesId?: number,
-    @Args("workLogsDate")
+    @Args("workLogsDate", { nullable: true })
     workLogsDate?: string,
     @Args("checkList", { type: () => [String], nullable: "itemsAndList" })
     checkList?: string[],

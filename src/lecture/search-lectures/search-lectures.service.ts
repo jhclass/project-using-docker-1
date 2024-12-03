@@ -112,6 +112,9 @@ export class SearchLecturesService {
                   where: {
                     lectureAssignment: "배정",
                   },
+                  include: {
+                    student: true,
+                  },
                 },
               },
             },

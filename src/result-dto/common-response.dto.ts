@@ -448,3 +448,17 @@ export class SearchWorkLogsResult extends CommonResponse {
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }
+
+@ObjectType()
+export class ResultAcademyRecord extends CommonResponse {
+  @Field(() => [StudentPayment], { nullable: "itemsAndList" })
+  result?: StudentPayment[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}
+
+@ObjectType()
+export class SignWorkLogsResult extends CommonResponse {
+  @Field({ nullable: true })
+  stampUrl?: string;
+}

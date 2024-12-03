@@ -15,7 +15,7 @@ export class SearchWorkLogsResolver {
     id?: number,
     @Args("workLogsDate", { nullable: true })
     workLogsDate?: string,
-    @Args("lecturesId", { nullable: true })
+    @Args("lecturesId", { type: () => Int, nullable: true })
     lecturesId?: number,
   ): Promise<SearchWorkLogsResult> {
     return this.searchWorkLogsService.searchWorkLogsFunc(

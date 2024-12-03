@@ -11,7 +11,7 @@ export class SearchAttendanceResolver {
   ) {}
   @UseGuards(GqlAuthGuard)
   @Query(() => SearchAttendanceResult)
-  async searchAttendanceResult(
+  async searchAttendance(
     @Context() context: any,
     @Args("lecturesId", { type: () => Int })
     lecturesId: number,

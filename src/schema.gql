@@ -888,6 +888,21 @@ type SearchWorkLogsResult {
   totalCount: Int
 }
 
+type ResultAcademyRecord {
+  ok: Boolean!
+  message: String
+  error: String
+  result: [StudentPayment]
+  totalCount: Int
+}
+
+type SignWorkLogsResult {
+  ok: Boolean!
+  message: String
+  error: String
+  stampUrl: String
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -913,8 +928,10 @@ type Query {
   seePaymentDetail(page: Int, limit: Int): PaymentDetailResult!
   seeLectures(page: Int, limit: Int): SeeLecturesResult!
   seeAttendance(attendanceDate: String!, lecturesId: Int!): SeeAttendanceResult!
-  searchAttendanceResult(lecturesId: Int!, id: Int, attendanceDate: [String], studentId: Int, studentPaymentId: Int): SearchAttendanceResult!
-  searchWorkLogs(id: Int, workLogsDate: String, lecturesId: Float): SearchWorkLogsResult!
+  searchAttendance(lecturesId: Int!, id: Int, attendanceDate: [String], studentId: Int, studentPaymentId: Int): SearchAttendanceResult!
+  searchWorkLogs(id: Int, workLogsDate: String, lecturesId: Int): SearchWorkLogsResult!
+  signWorkLogs(id: Int!, lastModifiedTime: String): SignWorkLogsResult!
+  searchAcademyRecord(id: Int, studentName: String, phoneNum: String, lectureName: String, subDiv: String, teacherName: String, limit: Int, page: Int): ResultAcademyRecord!
 }
 
 type Mutation {
@@ -980,6 +997,6 @@ type Mutation {
   editAttendance(lastModifiedTime: String!, id: [Int]!, attendanceState: [String]!): CommonResponse!
   deleteAttendance(id: Int!): CommonResponse!
   createWorkLogs(lecturesId: Int!, workLogsDate: String!): CommonResponse!
-  editWorkLogs(id: Int!, attendanceCount: [Int], lastModifiedTime: String!, trainingInfoOne: [String], trainingInfoTwo: [String], trainingInfoThree: [String], trainingInfoFour: [String], trainingInfoFive: [String], trainingInfoSix: [String], trainingInfoSeven: [String], trainingInfoEight: [String], trainingTimeOneday: [Int], trainingTimeTotal: [Int], instruction: String, absentSt: String, tardySt: String, leaveEarlySt: String, outingSt: String, etc: String, lecturesId: Int, workLogsDate: String!, checkList: [String], checkContext: [String]): CommonResponse!
+  editWorkLogs(id: Int!, attendanceCount: [Int], lastModifiedTime: String!, trainingInfoOne: [String], trainingInfoTwo: [String], trainingInfoThree: [String], trainingInfoFour: [String], trainingInfoFive: [String], trainingInfoSix: [String], trainingInfoSeven: [String], trainingInfoEight: [String], trainingTimeOneday: [Int], trainingTimeTotal: [Int], instruction: String, absentSt: String, tardySt: String, leaveEarlySt: String, outingSt: String, etc: String, lecturesId: Int, workLogsDate: String, checkList: [String], checkContext: [String]): CommonResponse!
   deleteWorkLogs(id: Int!): CommonResponse!
 }

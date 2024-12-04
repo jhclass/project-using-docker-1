@@ -999,4 +999,7 @@ type Mutation {
   createWorkLogs(lecturesId: Int!, workLogsDate: String!): CommonResponse!
   editWorkLogs(id: Int!, attendanceCount: [Int], lastModifiedTime: String!, trainingInfoOne: [String], trainingInfoTwo: [String], trainingInfoThree: [String], trainingInfoFour: [String], trainingInfoFive: [String], trainingInfoSix: [String], trainingInfoSeven: [String], trainingInfoEight: [String], trainingTimeOneday: [Int], trainingTimeTotal: [Int], instruction: String, absentSt: String, tardySt: String, leaveEarlySt: String, outingSt: String, etc: String, lecturesId: Int, workLogsDate: String, checkList: [String], checkContext: [String]): CommonResponse!
   deleteWorkLogs(id: Int!): CommonResponse!
+  createCareer(careerDetails: String!, subjectId: Int!, studentPaymentId: Int!): CommonResponse!
+  editCareer(id: Int!, careerDetails: String!, lastModifiedTime: String): CommonResponse!
+  deleteCareer(id: Int!): CommonResponse!
 }

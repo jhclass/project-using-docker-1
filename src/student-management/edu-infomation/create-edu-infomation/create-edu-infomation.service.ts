@@ -2,31 +2,31 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
-export class CreateCertificateService {
+export class CreateEduInfomationService {
   constructor(private readonly client: PrismaService) {}
-  async createCertificateFunc(
+  async createEduInfomationFunc(
     context: any,
-    CAdate: string,
-    certificateName: string,
-    CertificateIssuer: string,
-    subjectId: number,
+    subjectId: number, //과정id
     studentPaymentId: number,
-    certificateLevel?: string,
+    eduType: string,
+    eduName: string,
+    graduationStatus: string,
+    major?: string,
   ) {
     try {
       if (
         !subjectId ||
-        !studentPaymentId ||
-        !certificateName ||
-        !CAdate ||
-        !CertificateIssuer
+        !eduType ||
+        !eduName ||
+        !graduationStatus ||
+        !studentPaymentId
       ) {
         throw new Error(
           "필수값을 확인하세요. 모든 데이터는 필수값으로 들어가야 합니다. ",
         );
       }
-      const { user } = context.req;
       const client = this.client;
+      const { user } = context.req;
       //subjectId 와 studentPaymentId 확인 필요
       const existingSubjectId = await client.subject.findUnique({
         where: {
@@ -54,24 +54,30 @@ export class CreateCertificateService {
       } else if (!existingStudentPaymentId) {
         throw new Error("studentPaymentId 를 다시 확인하세요.");
       } else if (!existingManageUserId) {
-        throw new Error(
-          "manageUserId 를 다시 확인하세요. 지금 로그인이 되어있는 상태가 맞습니까?",
-        );
+        throw new Error("manageUserId 를 다시 확인하세요.");
       } else if (!existingSubjectId.lectures) {
         throw new Error(
           "강의배정이 되지 않았습니다. 강의배정을 하고 다시 시도 하세요.",
         );
       }
 
-      await client.certificate.create({
+      //존재 한다면 해당데이터의 student
+      //   console.log(
+      //     "existingStudentPaymentId:",
+      //     existingStudentPaymentId?.student?.name
+      //   );
+      //   console.log("existingSubjectId:", existingSubjectId.lectures.id);
+
+      //존재 여부 확인 후 데이터 삽입.
+      await client.eduInfomation.create({
         data: {
           lectureId: existingSubjectId?.lectures?.id,
           studentId: existingStudentPaymentId?.student?.id,
           stName: existingStudentPaymentId?.student?.name,
-          CAdate,
-          certificateName,
-          certificateLevel,
-          CertificateIssuer,
+          eduType,
+          eduName,
+          major,
+          graduationStatus,
           subjectId,
           studentPaymentId,
           branchId: user?.branchId,
@@ -81,13 +87,13 @@ export class CreateCertificateService {
       });
       return {
         ok: true,
-        message: "정상적으로 등록 완료 되었습니다.",
+        message: "교육 정보가 성공적으로 생성되었습니다.",
       };
     } catch (error) {
       console.error(error.message);
       return {
         ok: false,
-        message: "에러발생",
+        message: "에러발생! 에러메세지를 확인하세요.",
         error: `Error:${error.message}`,
       };
     }

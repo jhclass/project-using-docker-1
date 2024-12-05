@@ -1002,4 +1002,19 @@ type Mutation {
   createCareer(careerDetails: String!, subjectId: Int!, studentPaymentId: Int!): CommonResponse!
   editCareer(id: Int!, careerDetails: String!, lastModifiedTime: String): CommonResponse!
   deleteCareer(id: Int!): CommonResponse!
+  createCertificate(CAdate: String!, certificateName: String!, CertificateIssuer: String!, subjectId: Int!, studentPaymentId: Int!, certificateLevel: String): CommonResponse!
+  editCertificate(id: Int!, lastModifiedTime: String!, CAdate: String, certificateName: String, certificateLevel: String, CertificateIssuer: String): CommonResponse!
+  deleteCertificate(id: Int!): CommonResponse!
+  createEduInfomation(subjectId: Int!, studentPaymentId: Int!, eduType: String!, eduName: String!, graduationStatus: String!, major: String): CommonResponse!
+  editEduInfomation(id: Int!, lastModifiedTime: String!, eduType: String, eduName: String, major: String, graduationStatus: String): CommonResponse!
+  deleteEduInfomation(id: Int!): CommonResponse!
+  createEmploymentRecommendation(dateOfRecommendation: String!, recruitmentField: String!, companyName: String!, location: String!, phoneNum: String!, employmentStatus: String!, reasonForNonEmployment: String!, certificateOfEmploymentStatus: String!, subjectId: Int!, studentPaymentId: Int!, dateOfInterview: String): CommonResponse!
+  editEmploymentRecommendation(id: Int!, lastModifiedTime: String!, dateOfRecommendation: String, recruitmentField: String, companyName: String, location: String, phoneNum: String, dateOfInterview: String, employmentStatus: String, reasonForNonEmployment: String, certificateOfEmploymentStatus: String): CommonResponse!
+  deleteRecommendation(id: Int!): CommonResponse!
+  createEmploymentStatus(employmentType: String!, dateOfEmployment: String!, companyName: String!, businessNum: String!, responsibilities: String!, location: String!, phoneNum: String!, businessSize: String!, imploymentInsurance: String!, proofOfImployment: String!, relatedFields: String!, completionType: String!, subjectId: Int!, studentPaymentId: Int!): CommonResponse!
+  editEmploymentStatus(id: Int!, employmentType: String!, dateOfEmployment: String!, companyName: String!, businessNum: String!, responsibilities: String!, location: String!, phoneNum: String!, businessSize: String!, imploymentInsurance: String!, proofOfImployment: String!, relatedFields: String!, completionType: String!, lastModifiedTime: String!): CommonResponse!
+  deleteEmploymentStatus(id: Int!): CommonResponse!
+  createHopeForEmployment(workingArea: String!, fieldOfHope: String!, hopefulReward: Int!, workType: String!, workingHours: Int!, opinion: String!, studentPaymentId: Int!, subjectId: Int!): CommonResponse!
+  editHopeEmployment(id: Float!, fieldOfHope: String!, hopefulReward: Int!, workType: String!, workingHours: Int!, opinion: String!, lastModifiedTime: String!, workingArea: String): CommonResponse!
+  deleteHopeForEmployment(id: Int!): CommonResponse!
 }

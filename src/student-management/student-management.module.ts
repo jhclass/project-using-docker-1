@@ -8,6 +8,10 @@ import { EditEmploymentRecommendationModule } from "./employment-recommendation/
 import { DeleteEmploymentRecommendationModule } from "./employment-recommendation/delete-employment-recommendation/delete-employment-recommendation.module";
 import { EmploymentStatusModule } from "./employment-status/employment-status.module";
 import { HopeForEmploymentModule } from "./hope-for-employment/hope-for-employment.module";
+import { PreInspectionModule } from "./pre-inspection/pre-inspection.module";
+import { RegularEvaluationSetModule } from "./regular-evaluation-set/regular-evaluation-set.module";
+import { StudentConsultationModule } from "./student-consultation/student-consultation.module";
+import { StudentPortfolioModule } from "./student-portfolio/student-portfolio.module";
 
 @Module({
   imports: [
@@ -20,6 +24,10 @@ import { HopeForEmploymentModule } from "./hope-for-employment/hope-for-employme
     DeleteEmploymentRecommendationModule,
     EmploymentStatusModule,
     HopeForEmploymentModule,
+    PreInspectionModule,
+    RegularEvaluationSetModule,
+    StudentConsultationModule,
+    StudentPortfolioModule,
   ],
 })
 export class StudentManagementModule {}

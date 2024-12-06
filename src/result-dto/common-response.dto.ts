@@ -14,6 +14,7 @@ import { HourlyData } from "./hourlyData.dto";
 import { Lectures } from "./lectures.dto";
 import { Attendance } from "./attendance.dto";
 import { WorkLogs } from "./workLogs.dto";
+import { RegularEvaluationSet } from "./regularEvaluationSet.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -461,4 +462,12 @@ export class ResultAcademyRecord extends CommonResponse {
 export class SignWorkLogsResult extends CommonResponse {
   @Field({ nullable: true })
   stampUrl?: string;
+}
+
+@ObjectType()
+export class ResultSeeRegularEvaluationSet extends CommonResponse {
+  @Field(() => [RegularEvaluationSet], { nullable: "itemsAndList" })
+  data?: RegularEvaluationSet[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
 }

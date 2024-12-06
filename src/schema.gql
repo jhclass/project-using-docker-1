@@ -606,6 +606,23 @@ type HourlyData {
   amount: Int
 }
 
+type RegularEvaluationSet {
+  id: Int!
+  lectureId: Int!
+  statusType: String!
+  evaluationDetails: String!
+  points: Int!
+  Subject: Subject
+  subjectId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
+}
+
 type CommonResponse {
   ok: Boolean!
   message: String
@@ -903,6 +920,14 @@ type SignWorkLogsResult {
   stampUrl: String
 }
 
+type ResultSeeRegularEvaluationSet {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [RegularEvaluationSet]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -932,6 +957,7 @@ type Query {
   searchWorkLogs(id: Int, workLogsDate: String, lecturesId: Int): SearchWorkLogsResult!
   signWorkLogs(id: Int!, lastModifiedTime: String): SignWorkLogsResult!
   searchAcademyRecord(id: Int, studentName: String, phoneNum: String, lectureName: String, subDiv: String, teacherName: String, limit: Int, page: Int): ResultAcademyRecord!
+  seeRegularEvaluationSet(lectureId: Int, subjectId: Int, page: Int, limit: Int): ResultSeeRegularEvaluationSet!
 }
 
 type Mutation {
@@ -1017,4 +1043,16 @@ type Mutation {
   createHopeForEmployment(workingArea: String!, fieldOfHope: String!, hopefulReward: Int!, workType: String!, workingHours: Int!, opinion: String!, studentPaymentId: Int!, subjectId: Int!): CommonResponse!
   editHopeEmployment(id: Float!, fieldOfHope: String!, hopefulReward: Int!, workType: String!, workingHours: Int!, opinion: String!, lastModifiedTime: String!, workingArea: String): CommonResponse!
   deleteHopeForEmployment(id: Int!): CommonResponse!
+  createPreInspection(subjectId: Int!, studentPaymentId: Int!, dateOfPreInspection: String, preScreenerType: String, preInspectionDetails: String, actionTaken: String): CommonResponse!
+  editPreInspection(id: Int!, lastModifiedTime: String!, dateOfPreInspection: String, preScreenerType: String, preInspectionDetails: String, actionTaken: String): CommonResponse!
+  deletePreInspection(id: Int!): CommonResponse!
+  createRegularEvaluationSet(statusType: String!, evaluationDetails: String!, points: Float!, subjectId: Float!): CommonResponse!
+  editRegularEvaluationSet(id: Int!, statusType: String!, evaluationDetails: String!, points: Int!, lastModifiedTime: String!): CommonResponse!
+  deleteRegularEvaluationSet(id: Int!): CommonResponse!
+  createStudentConsultation(typeOfConsultation: String!, dateOfConsultation: String!, detailsOfConsultation: String!, subjectId: Int!, studentPaymentId: Int!): CommonResponse!
+  editStudentConsultation(id: Int!, lastModifiedTime: String!, typeOfConsultation: String, dateOfConsultation: String, detailsOfConsultation: String): CommonResponse!
+  deleteStudentConsultation(id: Int!): CommonResponse!
+  createStudentPortfolio(filePath: [String!]!, studentPaymentId: Float!, subjectId: Int!, isBest: String, details: String, url: [String]): CommonResponse!
+  editStudentPortfolio(id: Int!, lastModifiedTime: String!, isBest: String, filePath: [String], details: String, url: [String]): CommonResponse!
+  deleteFileNameSp(id: Int!, fileUrl: String!, folderName: String!): CommonResponse!
 }

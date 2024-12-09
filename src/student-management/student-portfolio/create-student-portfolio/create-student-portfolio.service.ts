@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -7,9 +6,9 @@ export class CreateStudentPortfolioService {
   constructor(private readonly client: PrismaService) {}
   async createStudentPortfolioFunc(
     context: any,
-    filePath: string[],
     studentPaymentId: number,
     subjectId: number,
+    filePath?: string[],
     isBest?: string,
     details?: string,
     url?: string[],

@@ -13,12 +13,12 @@ export class CreateStudentPortfolioResolver {
   @Mutation(() => CommonResponse)
   async createStudentPortfolio(
     @Context() context: any,
-    @Args("filePath", { type: () => [String] })
-    filePath: string[],
-    @Args("studentPaymentId")
+    @Args("studentPaymentId", { type: () => Int })
     studentPaymentId: number,
     @Args("subjectId", { type: () => Int })
     subjectId: number,
+    @Args("filePath", { type: () => [String], nullable: "items" })
+    filePath?: string[],
     @Args("isBest", { nullable: true })
     isBest?: string, //우수학생체크 필수아님
 
@@ -29,9 +29,9 @@ export class CreateStudentPortfolioResolver {
   ): Promise<CommonResponse> {
     return this.createStudentPortfolioService.createStudentPortfolioFunc(
       context,
-      filePath,
       studentPaymentId,
       subjectId,
+      filePath,
       isBest,
       details,
       url,

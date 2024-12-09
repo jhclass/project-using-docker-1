@@ -1067,7 +1067,7 @@ type Mutation {
   createStudentConsultation(typeOfConsultation: String!, dateOfConsultation: String!, detailsOfConsultation: String!, subjectId: Int!, studentPaymentId: Int!): CommonResponse!
   editStudentConsultation(id: Int!, lastModifiedTime: String!, typeOfConsultation: String, dateOfConsultation: String, detailsOfConsultation: String): CommonResponse!
   deleteStudentConsultation(id: Int!): CommonResponse!
-  createStudentPortfolio(filePath: [String!]!, studentPaymentId: Float!, subjectId: Int!, isBest: String, details: String, url: [String]): CommonResponse!
+  createStudentPortfolio(studentPaymentId: Int!, subjectId: Int!, filePath: [String]!, isBest: String, details: String, url: [String]): CommonResponse!
   editStudentPortfolio(id: Int!, lastModifiedTime: String!, isBest: String, filePath: [String], details: String, url: [String]): CommonResponse!
   deleteFileNameSp(id: Int!, fileUrl: String!, folderName: String!): CommonResponse!
 }

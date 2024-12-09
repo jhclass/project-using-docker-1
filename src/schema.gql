@@ -206,6 +206,7 @@ type Attendance {
 
 type EmploymentStatus {
   id: Int!
+  lectureId: Int!
   studentId: Int!
   stName: String!
   employmentType: String!
@@ -243,11 +244,13 @@ type EduInfomation {
   major: String
   graduationStatus: String!
   Subject: Subject
+  subjectId: Int!
   StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
   updatedAt: String!
   Branch: Branch
+  branchId: Int
   lastModifiedByUserId: String!
   lastModifiedByName: String!
   lastModifiedTime: String
@@ -290,7 +293,7 @@ type StudentConsultation {
   createdAt: String!
   updatedAt: String!
   Branch: Branch
-  branchId: Int!
+  branchId: Int
   lastModifiedByUserId: String!
   lastModifiedByName: String!
   lastModifiedTime: String
@@ -341,10 +344,10 @@ type EmploymentRecommendation {
   createdAt: String!
   updatedAt: String!
   Branch: Branch
-  branchId: Int!
+  branchId: Int
   lastModifiedByUserId: String!
   lastModifiedByName: String!
-  lastModifiedTime: String!
+  lastModifiedTime: String
 }
 
 type PreInspection {
@@ -433,6 +436,7 @@ type Career {
   stName: String!
   careerDetails: String!
   Subject: Subject
+  subjectId: Int!
   StudentPayment: StudentPayment
   studentPaymentId: Int!
   createdAt: String!
@@ -928,6 +932,16 @@ type ResultSeeRegularEvaluationSet {
   totalCount: Int
 }
 
+type ResultSearchSM {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [SearchDataUnion]
+  totalCount: Int
+}
+
+union SearchDataUnion = Career | EduInfomation | Certificate | StudentConsultation | HopeForEmployment | EmploymentRecommendation | EmploymentStatus | PreInspection | StudentPortfolio
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -958,6 +972,7 @@ type Query {
   signWorkLogs(id: Int!, lastModifiedTime: String): SignWorkLogsResult!
   searchAcademyRecord(id: Int, studentName: String, phoneNum: String, lectureName: String, subDiv: String, teacherName: String, limit: Int, page: Int): ResultAcademyRecord!
   seeRegularEvaluationSet(lectureId: Int, subjectId: Int, page: Int, limit: Int): ResultSeeRegularEvaluationSet!
+  searchSM(modelType: String!, lectureId: Int, studentPaymentId: Int, subjectId: Int, limit: Int, page: Int): ResultSearchSM!
 }
 
 type Mutation {
@@ -1046,7 +1061,7 @@ type Mutation {
   createPreInspection(subjectId: Int!, studentPaymentId: Int!, dateOfPreInspection: String, preScreenerType: String, preInspectionDetails: String, actionTaken: String): CommonResponse!
   editPreInspection(id: Int!, lastModifiedTime: String!, dateOfPreInspection: String, preScreenerType: String, preInspectionDetails: String, actionTaken: String): CommonResponse!
   deletePreInspection(id: Int!): CommonResponse!
-  createRegularEvaluationSet(statusType: String!, evaluationDetails: String!, points: Float!, subjectId: Float!): CommonResponse!
+  createRegularEvaluationSet(statusType: String!, evaluationDetails: String!, points: Int!, subjectId: Int!): CommonResponse!
   editRegularEvaluationSet(id: Int!, statusType: String!, evaluationDetails: String!, points: Int!, lastModifiedTime: String!): CommonResponse!
   deleteRegularEvaluationSet(id: Int!): CommonResponse!
   createStudentConsultation(typeOfConsultation: String!, dateOfConsultation: String!, detailsOfConsultation: String!, subjectId: Int!, studentPaymentId: Int!): CommonResponse!

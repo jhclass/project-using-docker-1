@@ -1,4 +1,4 @@
-import { Context, Mutation, Resolver, Args } from "@nestjs/graphql";
+import { Context, Mutation, Resolver, Args, Int } from "@nestjs/graphql";
 import { CreateRegularEvaluationSetService } from "./create-regular-evaluation-set.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
@@ -17,13 +17,13 @@ export class CreateRegularEvaluationSetResolver {
     statusType: string, //# 구분
     @Args("evaluationDetails")
     evaluationDetails: string, //# 평가내용
-    @Args("points")
+    @Args("points", { type: () => Int })
     points: number, //# 점수 (배점)
-    @Args("subjectId")
+    @Args("subjectId", { type: () => Int })
     subjectId: number,
   ) {
     return this.createRegularEvaluationSetService.createRegularEvaluationSetFunc(
-      Context,
+      context,
       statusType,
       evaluationDetails,
       points,

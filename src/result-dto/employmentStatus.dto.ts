@@ -8,6 +8,8 @@ export class EmploymentStatus {
   @Field(() => Int)
   id: number;
   @Field(() => Int)
+  lectureId: number; //강의id
+  @Field(() => Int)
   studentId: number; // 학생id
   @Field()
   stName: string; // 학생이름

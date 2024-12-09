@@ -46,12 +46,12 @@ export class EmploymentRecommendation {
   updatedAt: Date;
   @Field(() => Branch, { nullable: true })
   Branch?: Branch;
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   branchId?: number;
   @Field()
   lastModifiedByUserId: string; // 직원아이디
   @Field()
   lastModifiedByName: string; //직원이름
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   lastModifiedTime?: Date; //최근수정시간
 }

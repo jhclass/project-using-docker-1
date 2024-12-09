@@ -18,6 +18,8 @@ export class Career {
   careerDetails: string; // 경력내용
   @Field(() => Subject, { nullable: true })
   Subject?: Subject;
+  @Field(() => Int)
+  subjectId: number;
   @Field(() => StudentPayment, { nullable: true })
   StudentPayment?: StudentPayment;
   @Field(() => Int)

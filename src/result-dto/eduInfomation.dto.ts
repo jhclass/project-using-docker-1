@@ -24,6 +24,8 @@ export class EduInfomation {
   graduationStatus: string; // 졸업여부
   @Field(() => Subject, { nullable: true })
   Subject?: Subject;
+  @Field(() => Int)
+  subjectId: number;
   @Field(() => StudentPayment, { nullable: true })
   StudentPayment?: StudentPayment;
   @Field(() => Int)
@@ -34,6 +36,8 @@ export class EduInfomation {
   updatedAt: Date;
   @Field(() => Branch, { nullable: true })
   Branch?: Branch;
+  @Field(() => Int, { nullable: true })
+  branchId?: number;
   @Field()
   lastModifiedByUserId: string; // 직원아이디
   @Field()

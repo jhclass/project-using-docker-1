@@ -27,5 +27,5 @@ export class PermissionsGranted {
   @Field(() => Int, { nullable: true })
   branchId: number;
   @Field(() => String, { nullable: true })
-  lastModifiedTime: Date;
+  lastModifiedTime?: Date;
 }

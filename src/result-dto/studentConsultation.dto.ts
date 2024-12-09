@@ -34,7 +34,7 @@ export class StudentConsultation {
   updatedAt: Date;
   @Field(() => Branch, { nullable: true })
   Branch?: Branch;
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   branchId?: number;
   @Field()
   lastModifiedByUserId: string; // 직원아이디

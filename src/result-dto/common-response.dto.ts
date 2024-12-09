@@ -15,6 +15,15 @@ import { Lectures } from "./lectures.dto";
 import { Attendance } from "./attendance.dto";
 import { WorkLogs } from "./workLogs.dto";
 import { RegularEvaluationSet } from "./regularEvaluationSet.dto";
+import { SearchDataUnion } from "./smSearch.dto";
+import { EmploymentRecommendation } from "./employmentRecommendation.dto";
+import { EduInfomation } from "./eduInfomation.dto";
+import { Certificate } from "./certificate.dto";
+import { StudentConsultation } from "./studentConsultation.dto";
+import { HopeForEmployment } from "./hopeForEmployment.dto";
+import { PreInspection } from "./preInspection.dto";
+import { StudentPortfolio } from "./studentPorfolio.dto";
+import { Career } from "./career.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -468,6 +477,23 @@ export class SignWorkLogsResult extends CommonResponse {
 export class ResultSeeRegularEvaluationSet extends CommonResponse {
   @Field(() => [RegularEvaluationSet], { nullable: "itemsAndList" })
   data?: RegularEvaluationSet[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}
+type SearchDataUnionType =
+  | EmploymentRecommendation
+  | EduInfomation
+  | Certificate
+  | StudentConsultation
+  | HopeForEmployment
+  | EmploymentRecommendation
+  | PreInspection
+  | StudentPortfolio
+  | Career;
+@ObjectType()
+export class ResultSearchSM extends CommonResponse {
+  @Field(() => [SearchDataUnion], { nullable: "itemsAndList" })
+  data?: SearchDataUnionType[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }

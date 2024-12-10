@@ -24,6 +24,8 @@ import { HopeForEmployment } from "./hopeForEmployment.dto";
 import { PreInspection } from "./preInspection.dto";
 import { StudentPortfolio } from "./studentPorfolio.dto";
 import { Career } from "./career.dto";
+import { Sms } from "./sms.dto";
+import { MessageStorage } from "./messageStorage.dto";
 
 @ObjectType()
 export class CommonResponse {
@@ -494,6 +496,22 @@ type SearchDataUnionType =
 export class ResultSearchSM extends CommonResponse {
   @Field(() => [SearchDataUnion], { nullable: "itemsAndList" })
   data?: SearchDataUnionType[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}
+
+@ObjectType()
+export class ResultSearchSms extends CommonResponse {
+  @Field(() => [Sms], { nullable: "itemsAndList" })
+  data?: Sms[];
+  @Field(() => Int, { nullable: true })
+  totalCount?: number;
+}
+
+@ObjectType()
+export class ResultMessageStorage extends CommonResponse {
+  @Field(() => [MessageStorage], { nullable: "itemsAndList" })
+  data?: MessageStorage[];
   @Field(() => Int, { nullable: true })
   totalCount?: number;
 }

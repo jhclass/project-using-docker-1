@@ -530,6 +530,25 @@ type Stamp {
   lastModifiedTime: String
 }
 
+type Sms {
+  id: Int!
+  receiver: String!
+  message: String!
+  manageUser: ManageUser
+  manageUserId: Int
+  Branch: Branch
+  createdAt: String!
+  updatedAt: String!
+  saveType: String
+  branchId: Int
+  rDate: String
+  rTime: String
+  successType: String
+  sender: String
+  failureReason: String
+  lastModifiedTime: String
+}
+
 type ManageUser {
   id: Int
   mUserId: String
@@ -566,6 +585,7 @@ type ManageUser {
   Stamp: [Stamp!]
   lastModifiedBy: String
   frequentlyUsed: [String]
+  Sms: [Sms]
 }
 
 type Alarm {
@@ -625,6 +645,18 @@ type RegularEvaluationSet {
   lastModifiedByUserId: String!
   lastModifiedByName: String!
   lastModifiedTime: String
+}
+
+type MessageStorage {
+  id: Int!
+  manageUser: ManageUser
+  manageUserId: Int
+  message: String!
+  saveType: String!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
 }
 
 type CommonResponse {
@@ -942,6 +974,22 @@ type ResultSearchSM {
 
 union SearchDataUnion = Career | EduInfomation | Certificate | StudentConsultation | HopeForEmployment | EmploymentRecommendation | EmploymentStatus | PreInspection | StudentPortfolio
 
+type ResultSearchSms {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [Sms]
+  totalCount: Int
+}
+
+type ResultMessageStorage {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [MessageStorage]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -973,6 +1021,8 @@ type Query {
   searchAcademyRecord(id: Int, studentName: String, phoneNum: String, lectureName: String, subDiv: String, teacherName: String, limit: Int, page: Int): ResultAcademyRecord!
   seeRegularEvaluationSet(lectureId: Int, subjectId: Int, page: Int, limit: Int): ResultSeeRegularEvaluationSet!
   searchSM(modelType: String!, lectureId: Int, studentPaymentId: Int, subjectId: Int, limit: Int, page: Int): ResultSearchSM!
+  searchSms(id: Int, branchId: Int, receiver: String, manageUserId: Int, period: [String], page: Int, limit: Int, saveType: String!): ResultSearchSms!
+  seeMessageStorage(saveType: String!, page: Int, limit: Int): ResultMessageStorage!
 }
 
 type Mutation {
@@ -1070,4 +1120,8 @@ type Mutation {
   createStudentPortfolio(studentPaymentId: Int!, subjectId: Int!, filePath: [String]!, isBest: String, details: String, url: [String]): CommonResponse!
   editStudentPortfolio(id: Int!, lastModifiedTime: String!, isBest: String, filePath: [String], details: String, url: [String]): CommonResponse!
   deleteFileNameSp(id: Int!, fileUrl: String!, folderName: String!): CommonResponse!
+  sendSms(receiver: String!, message: String!, rDate: String, rTime: String, senderNum: String): CommonResponse!
+  deleteSms(id: Int!): CommonResponse!
+  createMessageStorage(message: String!, saveType: String!): CommonResponse!
+  deleteMessageStorage(id: Int!): CommonResponse!
 }

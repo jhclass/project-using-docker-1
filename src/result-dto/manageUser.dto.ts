@@ -9,6 +9,7 @@ import { PaymentDetail } from "./paymentDetail.dto";
 import { Lectures } from "./lectures.dto";
 import { Stamp } from "./stamp.dto";
 import { Branch } from "./branch.dto";
+import { Sms } from "./sms.dto";
 //ManageUser
 @ObjectType()
 export class ManageUser {
@@ -82,4 +83,6 @@ export class ManageUser {
   lastModifiedBy?: string;
   @Field(() => [String], { nullable: "itemsAndList" })
   frequentlyUsed: string[]; //자주 사용하는 문장
+  @Field(() => [Sms], { nullable: "itemsAndList" })
+  Sms?: Sms[];
 }

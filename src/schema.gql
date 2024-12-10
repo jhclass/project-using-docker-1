@@ -1021,7 +1021,7 @@ type Query {
   searchAcademyRecord(id: Int, studentName: String, phoneNum: String, lectureName: String, subDiv: String, teacherName: String, limit: Int, page: Int): ResultAcademyRecord!
   seeRegularEvaluationSet(lectureId: Int, subjectId: Int, page: Int, limit: Int): ResultSeeRegularEvaluationSet!
   searchSM(modelType: String!, lectureId: Int, studentPaymentId: Int, subjectId: Int, limit: Int, page: Int): ResultSearchSM!
-  searchSms(id: Int, branchId: Int, receiver: String, manageUserId: Int, period: [String], page: Int, limit: Int, saveType: String!): ResultSearchSms!
+  searchSms(id: Int, branchId: Int, receiver: String, manageUserId: Int, period: [String], page: Int, limit: Int, saveType: String): ResultSearchSms!
   seeMessageStorage(saveType: String!, page: Int, limit: Int): ResultMessageStorage!
 }
 

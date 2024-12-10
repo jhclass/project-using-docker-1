@@ -26,7 +26,7 @@ export class SearchSmsResolver {
     page?: number,
     @Args("limit", { type: () => Int, nullable: true })
     limit?: number,
-    @Args("saveType")
+    @Args("saveType", { nullable: true })
     saveType?: string,
   ): Promise<ResultSearchSms> {
     return this.searchSmsService.searchSmsFunc(

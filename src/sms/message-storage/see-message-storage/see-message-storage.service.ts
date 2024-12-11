@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -12,7 +16,7 @@ export class SeeMessageStorageService {
   ) {
     try {
       if (!saveType) {
-        throw new Error("saveType 은 반드시 존재해야합니다.");
+        throw new BadRequestException("saveType 은 반드시 존재해야합니다.");
       }
       const client = this.client;
       const { user } = context.req;
@@ -40,7 +44,7 @@ export class SeeMessageStorageService {
           },
         });
         if (!dataOk) {
-          throw new Error("데이터가 존재하지 않습니다.");
+          throw new NotFoundException("데이터가 존재하지 않습니다.");
         }
 
         return {
@@ -68,7 +72,7 @@ export class SeeMessageStorageService {
           },
         });
         if (!dataOk) {
-          throw new Error("데이터가 존재하지 않습니다.");
+          throw new NotFoundException("데이터가 존재하지 않습니다.");
         }
 
         return {

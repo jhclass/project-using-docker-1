@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { validateIdExists } from "@src/utils/shared.utils";
 
@@ -16,11 +16,11 @@ export class EditStudentConsultationService {
     try {
       //
       if (!id || !lastModifiedTime) {
-        throw new Error("id 와 lastModifiedTime 은 필수값 입니다.");
+        throw new BadRequestException(
+          "id 와 lastModifiedTime 은 필수값 입니다.",
+        );
       }
-      if (!id) {
-        throw new Error("id 는 필수값입니다.");
-      }
+
       const client = this.client;
       const { user } = context.req;
       const existingId = await client.studentConsultation.findUnique({

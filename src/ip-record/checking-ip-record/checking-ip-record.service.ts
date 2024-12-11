@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -8,7 +8,7 @@ export class CheckingIpRecordService {
     try {
       const { user } = context.req;
       if (!ipRecord) {
-        throw new Error("ipRecord 는 필수값 입니다.");
+        throw new BadRequestException("ipRecord 는 필수값 입니다.");
       }
       const ipCount = await this.client.ipRecord.count({
         where: {

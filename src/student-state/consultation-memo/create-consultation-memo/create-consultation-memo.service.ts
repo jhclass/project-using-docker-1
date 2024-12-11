@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -31,9 +31,9 @@ export class CreateConsultationMemoService {
           },
         },
       });
-      console.log(createMemo);
+
       if (!createMemo) {
-        throw new Error("메모를 생성할 수 없습니다.");
+        throw new InternalServerErrorException("메모를 생성할 수 없습니다.");
       }
       return {
         ok: true,

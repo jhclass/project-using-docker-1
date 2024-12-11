@@ -1,4 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -17,11 +22,13 @@ export class CreateStudentPortfolioService {
       const { user } = context.req;
       const client = this.client;
       if (!studentPaymentId || !subjectId) {
-        throw new Error("studentpaymentId 와 subjectId 는 필수값입니다.");
+        throw new BadRequestException(
+          "studentpaymentId 와 subjectId 는 필수값입니다.",
+        );
       }
 
       if (!filePath || filePath.length === 0) {
-        throw new Error(
+        throw new BadRequestException(
           "포트폴리오는 적어도 1개 이상, 스크린샷으로 등록하여야 합니다.",
         );
       }
@@ -31,7 +38,7 @@ export class CreateStudentPortfolioService {
         },
       });
       if (existingPortfolio) {
-        throw new Error(
+        throw new ConflictException(
           "포트폴리오가 이미 존재합니다. 기존 포트폴리오를 수정하세요",
         );
       }
@@ -58,13 +65,13 @@ export class CreateStudentPortfolioService {
         },
       });
       if (!existingSubjectId) {
-        throw new Error("subjectId 를 다시 확인하세요.");
+        throw new NotFoundException("subjectId 를 다시 확인하세요.");
       } else if (!existingStudentPaymentId) {
-        throw new Error("studentPaymentId 를 다시 확인하세요.");
+        throw new NotFoundException("studentPaymentId 를 다시 확인하세요.");
       } else if (!existingManageUserId) {
-        throw new Error("manageUserId 를 다시 확인하세요.");
+        throw new NotFoundException("manageUserId 를 다시 확인하세요.");
       } else if (!existingSubjectId.lectures) {
-        throw new Error(
+        throw new BadRequestException(
           "강의배정이 되지 않았습니다. 강의배정을 하고 다시 시도 하세요.",
         );
       }

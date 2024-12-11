@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -16,7 +20,9 @@ export class CreatePreInspectionService {
     try {
       //필수값 확인
       if (!subjectId || !studentPaymentId) {
-        throw new Error("subjectId 와 studentPaymentId는 필수값을 입니다.");
+        throw new BadRequestException(
+          "subjectId 와 studentPaymentId는 필수값을 입니다.",
+        );
       }
       const client = this.client;
       const { user } = context.req;
@@ -43,13 +49,13 @@ export class CreatePreInspectionService {
         },
       });
       if (!existingSubjectId) {
-        throw new Error("subjectId 를 다시 확인하세요.");
+        throw new NotFoundException("subjectId 를 다시 확인하세요.");
       } else if (!existingStudentPaymentId) {
-        throw new Error("studentPaymentId 를 다시 확인하세요.");
+        throw new NotFoundException("studentPaymentId 를 다시 확인하세요.");
       } else if (!existingManageUserId) {
-        throw new Error("manageUserId 를 다시 확인하세요.");
+        throw new NotFoundException("manageUserId 를 다시 확인하세요.");
       } else if (!existingSubjectId.lectures) {
-        throw new Error(
+        throw new BadRequestException(
           "강의배정이 되지 않았습니다. 강의배정을 하고 다시 시도 하세요.",
         );
       }

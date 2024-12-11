@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { generateRandomFourDigitNumber } from "@src/utils/shared.utils";
 
@@ -18,7 +18,9 @@ export class CreateBranchService {
 
       // random
       if (existbranchName) {
-        throw new Error(`알수없는 오류가 발생하였습니다. 다시 생성 해주세요.`);
+        throw new BadRequestException(
+          `알수없는 오류가 발생하였습니다. 다시 생성 해주세요.`,
+        );
       }
       await this.client.branch.create({
         data: {

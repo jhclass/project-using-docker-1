@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -12,7 +16,7 @@ export class CreateCareerService {
   ) {
     try {
       if (!subjectId || !studentPaymentId || !careerDetails) {
-        throw new Error(
+        throw new BadRequestException(
           "필수값을 확인하세요. 모든 데이터는 필수값으로 들어가야 합니다. ",
         );
       }
@@ -41,16 +45,16 @@ export class CreateCareerService {
         },
       });
       if (!existingSubjectId) {
-        throw new Error("subjectId 를 다시 확인하세요.");
+        throw new NotFoundException("subjectId 를 다시 확인하세요.");
       } else if (!existingStudentPaymentId) {
-        throw new Error("studentPaymentId 를 다시 확인하세요.");
+        throw new NotFoundException("studentPaymentId 를 다시 확인하세요.");
       } else if (!existingManageUserId) {
-        throw new Error(
+        throw new NotFoundException(
           "manageUserId 를 다시 확인하세요. 지금 로그인이 되어있는 상태가 맞습니까?",
         );
       } else if (!existingSubjectId.lectures) {
-        throw new Error(
-          "강의배정이 되지 않았습니다. 강의배정을 하고 다시 시도 하세요.",
+        throw new BadRequestException(
+          "강의가 배정되지 않았습니다. 강의를 배정한 후 다시 시도하세요.",
         );
       }
       await client.career.create({

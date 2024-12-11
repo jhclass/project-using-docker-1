@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -42,7 +42,9 @@ export class CreateSubjectService {
       });
       //console.log(createSubjectData);
       if (!createSubjectData) {
-        throw new Error("데이터가 정상적으로 생성되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "데이터가 정상적으로 생성되지 않았습니다.",
+        );
       }
       return {
         ok: true,

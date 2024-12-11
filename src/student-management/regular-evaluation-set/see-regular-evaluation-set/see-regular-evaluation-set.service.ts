@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 interface IWhere {
   subjectId: number;
@@ -23,7 +23,9 @@ export class SeeRegularEvaluationSetService {
           where: { id: subjectId },
         });
         if (!existingSubjectId) {
-          throw new Error("subjectId 가 유효하지 않습니다. 다시 확인하세요.");
+          throw new NotFoundException(
+            "subjectId 가 유효하지 않습니다. 다시 확인하세요.",
+          );
         }
       }
       if (lectureId) {
@@ -31,7 +33,9 @@ export class SeeRegularEvaluationSetService {
           where: { id: lectureId },
         });
         if (!existingLectureId) {
-          throw new Error("lectureId 가 유효하지 않습니다. 다시 확인하세요.");
+          throw new NotFoundException(
+            "lectureId 가 유효하지 않습니다. 다시 확인하세요.",
+          );
         }
       }
 

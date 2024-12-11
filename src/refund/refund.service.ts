@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { validateIdExists } from "@src/utils/shared.utils";
 
@@ -59,7 +59,9 @@ export class RefundService {
           },
         });
         if (!createAlarm) {
-          throw new Error("알람이 제대로 생성되지 않았습니다.");
+          throw new InternalServerErrorException(
+            "알람이 제대로 생성되지 않았습니다.",
+          );
         }
       } else {
         if (
@@ -79,7 +81,9 @@ export class RefundService {
           },
         });
         if (!createAlarm) {
-          throw new Error("알람이 제대로 생성되지 않았습니다.");
+          throw new InternalServerErrorException(
+            "알람이 제대로 생성되지 않았습니다.",
+          );
         }
       }
 
@@ -174,7 +178,7 @@ export class RefundService {
           },
         });
         if (!createAlarm) {
-          throw new Error(
+          throw new InternalServerErrorException(
             "환불승인완료에 대한 알람이 정상적으로 생성되지 않았습니다.",
           );
         }

@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -31,7 +35,9 @@ export class EditStudentStateService {
     try {
       const { user } = context.req;
       if (!id || !lastModifiedTime) {
-        throw new Error("id 와 lastModifiedTime 은 필수값 입니다.");
+        throw new BadRequestException(
+          "id 와 lastModifiedTime 은 필수값 입니다.",
+        );
       }
       const existingData = await this.client.studentState.findUnique({
         where: {
@@ -42,7 +48,9 @@ export class EditStudentStateService {
         },
       });
       if (!existingData) {
-        throw new Error("데이터가 존재 하지 않습니다. id를 다시 확인하세요.");
+        throw new NotFoundException(
+          "데이터가 존재 하지 않습니다. id를 다시 확인하세요.",
+        );
       }
       const existingAdviceTtypeData = existingData.adviceTypes;
       await this.client.studentState.update({

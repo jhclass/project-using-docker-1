@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { validateIdExists } from "@src/utils/shared.utils";
 
 @Injectable()
 export class DeleteManageUserService {
@@ -12,9 +13,7 @@ export class DeleteManageUserService {
           id,
         },
       });
-      if (!existingId) {
-        throw new Error(`id가 존재하지 않습니다.`);
-      }
+      validateIdExists(existingId);
       await this.client.manageUser.delete({
         where: { id },
       });

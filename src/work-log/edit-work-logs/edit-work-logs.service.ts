@@ -1,4 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -33,7 +38,9 @@ export class EditWorkLogsService {
     try {
       const client = this.client;
       if (!id || !lastModifiedTime) {
-        throw new Error("id 와 lastModifiedTime 은 필수값 입니다.");
+        throw new BadRequestException(
+          "id 와 lastModifiedTime 은 필수값 입니다.",
+        );
       }
 
       //아이디 존재 여부 확인
@@ -43,7 +50,9 @@ export class EditWorkLogsService {
         },
       });
       if (!existingId) {
-        throw new Error("해당 업무일지가 존재 하지 않습니다 id 확인하세요.");
+        throw new NotFoundException(
+          "해당 업무일지가 존재 하지 않습니다 id 확인하세요.",
+        );
       }
 
       //수정
@@ -75,7 +84,9 @@ export class EditWorkLogsService {
         },
       });
       if (!editWorkLogsData) {
-        throw new Error("데이터가 정상적으로 수정되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "데이터가 정상적으로 수정되지 않았습니다.",
+        );
       }
       return {
         ok: true,

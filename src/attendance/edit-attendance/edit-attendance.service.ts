@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -14,10 +14,12 @@ export class EditAttendanceService {
       const updatedAttendanceState = attendanceState || [];
       // 배열 길이 검증
       if (id.length !== updatedAttendanceState.length) {
-        throw new Error("ID 배열과 출석 상태 배열의 길이가 일치하지 않습니다.");
+        throw new BadRequestException(
+          "ID 배열과 출석 상태 배열의 길이가 일치하지 않습니다.",
+        );
       }
       if (!lastModifiedTime) {
-        throw new Error("lastModifiedTime 은 필수값 입니다.");
+        throw new BadRequestException("lastModifiedTime 은 필수값 입니다.");
       }
       // id 배열 전체를 검사한다.
       const existingIds = await client.attendance.findMany({
@@ -29,7 +31,9 @@ export class EditAttendanceService {
       });
 
       if (existingIds.length !== id.length) {
-        throw new Error("존재하지 않는 출석 내역이 포함되어 있습니다.");
+        throw new BadRequestException(
+          "존재하지 않는 출석 내역이 포함되어 있습니다.",
+        );
       }
 
       for (let i = 0; i < id.length; i++) {

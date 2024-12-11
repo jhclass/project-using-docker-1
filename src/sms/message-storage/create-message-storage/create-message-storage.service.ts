@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { CommonResponse } from "@src/result-dto/common-response.dto";
 
@@ -22,7 +22,9 @@ export class CreateMessageStorageService {
         },
       });
       if (!messageOk) {
-        throw new Error("메세지내용이 저장되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "메세지내용이 저장되지 않았습니다.",
+        );
       }
       return {
         ok: true,

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { validateIdExists } from "@src/utils/shared.utils";
 
@@ -23,7 +23,7 @@ export class EditStudentPortfolioService {
       });
       // id와 lastModifiedTime 확인
       if (!id || !lastModifiedTime) {
-        throw new Error("id와 lastModifiedTime은 필수값입니다.");
+        throw new BadRequestException("id와 lastModifiedTime은 필수값입니다.");
       }
 
       // filePath 초기화
@@ -33,14 +33,14 @@ export class EditStudentPortfolioService {
 
       validateIdExists(existingId);
       if (existingId.url === null) {
-        throw new Error(
+        throw new BadRequestException(
           "url 은 null 일 수 없습니다. 반드시 빈 배열이라도 가지고 있어야 합니다.",
         );
       }
       // 기존 파일 경로 배열 확인
       const oldFilePathArr = existingId.filePath || [];
       if (!Array.isArray(oldFilePathArr)) {
-        throw new Error("filePath 필드는 배열이어야 합니다.");
+        throw new BadRequestException("filePath 필드는 배열이어야 합니다.");
       }
 
       // 학생 포트폴리오 업데이트

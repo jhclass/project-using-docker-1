@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -21,7 +25,7 @@ export class CreateWorkLogsService {
         },
       });
       if (existingWorkLogsData) {
-        throw new Error("오늘 업무일지는 이미 생성되었습니다.");
+        throw new ConflictException("오늘 업무일지는 이미 생성되었습니다.");
       }
       const newWorkLogs = await client.workLogs.create({
         data: {
@@ -31,7 +35,7 @@ export class CreateWorkLogsService {
         },
       });
       if (!newWorkLogs) {
-        throw new Error(
+        throw new InternalServerErrorException(
           "데이터가 제대로 생성되지 않았습니다. 다시 확인하세요.",
         );
       }

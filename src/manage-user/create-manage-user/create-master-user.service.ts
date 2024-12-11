@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { validateIdExists } from "@src/utils/shared.utils";
 import * as bcrypt from "bcrypt";
@@ -32,7 +32,7 @@ export class CreateMasterUserService {
         },
       });
       if (!existingBranchName) {
-        throw new Error(`branchName 을 다시 확인하세요.`);
+        throw new NotFoundException(`branchName 을 다시 확인하세요.`);
       }
       const existingId = await this.client.manageUser.findFirst({
         where: {

@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -36,7 +40,7 @@ export class CreateLecturesService {
       });
       console.log(existingSubjectId, "뭐가잇나?");
       if (existingSubjectId > 0) {
-        throw new Error(
+        throw new ConflictException(
           "과정이 중복됩니다 . 과정이 중복된 강의는 배정할 수 없습니다.",
         );
       }

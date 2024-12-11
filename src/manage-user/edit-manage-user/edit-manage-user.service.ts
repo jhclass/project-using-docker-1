@@ -1,5 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { validateIdExists } from "@src/utils/shared.utils";
 import * as bcrypt from "bcrypt";
 @Injectable()
 export class EditManageUserService {
@@ -34,9 +39,7 @@ export class EditManageUserService {
           id,
         },
       });
-      if (!existingId) {
-        throw new Error(`id 가 없습니다.`);
-      }
+      validateIdExists(existingId);
       let hashedPassword: string;
       if (mPassword) {
         hashedPassword = await bcrypt.hash(mPassword, 10);
@@ -107,7 +110,7 @@ export class EditManageUserService {
       });
       if (!areYouDevOk) {
         //개발자이외엔 사용할수 없음.
-        throw new Error("개발자이외엔 사용할수 없음.");
+        throw new NotFoundException("개발자이외엔 사용할수 없음.");
       }
 
       const newPassword = mPassword;
@@ -117,7 +120,9 @@ export class EditManageUserService {
         try {
           uglyPassword = await bcrypt.hash(newPassword, 10);
         } catch (error) {
-          throw new Error("비밀번호 해싱 중 문제가 발생했습니다.");
+          throw new InternalServerErrorException(
+            "비밀번호 해싱 중 문제가 발생했습니다.",
+          );
         }
       }
       // 데이터 수정

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -17,7 +17,9 @@ export class CreateAdviceTypeService {
       const { user } = context.req;
 
       if (onOff === "N") {
-        throw new Error(`onOff 상태는 무조건 "Y" 로 지정해야합니다.`);
+        throw new BadRequestException(
+          `onOff 상태는 무조건 "Y" 로 지정해야합니다.`,
+        );
       }
       const compareAT = await this.client.adviceType.findFirst({
         where: {
@@ -28,7 +30,7 @@ export class CreateAdviceTypeService {
         },
       });
       if (compareAT !== null) {
-        throw new Error(`중복되는 분야 입니다.`);
+        throw new BadRequestException(`중복되는 분야 입니다.`);
       }
       await this.client.adviceType.create({
         data: {

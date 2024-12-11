@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { validateIdExists } from "@src/utils/shared.utils";
 
@@ -28,7 +28,7 @@ export class DeleteMessageStorageService {
       });
 
       if (checkDeleted) {
-        throw new Error("데이터가 삭제되지 않았습니다.");
+        throw new InternalServerErrorException("데이터가 삭제되지 않았습니다.");
       }
       return {
         ok: true,

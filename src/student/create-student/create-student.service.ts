@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { WebSocketGatewayService } from "@src/websocket/websocket.gateway";
 @Injectable()
@@ -28,7 +32,9 @@ export class CreateStudentService {
         },
       });
       if (existingStudent > 0) {
-        throw new Error("이미 등록된 학생이름과 전화번호를 가지고 있습니다.");
+        throw new ConflictException(
+          "이미 등록된 학생이름과 전화번호를 가지고 있습니다.",
+        );
       }
       //console.log(name, phoneNum1, phoneNum2, smsAgreement, birthday);
       const createStudentData = await this.client.student.create({
@@ -43,7 +49,7 @@ export class CreateStudentService {
         },
       });
       if (!createStudentData) {
-        throw new Error(
+        throw new InternalServerErrorException(
           "정상적으로 데이터가 생성되지 않았습니다 데이터를 다시 확인하세요.",
         );
       }
@@ -76,7 +82,9 @@ export class CreateStudentService {
         },
       });
       if (!createAlarm) {
-        throw new Error("알람이 제대로 생성되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "알람이 제대로 생성되지 않았습니다.",
+        );
       }
 
       //소켓발송

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { validateIdExists } from "@src/utils/shared.utils";
 
@@ -8,7 +8,7 @@ export class DeletePaymentDetailService {
   async deletePaymentDetailFunc(id: number) {
     try {
       if (!id) {
-        throw new Error("id 는 필수값 입니다. 다시 확인하세요.");
+        throw new BadRequestException("id 는 필수값 입니다. 다시 확인하세요.");
       }
       const existingId = await this.client.paymentDetail.findUnique({
         where: {

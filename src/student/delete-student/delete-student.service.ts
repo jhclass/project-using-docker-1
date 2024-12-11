@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import {
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { validateIdExists } from "@src/utils/shared.utils";
+
 @Injectable()
 export class DeleteStudentService {
   constructor(private readonly client: PrismaService) {}
@@ -13,19 +19,24 @@ export class DeleteStudentService {
         },
       });
       if (areUdev.mGrade !== 0) {
-        throw new Error(
+        throw new ForbiddenException(
           "당신은 개발자가 아닙니다.개발자만 삭제권한이 있습니다.",
         );
       }
-
+      const existingId = await this.client.student.findUnique({
+        where: {
+          id,
+        },
+      });
+      validateIdExists(existingId);
       const deleteStudentOk = await this.client.student.delete({
         where: {
           id,
         },
       });
       if (!deleteStudentOk) {
-        throw new Error(
-          "id 를 다시 확인하세요. 정상적으로 데이터 삭제가 이루어지지 않았습니다.",
+        throw new InternalServerErrorException(
+          "정상적으로 데이터 삭제가 이루어지지 않았습니다.",
         );
       }
       return {

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { validateIdExists } from "@src/utils/shared.utils";
 
@@ -9,7 +9,7 @@ export class DeleteEmploymentRecommendationService {
     try {
       //
       if (!id) {
-        throw new Error("id 는 필수값 입니다.");
+        throw new BadRequestException("id 는 필수값 입니다.");
       }
       const client = this.client;
       const existingId = await client.employmentRecommendation.findUnique({

@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { validateIdExists } from "@src/utils/shared.utils";
 
 @Injectable()
 export class ReadAlarmsService {
@@ -40,9 +41,7 @@ export class ReadAlarmsService {
             id,
           },
         });
-        if (!existingId) {
-          throw new Error("id 가 존재하지 않습니다.");
-        }
+        validateIdExists(existingId);
 
         const updatedPersonalTarget = existingId.personalTarget.filter(
           (id) => id !== user?.id,

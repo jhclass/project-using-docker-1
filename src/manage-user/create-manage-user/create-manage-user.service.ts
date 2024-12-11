@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { CommonResponse } from "@src/result-dto/common-response.dto";
 import * as bcrypt from "bcrypt";
@@ -37,7 +37,7 @@ export class CreateManageUserService {
         },
       });
       if (existingUser) {
-        throw new Error(
+        throw new ConflictException(
           "아이디 또는 전화번호 또는 이름이 중복 되었습니다. 이름이 중복되었을 경우 이름 뒤에 숫자를 넣어 다른 이름으로 작성하여 주세요.",
         );
       }

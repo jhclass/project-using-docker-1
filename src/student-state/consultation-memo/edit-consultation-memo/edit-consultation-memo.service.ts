@@ -1,4 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -13,12 +18,14 @@ export class EditConsultationMemoService {
     try {
       const { user } = context.req;
       if (!user) {
-        throw new Error(
+        throw new UnauthorizedException(
           `현재 user 가 존재하지 않습니다. token 상태를 확인하세요.`,
         );
       }
       if (!id || !lastModifiedTime || !content) {
-        throw new Error("id,lastModifiedTime,content 은(는) 필수값 입니다.");
+        throw new BadRequestException(
+          "id,lastModifiedTime,content 은(는) 필수값 입니다.",
+        );
       }
       //기존에 memo가 있는지 검색
       const existence = await this.client.consultationMemo.findFirst({
@@ -27,7 +34,7 @@ export class EditConsultationMemoService {
         },
       });
       if (!existence) {
-        throw new Error(`해당 항목을 찾을 수 없습니다.`);
+        throw new NotFoundException(`해당 항목을 찾을 수 없습니다.`);
       }
 
       await this.client.consultationMemo.update({

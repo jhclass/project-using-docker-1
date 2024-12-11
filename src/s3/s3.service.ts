@@ -4,7 +4,11 @@ import {
   S3Client,
   // PutObjectCommandInput,
 } from "@aws-sdk/client-s3";
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { v4 as uuidv4 } from "uuid";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -37,7 +41,9 @@ export class S3Service {
     folderName: string,
   ): Promise<string> {
     if (!file || !folderName) {
-      throw new Error("첨부 된 파일,폴더 이름 지정이 반드시 필요합니다.");
+      throw new BadRequestException(
+        "첨부 된 파일,폴더 이름 지정이 반드시 필요합니다.",
+      );
     }
     //폴더 와 이름.
     const ext = path.extname(file.originalname);
@@ -74,7 +80,7 @@ export class S3Service {
       return `https://${this.bucketName}.s3.${this.configService.get("AWS_REGION")}.amazonaws.com/${key}`;
     } catch (error) {
       console.error(error);
-      throw new Error("file upload failed");
+      throw new InternalServerErrorException("file upload failed");
     }
   }
   async getPresignedUrl(key: string): Promise<string> {
@@ -90,7 +96,7 @@ export class S3Service {
   ): Promise<DeleteFileResponse> {
     try {
       if (!folderName || !url) {
-        throw new Error("folderName 과 url을 다시 확인하세요.");
+        throw new BadRequestException("folderName 과 url을 다시 확인하세요.");
       }
       const decodeUrl = decodeURI(url);
       const filePath = decodeUrl.split(`/${folderName}/`)[1];

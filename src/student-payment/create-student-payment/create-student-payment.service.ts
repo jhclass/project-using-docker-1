@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -121,7 +121,9 @@ export class CreateStudentPaymentService {
         },
       });
       if (!createAlarm) {
-        throw new Error("알람이 제대로 생성되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "알람이 제대로 생성되지 않았습니다.",
+        );
       }
       //웹소켓발송
       return {

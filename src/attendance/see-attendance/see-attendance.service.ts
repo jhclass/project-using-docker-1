@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 interface IGetAllAttendanceData {
   attendanceDate: string;
@@ -87,7 +87,7 @@ export class SeeAttendanceService {
       const seeAttendanceDataAll = await this.getAllAttendanceData(params);
 
       if (seeAttendanceDataAll.data.length === 0) {
-        throw new Error(
+        throw new NotFoundException(
           "데이터가 존재하지 않습니다.attendanceDate, lectureId 를 확인하세요.",
         );
       }

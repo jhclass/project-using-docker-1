@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -29,7 +33,7 @@ export class SearchSmService {
         StudentPortfolio: client.studentPortfolio,
       };
       const model = modelMap[modelType];
-      if (!model) throw new Error("Invalid modelType");
+      if (!model) throw new BadRequestException("Invalid modelType");
       const pageNum = page || 1;
       const take = limit || 3;
       //lectureId
@@ -40,7 +44,9 @@ export class SearchSmService {
           },
         });
         if (!existingLectureId) {
-          throw new Error("lectureId 가 존재하는지 다시 확인하시기 바랍니다.");
+          throw new NotFoundException(
+            "lectureId 가 존재하는지 다시 확인하시기 바랍니다.",
+          );
         }
       }
       if (studentPaymentId) {
@@ -50,7 +56,7 @@ export class SearchSmService {
           },
         );
         if (!existingStudentPaymentId) {
-          throw new Error(
+          throw new NotFoundException(
             "studentPaymentId 가 존재하는지 다시 확인하시기 바랍니다.",
           );
         }
@@ -62,7 +68,9 @@ export class SearchSmService {
           },
         });
         if (!existingSubjectId) {
-          throw new Error("subjectId 가 존재하는지 다시 확인하시기 바랍니다.");
+          throw new NotFoundException(
+            "subjectId 가 존재하는지 다시 확인하시기 바랍니다.",
+          );
         }
       }
       const branchId = user?.branchId;

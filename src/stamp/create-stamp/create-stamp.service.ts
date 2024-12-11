@@ -1,4 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { S3Service } from "@src/s3/s3.service";
 import { createCanvas } from "canvas";
@@ -64,7 +69,7 @@ export class CreateStampService {
         },
       });
       if (!checkManager) {
-        throw new Error(
+        throw new NotFoundException(
           "해당 관리자아이디가 없습니다. manageUserId 를 다시 확인하세요.",
         );
       }
@@ -75,7 +80,7 @@ export class CreateStampService {
         },
       });
       if (checkManagerInStamp) {
-        throw new Error("이미 등록된 도장 이미지가 있습니다.");
+        throw new ConflictException("이미 등록된 도장 이미지가 있습니다.");
       }
       //console.log(checkManager, "매니져체크");
       const shortUsername =
@@ -86,7 +91,9 @@ export class CreateStampService {
         String(shortUsername + "인"),
       );
       if (!imageBuffer) {
-        throw new Error("스탬프 이미지가 정상적으로 생성되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "스탬프 이미지가 정상적으로 생성되지 않았습니다.",
+        );
       }
 
       //console.log(imageStream, "이미지 생성");
@@ -103,7 +110,9 @@ export class CreateStampService {
       let stampImageUrl = null;
       stampImageUrl = await this.s3Service.uploadFile(file, folderName);
       if (!stampImageUrl) {
-        throw new Error("스탬프 이미지가 S3에 정상적으로 저장되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "스탬프 이미지가 S3에 정상적으로 저장되지 않았습니다.",
+        );
       }
       console.log(stampImageUrl, "이미지 경로");
       const createStampOk = await this.client.stamp.create({
@@ -114,7 +123,9 @@ export class CreateStampService {
         },
       });
       if (!createStampOk) {
-        throw new Error("데이터가 정상적으로 생성되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "데이터가 정상적으로 생성되지 않았습니다.",
+        );
       }
       return {
         ok: true,

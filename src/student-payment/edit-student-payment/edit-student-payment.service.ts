@@ -1,5 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { validateIdExists } from "@src/utils/shared.utils";
 
 @Injectable()
 export class EditStudentPaymentService {
@@ -38,17 +39,15 @@ export class EditStudentPaymentService {
     try {
       const { user } = context.req;
       if (!id) {
-        throw new Error("id 는 필수값 입니다.");
+        throw new BadRequestException("id 는 필수값 입니다.");
       }
-      const existing = await this.client.studentPayment.findFirst({
+      const existingId = await this.client.studentPayment.findFirst({
         where: {
           id,
         },
       });
 
-      if (!existing) {
-        throw new Error("해당 studentPayment 의 id 는 존재하지 않습니다.");
-      }
+      validateIdExists(existingId);
 
       await this.client.studentPayment.update({
         where: {

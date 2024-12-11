@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class DuplicateCheckService {
         },
       });
       if (existStudentpaymentData) {
-        throw new Error("강의가 중복됩니다. 배정할 수 없습니다.");
+        throw new ConflictException("강의가 중복됩니다. 배정할 수 없습니다.");
       }
       return {
         ok: true,

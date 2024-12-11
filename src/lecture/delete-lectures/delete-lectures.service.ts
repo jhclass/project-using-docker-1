@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { S3Service } from "@src/s3/s3.service";
 
@@ -23,7 +27,7 @@ export class DeleteLecturesService {
       });
       //console.log("접속자의 MGrade:",checkedGrade.mGrade)
       if (checkedGrade.mGrade !== 0 && checkedGrade.mGrade !== 1) {
-        throw new Error("권한이 없는 아이디 입니다.");
+        throw new ForbiddenException("권한이 없는 아이디 입니다.");
       }
       // 존재하는 id 인가?
       const existingCheckId = await client.lectures.findUnique({
@@ -32,7 +36,9 @@ export class DeleteLecturesService {
         },
       });
       if (!existingCheckId) {
-        throw new Error("존재하지 않는 강의 입니다. id 를 확인하세요.");
+        throw new NotFoundException(
+          "존재하지 않는 강의 입니다. id 를 확인하세요.",
+        );
       }
 
       //파일도 함께 삭제 한다.

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -25,7 +25,9 @@ export class EditPaymentDetailService {
   ) {
     try {
       if (!id || !lastModifiedTime) {
-        throw new Error("id 와 lastModifiedTime 은 필수값 입니다.");
+        throw new BadRequestException(
+          "id 와 lastModifiedTime 은 필수값 입니다.",
+        );
       }
       const { user } = context.req;
       //존재 여부
@@ -40,7 +42,6 @@ export class EditPaymentDetailService {
           id: studentPaymentId,
         },
       });
-      console.log(studentPaymentData);
 
       if (!editPaymentDetailOk) {
         return {

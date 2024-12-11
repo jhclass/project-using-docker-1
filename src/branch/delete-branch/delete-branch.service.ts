@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { validateIdExists } from "@src/utils/shared.utils";
 
 @Injectable()
 export class DeleteBranchService {
@@ -7,9 +8,7 @@ export class DeleteBranchService {
   async deleteBranchFunc(id: number) {
     try {
       const existingId = await this.client.branch.findUnique({ where: { id } });
-      if (!existingId) {
-        throw new Error(`id 가 존재하지 않습니다 확인해주세요.`);
-      }
+      validateIdExists(existingId);
       await this.client.branch.delete({
         where: { id },
       });

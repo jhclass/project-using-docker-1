@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -23,14 +27,11 @@ export class DeleteConsultationMemoService {
       });
       //console.log(existingData);
       if (!existingData) {
-        return {
-          ok: false,
-          error: "데이터가 존재하지 않습니다.",
-        };
+        throw new NotFoundException("데이터가 존재하지 않습니다.");
       }
       // 본인이 작성한건가요??(작성자만 삭제가능)
       else if (existingData?.manageUser?.mUsername !== user?.mUsername) {
-        throw new Error(`작성자가 아닙니다.`);
+        throw new BadRequestException(`작성자가 아닙니다.`);
       } else {
         //console.log("삭제합니다.");
         await this.client.consultationMemo.delete({

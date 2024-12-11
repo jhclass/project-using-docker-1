@@ -1,6 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
-import { generateRandomFourDigitNumber } from "@src/utils/shared.utils";
+import {
+  generateRandomFourDigitNumber,
+  validateIdExists,
+} from "@src/utils/shared.utils";
 
 @Injectable()
 export class EditBranchService {
@@ -12,9 +15,7 @@ export class EditBranchService {
           id,
         },
       });
-      if (!existingBranchName) {
-        throw new Error(`id가 존재하지 않습니다.`);
-      }
+      validateIdExists(existingBranchName);
       const randonInt = generateRandomFourDigitNumber();
       newBranchName = `${newBranchName + "_" + randonInt}`;
       await this.client.branch.update({

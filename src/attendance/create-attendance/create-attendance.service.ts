@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -20,7 +24,7 @@ export class CreateAttendanceService {
         studentPaymentId.length !== studentId.length ||
         studentId.length !== attendanceState.length
       ) {
-        throw new Error("입력 배열의 길이가 일치하지 않습니다.");
+        throw new BadRequestException("입력 배열의 길이가 일치하지 않습니다.");
       }
       //오늘 생성된 출석부 데이터가 있을까?
 
@@ -31,7 +35,7 @@ export class CreateAttendanceService {
         },
       });
       if (existingAttendanceData) {
-        throw new Error(`오늘 출석부는 이미 생성되어 있습니다.`);
+        throw new ConflictException(`오늘 출석부는 이미 생성되어 있습니다.`);
       }
 
       //데이트 생성
@@ -53,7 +57,7 @@ export class CreateAttendanceService {
       );
       //데이터 생성 결과 확인
       if (attendanceDateArray.some((data) => !data)) {
-        throw new Error("일부 데이터가 생성되지 않았습니다.");
+        throw new ConflictException("일부 데이터가 생성되지 않았습니다.");
       }
       return {
         ok: true,

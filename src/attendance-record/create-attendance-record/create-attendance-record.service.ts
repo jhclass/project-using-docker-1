@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -8,7 +8,7 @@ export class CreateAttendanceRecordService {
     try {
       const { user } = context.req;
       if (!clockIn) {
-        throw new Error("출근 시간이 입력되지 않았습니다.");
+        throw new BadRequestException("출근 시간이 입력되지 않았습니다.");
       }
       await this.client.attendanceRecord.create({
         data: {

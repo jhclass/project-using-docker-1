@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -29,7 +33,9 @@ export class SignWorkLogsService {
   async signWorkLogsFunc(context: any, id: number, lastModifiedTime?: string) {
     try {
       if (!id || !lastModifiedTime) {
-        throw new Error("id 와 lastModifiedTime 은 필수값 입니다.");
+        throw new BadRequestException(
+          "id 와 lastModifiedTime 은 필수값 입니다.",
+        );
       }
       const { user } = context.req;
       const client = this.client;
@@ -43,7 +49,7 @@ export class SignWorkLogsService {
         },
       });
       if (!checkGrade) {
-        throw new Error("당신은 HMS 사용자가 아닙니다.");
+        throw new ForbiddenException("당신은 HMS 사용자가 아닙니다.");
       }
       console.log(checkGrade);
 

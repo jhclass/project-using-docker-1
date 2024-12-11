@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class MMeService {
         },
       });
       if (!mUser) {
-        throw new Error("사용자를 찾을 수 없습니다.");
+        throw new NotFoundException("사용자를 찾을 수 없습니다.");
       }
       return mUser;
     } catch (error) {
@@ -34,7 +34,7 @@ export class MMeService {
         },
       });
       if (!existingId) {
-        throw new Error(`본인이 아닙니다.`);
+        throw new NotFoundException(`본인이 아닙니다.`);
       }
       return {
         ok: true,

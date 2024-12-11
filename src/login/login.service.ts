@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
@@ -8,7 +12,9 @@ export class LoginService {
   async loginFunc(mUserId: string, mPassword: string) {
     try {
       if (!mUserId || !mPassword) {
-        throw new Error("아이디 와 비밀번호는 반드시 입력되어야 합니다.");
+        throw new BadRequestException(
+          "아이디 와 비밀번호는 반드시 입력되어야 합니다.",
+        );
       }
       const existingId = await this.client.manageUser.findUnique({
         where: {
@@ -16,13 +22,13 @@ export class LoginService {
         },
       });
       if (!existingId) {
-        throw new Error(
+        throw new NotFoundException(
           "아이디가 존재하지 않습니다. 아이디/패스워드를 다시 확인하세요.",
         );
       }
       const passwordOk = await bcrypt.compare(mPassword, existingId.mPassword);
       if (!passwordOk) {
-        throw new Error("비밀번호가 일치하지 않습니다.");
+        throw new NotFoundException("비밀번호가 일치하지 않습니다.");
       }
       const token = jwt.sign(
         { mUserId: existingId.mUserId },

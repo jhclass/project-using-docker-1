@@ -1,5 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { validateIdExists } from "@src/utils/shared.utils";
 
 @Injectable()
 export class EditCareerService {
@@ -12,7 +13,7 @@ export class EditCareerService {
   ) {
     try {
       if (!id || !careerDetails || !lastModifiedTime) {
-        throw new Error(
+        throw new BadRequestException(
           "필수값을 확인하세요. id,careerDetails 는 필수값으로 들어가야 합니다.",
         );
       }
@@ -24,9 +25,7 @@ export class EditCareerService {
           id,
         },
       });
-      if (!existingId) {
-        throw new Error("존재하지 않는 id 입니다. 확인이 필요합니다.");
-      }
+      validateIdExists(existingId);
       await client.career.update({
         where: {
           id,

@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -26,7 +30,9 @@ export class EditLecturesService {
   ) {
     try {
       if (!id || !lastModifiedTime) {
-        throw new Error("id 와 lastModifiedTime 은 필수값 입니다.");
+        throw new BadRequestException(
+          "id 와 lastModifiedTime 은 필수값 입니다.",
+        );
       }
 
       const client = this.client;
@@ -37,14 +43,16 @@ export class EditLecturesService {
       });
 
       if (!existingLectureId) {
-        throw new Error("개설되지 않은 강의입니다. id를 확인하세요.");
+        throw new NotFoundException(
+          "개설되지 않은 강의입니다. id를 확인하세요.",
+        );
       }
 
       // teachersId가 정의된 경우에만 교사 연결 및 해제 작업 수행
       let teachersData = {};
       if (teachersId !== undefined) {
         if (!Array.isArray(teachersId)) {
-          throw new Error("teachersId는 배열이어야 합니다.");
+          throw new BadRequestException("teachersId는 배열이어야 합니다.");
         }
         // 교사 연결 및 해제를 위한 데이터 준비
         teachersData = {

@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 
 @Injectable()
@@ -15,7 +19,9 @@ export class EditCertificateService {
   ) {
     try {
       if (!id || !lastModifiedTime) {
-        throw new Error("id 와 lastModifiedTime 은 필수값 입니다.");
+        throw new BadRequestException(
+          "id 와 lastModifiedTime 은 필수값 입니다.",
+        );
       }
       const { user } = context.req;
       const client = this.client;
@@ -31,9 +37,11 @@ export class EditCertificateService {
         },
       });
       if (!existingId) {
-        throw new Error("id 가 존재하지 않습니다. 다시 확인하세요.");
+        throw new NotFoundException(
+          "id 가 존재하지 않습니다. 다시 확인하세요.",
+        );
       } else if (!existingManageUserId) {
-        throw new Error(
+        throw new NotFoundException(
           "manageUserId 를 다시 확인하세요. 지금 로그인이 되어있는 상태가 맞습니까?",
         );
       }

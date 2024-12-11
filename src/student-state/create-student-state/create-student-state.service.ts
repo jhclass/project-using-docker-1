@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { WebSocketGatewayService } from "@src/websocket/websocket.gateway";
 
@@ -41,7 +45,9 @@ export class CreateStudentStateService {
       //console.log("a", ip);
       //today 체크
       if (!Array.isArray(today) || today.length < 2) {
-        throw new Error("오늘 날짜 범위를 정의하는 배열이 필요합니다.");
+        throw new BadRequestException(
+          "오늘 날짜 범위를 정의하는 배열이 필요합니다.",
+        );
       }
       //현재 ipRecord 없음.
       const ipAddr =
@@ -52,7 +58,9 @@ export class CreateStudentStateService {
       console.log(ipAddr);
       //today 체크
       if (!Array.isArray(today) || today.length < 2) {
-        throw new Error("오늘 날짜 범위를 정의하는 배열이 필요합니다.");
+        throw new BadRequestException(
+          "오늘 날짜 범위를 정의하는 배열이 필요합니다.",
+        );
       }
       //ip 체크 / 내부인원은
       if (!user) {
@@ -67,7 +75,7 @@ export class CreateStudentStateService {
             },
           });
           if (checkingIp >= 10) {
-            throw new Error(
+            throw new BadRequestException(
               "오늘 하루 동안 비정상적으로 많은 게시물이 생성된 ip addr 입니다.",
             );
           }
@@ -82,7 +90,9 @@ export class CreateStudentStateService {
             },
           });
         } else {
-          throw new Error(" ip 주소를 기록할 수 없습니다.");
+          throw new InternalServerErrorException(
+            " ip 주소를 기록할 수 없습니다.",
+          );
         }
       }
 
@@ -155,7 +165,9 @@ export class CreateStudentStateService {
         },
       });
       if (!createAlarm) {
-        throw new Error("알람이 제대로 생성되지 않았습니다.");
+        throw new InternalServerErrorException(
+          "알람이 제대로 생성되지 않았습니다.",
+        );
       }
 
       //소켓발송

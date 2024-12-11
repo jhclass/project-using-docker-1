@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { S3Service } from "@src/s3/s3.service";
 
@@ -15,7 +19,9 @@ export class DeleteStudentPortfolioService {
   ) {
     try {
       if (!id || !fileUrl || !folderName) {
-        throw new Error("id,fileUrl,folderName 은 필수로 입력되어야 합니다.");
+        throw new BadRequestException(
+          "id,fileUrl,folderName 은 필수로 입력되어야 합니다.",
+        );
       }
       const client = this.client;
 
@@ -29,14 +35,14 @@ export class DeleteStudentPortfolioService {
         },
       });
       if (!existingId) {
-        throw new Error(
+        throw new NotFoundException(
           "id가 존재 하지 않거나 해당경로(fileUrl)가 존재하지 않습니다. 다시 확인하세요.",
         );
       }
       const filePathArr = existingId.filePath;
       //파일이 1개 남아있으면 삭제 X
       if (filePathArr.length <= 1) {
-        throw new Error(
+        throw new BadRequestException(
           "파일이 1개 남아있는 상태에서는 삭제가 되지 않습니다. 먼저 포트폴리오를 등록하고 삭제하세요.",
         );
       }

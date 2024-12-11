@@ -58,8 +58,6 @@ export class SendSmsService {
           message: "메세지 발송실패",
           error: `실패사유:${failureReason}`,
         };
-
-        //throw new Error("SMS 발송 실패");
       }
       //SMS 발송 기록을 저장
       await client.sms.create({

@@ -153,8 +153,17 @@ export class SearchPaymentDetailService {
           include: {
             studentPayment: {
               include: {
-                subject: true,
+                subject: {
+                  include: {
+                    lectures: {
+                      include: {
+                        teachers: true,
+                      },
+                    },
+                  },
+                },
                 student: true,
+                processingManager: true,
               },
             },
           },

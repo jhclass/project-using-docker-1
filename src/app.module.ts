@@ -35,6 +35,7 @@ import { AttendanceModule } from "./attendance/attendance.module";
 import { WorklogsModule } from "./work-log/worklogs.module";
 import { StudentManagementModule } from "./student-management/student-management.module";
 import { SmsModule } from './sms/sms.module';
+import { BusinessAccountReqModule } from './business-account-req/business-account-req.module';
 
 @Module({
   imports: [
@@ -81,6 +82,7 @@ import { SmsModule } from './sms/sms.module';
     WorklogsModule,
     StudentManagementModule,
     SmsModule,
+    BusinessAccountReqModule,
   ],
   controllers: [AppController],
   providers: [

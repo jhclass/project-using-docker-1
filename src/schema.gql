@@ -1124,4 +1124,7 @@ type Mutation {
   deleteSms(id: Int!): CommonResponse!
   createMessageStorage(message: String!, saveType: String!): CommonResponse!
   deleteMessageStorage(id: Int!): CommonResponse!
+  createBusinessAccountReq(companyName: String!, phoneNum: String!, validate: String!, email: String!, filePath: [String!]!, agree: String!): CommonResponse!
+  editBusinessAccountReq(id: Int!, creationComplete: String!, rejection: String): CommonResponse!
+  deleteBusinessAccountReq(id: Int!): CommonResponse!
 }

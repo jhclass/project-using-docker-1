@@ -3,17 +3,16 @@ import {
   Controller,
   Post,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { S3Service } from "./s3.service";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { JwtAuthGuard } from "@src/auth/jwt-auth.guard";
+import { Public } from "@src/public-decorator/public-decorator.decorator";
 
 @Controller("s3")
 export class S3Controller {
   constructor(private readonly s3Service: S3Service) {}
-  @UseGuards(JwtAuthGuard)
+  @Public()
   @Post("upload")
   @UseInterceptors(FileInterceptor("file"))
   async uploadFile(

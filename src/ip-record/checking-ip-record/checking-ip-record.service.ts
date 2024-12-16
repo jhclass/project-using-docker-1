@@ -21,7 +21,7 @@ export class CheckingIpRecordService {
         },
       });
       if (ipCount >= 10) {
-        throw new Error(
+        throw new BadRequestException(
           "하루에 등록할 수 있는 게시글의 개수를 초과하였습니다.",
         );
       }

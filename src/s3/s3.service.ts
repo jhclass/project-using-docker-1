@@ -13,7 +13,7 @@ import { ConfigService } from "@nestjs/config";
 import { v4 as uuidv4 } from "uuid";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as path from "path";
-import { DeleteFileResponse } from "@src/result-dto/common-response.dto";
+import { DeleteFileResponse } from "@src/s3/entity/s3.entity";
 import { Readable } from "stream";
 import { Upload } from "@aws-sdk/lib-storage";
 @Injectable()

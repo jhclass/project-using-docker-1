@@ -2,7 +2,7 @@ import { Resolver, Query, Args, Int, Context } from "@nestjs/graphql";
 import { SeeLecturesService } from "./see-lectures.service";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { UseGuards } from "@nestjs/common";
-import { SeeLecturesResult } from "@src/result-dto/common-response.dto";
+import { SeeLecturesResult } from "../entity/lectures.entity";
 @Resolver()
 export class SeeLecturesResolver {
   constructor(private readonly seeLecturesService: SeeLecturesService) {}

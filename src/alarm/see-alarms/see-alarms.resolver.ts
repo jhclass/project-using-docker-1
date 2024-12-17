@@ -1,5 +1,5 @@
 import { Resolver, Query, Args, Int, Context } from "@nestjs/graphql";
-import { ResultSeeAlarms } from "@src/result-dto/common-response.dto";
+import { ResultSeeAlarms } from "../entity/alarm.entity";
 import { SeeAlarmsService } from "./see-alarms.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";

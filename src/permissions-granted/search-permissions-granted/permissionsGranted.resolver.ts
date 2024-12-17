@@ -1,8 +1,8 @@
 import { Parent, ResolveField, Resolver } from "@nestjs/graphql";
 
 import { PermissionsGrantedService } from "./permissionsGranted.service";
-import { PermissionsGranted } from "@src/result-dto/permissionsGranted.dto";
-import { ManageUser } from "@src/result-dto/manageUser.dto";
+import { PermissionsGranted } from "@src/permissions-granted/entity/permissionsGranted.entity";
+import { ManageUser } from "@src/manage-user/entity/manageUser.entity";
 
 @Resolver(() => PermissionsGranted)
 export class PermissionsGrantedResolver {

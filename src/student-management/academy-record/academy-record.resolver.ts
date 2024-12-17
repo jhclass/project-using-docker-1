@@ -2,7 +2,7 @@ import { Args, Query, Resolver, Int, Context } from "@nestjs/graphql";
 import { AcademyRecordService } from "./academy-record.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { ResultAcademyRecord } from "@src/result-dto/common-response.dto";
+import { ResultAcademyRecord } from "@src/student-management/academy-record/entity/academy-record.entity";
 
 @Resolver()
 export class AcademyRecordResolver {

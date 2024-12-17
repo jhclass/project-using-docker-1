@@ -12,7 +12,8 @@
     "baseUrl": "./",
     "paths": {
       "@src/*": ["src/*"],
-      "@dto/*": ["src/result-dto/*"]
+      "@entity/*": ["src/common-entity/*"],
+      "@lecture/*": ["src/lecture/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

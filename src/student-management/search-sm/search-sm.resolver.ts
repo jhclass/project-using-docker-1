@@ -1,7 +1,7 @@
 import { Args, Context, Query, Resolver, Int } from "@nestjs/graphql";
 import { SearchSmService } from "./search-sm.service";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { ResultSearchSM } from "@src/result-dto/common-response.dto";
+import { ResultSearchSM } from "@src/student-management/search-sm/entity/smSearch.entity";
 import { UseGuards } from "@nestjs/common";
 @Resolver()
 export class SearchSmResolver {

@@ -2,7 +2,7 @@ import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 import { SalesDataService } from "./sales-data.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { HourlySalesData } from "@src/result-dto/common-response.dto";
+import { HourlySalesData } from "../entity/hourlyData.entity";
 
 @Resolver()
 export class SalesDataResolver {

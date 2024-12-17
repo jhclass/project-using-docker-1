@@ -1,7 +1,7 @@
 import { UseGuards } from "@nestjs/common";
 import { Resolver, Query, Context } from "@nestjs/graphql";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { StudentState } from "@src/result-dto/studentState.dto";
+import { StudentState } from "@src/student-state/entity/studentState.entity";
 import { SeeFavoriteService } from "./see-favorite.service";
 
 @Resolver()

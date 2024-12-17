@@ -1,6 +1,6 @@
 import { Args, Context, Int, Query, Resolver } from "@nestjs/graphql";
 import { SearchPermissionsGrantedService } from "./search-permissions-granted.service";
-import { ResultSearchPermissionsGranted } from "@src/result-dto/common-response.dto";
+import { ResultSearchPermissionsGranted } from "@src/permissions-granted/entity/permissionsGranted.entity";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 

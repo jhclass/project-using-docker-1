@@ -1,6 +1,6 @@
 import { Mutation, Resolver, Args, Int } from "@nestjs/graphql";
 import { DeleteManageUserService } from "./delete-manage-user.service";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 
 @Resolver()
 export class DeleteManageUserResolver {

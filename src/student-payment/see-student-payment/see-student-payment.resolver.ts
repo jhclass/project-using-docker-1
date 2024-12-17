@@ -2,7 +2,7 @@ import { Resolver, Query, Context, Args, Int } from "@nestjs/graphql";
 import { SeeStudentPaymentService } from "./see-student-payment.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { StudentPaymentResult } from "@src/result-dto/common-response.dto";
+import { StudentPaymentResult } from "@src/student-payment/entity/studentPayment.entity";
 
 @Resolver()
 export class SeeStudentPaymentResolver {

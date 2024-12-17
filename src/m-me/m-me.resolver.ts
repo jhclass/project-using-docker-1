@@ -3,8 +3,8 @@ import { MMeService } from "./m-me.service";
 
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { ResultIsMe } from "@src/result-dto/common-response.dto";
-import { ManageUser } from "@src/result-dto/manageUser.dto";
+import { ResultIsMe } from "@src/m-me/entity/m-me.entity";
+import { ManageUser } from "@src/manage-user/entity/manageUser.entity";
 
 @Resolver()
 export class MMeResolver {

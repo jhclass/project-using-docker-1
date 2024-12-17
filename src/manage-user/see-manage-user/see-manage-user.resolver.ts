@@ -2,7 +2,7 @@ import { Int, Resolver, Args, Context, Query } from "@nestjs/graphql";
 import { SeeManageUserService } from "./see-manage-user.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { SeeManageUserResult } from "@src/result-dto/common-response.dto";
+import { SeeManageUserResult } from "@src/manage-user/entity/manageUser.entity";
 
 @Resolver()
 export class SeeManageUserResolver {

@@ -1,6 +1,6 @@
 import { Args, Resolver, Mutation } from "@nestjs/graphql";
 import { CreateBusinessAccountReqService } from "./create-business-account-req.service";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 import { Public } from "@src/public-decorator/public-decorator.decorator";
 
 @Resolver()

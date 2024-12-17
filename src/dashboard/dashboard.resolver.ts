@@ -8,7 +8,7 @@ import {
   DashboardRDResult,
   DashboardTodayResult,
   DashboardUnpResult,
-} from "@src/result-dto/common-response.dto";
+} from "@src/dashboard/entity/dashboard.entity";
 @Resolver()
 export class DashboardResolver {
   constructor(private readonly dashboardService: DashboardService) {}

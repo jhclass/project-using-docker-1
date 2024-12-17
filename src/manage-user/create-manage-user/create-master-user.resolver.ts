@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Args, Int } from "@nestjs/graphql";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 import { CreateMasterUserService } from "./create-master-user.service";
 
 @Resolver()

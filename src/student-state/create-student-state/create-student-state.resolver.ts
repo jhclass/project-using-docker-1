@@ -1,6 +1,6 @@
 import { Args, Resolver, Mutation, Int, Context } from "@nestjs/graphql";
 import { CreateStudentStateService } from "./create-student-state.service";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 

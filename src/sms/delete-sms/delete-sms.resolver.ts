@@ -1,7 +1,7 @@
 import { Args, Int, Mutation, Resolver } from "@nestjs/graphql";
 import { DeleteSmsService } from "./delete-sms.service";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 import { UseGuards } from "@nestjs/common";
 
 @Resolver()

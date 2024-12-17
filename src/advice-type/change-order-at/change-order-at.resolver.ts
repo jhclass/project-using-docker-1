@@ -1,5 +1,5 @@
 import { Int, Resolver, Args, Mutation, Context } from "@nestjs/graphql";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 import { ChangeOrderAtService } from "./change-order-at.service";
 
 @Resolver()

@@ -2,10 +2,8 @@ import { Resolver, Query, Int, Args, Context, Mutation } from "@nestjs/graphql";
 import { SeeStudentService } from "./see-student.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import {
-  CommonResponse,
-  SeeStudentResult,
-} from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
+import { SeeStudentResult } from "@src/student/entity/student.entity";
 
 @Resolver()
 export class SeeStudentResolver {

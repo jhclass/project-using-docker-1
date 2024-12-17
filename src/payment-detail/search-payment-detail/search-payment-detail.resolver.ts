@@ -2,7 +2,7 @@ import { Args, Resolver, Int, Context, Mutation } from "@nestjs/graphql";
 import { SearchPaymentDetailService } from "./search-payment-detail.service";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { UseGuards } from "@nestjs/common";
-import { PaymentDetailResult } from "@src/result-dto/common-response.dto";
+import { PaymentDetailResult } from "@src/payment-detail/entity/paymentDetail.entity";
 @Resolver()
 export class SearchPaymentDetailResolver {
   constructor(

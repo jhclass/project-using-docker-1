@@ -2,7 +2,7 @@ import { Args, Mutation, Resolver, Int, Context } from "@nestjs/graphql";
 import { UpdateFavoriteService } from "./update-favorite.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { UpdateFavoriteResult } from "@src/result-dto/common-response.dto";
+import { UpdateFavoriteResult } from "@src/student-state/entity/studentState.entity";
 
 @Resolver()
 export class UpdateFavoriteResolver {

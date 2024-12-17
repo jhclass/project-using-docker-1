@@ -1,6 +1,6 @@
 import { Args, Int, Mutation, Resolver, Context } from "@nestjs/graphql";
 import { EditPermissionsGrantedService } from "./edit-permissions-granted.service";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 

@@ -2,7 +2,7 @@ import { Args, Context, Int, Query, Resolver } from "@nestjs/graphql";
 import { SeeMessageStorageService } from "./see-message-storage.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { ResultMessageStorage } from "@src/result-dto/common-response.dto";
+import { ResultMessageStorage } from "@src/sms/message-storage/entity/messageStorage.entity";
 
 @Resolver()
 export class SeeMessageStorageResolver {

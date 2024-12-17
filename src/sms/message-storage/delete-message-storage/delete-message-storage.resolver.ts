@@ -2,7 +2,7 @@ import { Args, Int, Mutation, Resolver } from "@nestjs/graphql";
 import { DeleteMessageStorageService } from "./delete-message-storage.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 
 @Resolver()
 export class DeleteMessageStorageResolver {

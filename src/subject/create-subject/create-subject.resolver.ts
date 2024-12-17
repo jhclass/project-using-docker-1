@@ -2,7 +2,7 @@ import { Args, Int, Mutation, Resolver, Context } from "@nestjs/graphql";
 import { CreateSubjectService } from "./create-subject.service";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { UseGuards } from "@nestjs/common";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 @Resolver()
 export class CreateSubjectResolver {
   constructor(private readonly createSubjectService: CreateSubjectService) {}

@@ -12,7 +12,7 @@ import { PreInspectionModule } from "./pre-inspection/pre-inspection.module";
 import { RegularEvaluationSetModule } from "./regular-evaluation-set/regular-evaluation-set.module";
 import { StudentConsultationModule } from "./student-consultation/student-consultation.module";
 import { StudentPortfolioModule } from "./student-portfolio/student-portfolio.module";
-import { SearchSmModule } from './search-sm/search-sm.module';
+import { SearchSmModule } from "./search-sm/search-sm.module";
 
 @Module({
   imports: [

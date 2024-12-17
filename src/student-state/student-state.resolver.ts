@@ -2,8 +2,8 @@ import { UseGuards } from "@nestjs/common";
 import { Parent, ResolveField, Resolver } from "@nestjs/graphql";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { PrismaService } from "@src/prisma/prisma.service";
-import { ManageUser } from "@src/result-dto/manageUser.dto";
-import { StudentState } from "@src/result-dto/studentState.dto";
+import { ManageUser } from "@src/manage-user/entity/manageUser.entity";
+import { StudentState } from "@src/student-state/entity/studentState.entity";
 @Resolver(() => StudentState)
 export class StudentStateResolver {
   constructor(private readonly client: PrismaService) {}

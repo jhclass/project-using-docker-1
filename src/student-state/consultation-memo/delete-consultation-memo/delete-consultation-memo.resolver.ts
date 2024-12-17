@@ -2,7 +2,7 @@ import { Args, Int, Mutation, Resolver, Context } from "@nestjs/graphql";
 import { DeleteConsultationMemoService } from "./delete-consultation-memo.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 
 @Resolver()
 export class DeleteConsultationMemoResolver {

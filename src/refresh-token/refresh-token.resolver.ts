@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Args } from "@nestjs/graphql";
 import { RefreshTokenService } from "./refresh-token.service";
-import { ResultRefreshToken } from "@src/result-dto/common-response.dto";
+import { ResultRefreshToken } from "@src/refresh-token/entity/refresh-token.entity";
 import { UseGuards } from "@nestjs/common";
 
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";

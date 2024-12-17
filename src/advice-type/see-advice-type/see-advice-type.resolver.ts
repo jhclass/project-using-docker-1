@@ -1,6 +1,6 @@
 import { Query, Resolver, Int, Args, Context } from "@nestjs/graphql";
 import { SeeAdviceTypeService } from "./see-advice-type.service";
-import { ResultAdviceType } from "@src/result-dto/common-response.dto";
+import { ResultAdviceType } from "../entity/adviceType.entity";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { UseGuards } from "@nestjs/common";
 

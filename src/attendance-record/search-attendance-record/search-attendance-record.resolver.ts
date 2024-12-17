@@ -2,7 +2,7 @@ import { Args, Context, Int, Query, Resolver } from "@nestjs/graphql";
 import { SearchAttendanceRecordService } from "./search-attendance-record.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { ResultSearchAttendanceRecord } from "@src/result-dto/common-response.dto";
+import { ResultSearchAttendanceRecord } from "../entity/attendanceRecord.entity";
 
 @Resolver()
 export class SearchAttendanceRecordResolver {

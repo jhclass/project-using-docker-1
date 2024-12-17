@@ -2,7 +2,7 @@ import { Resolver, Mutation, Args, Int } from "@nestjs/graphql";
 import { DeleteWorkLogsService } from "./delete-work-logs.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 
 @Resolver()
 export class DeleteWorkLogsResolver {

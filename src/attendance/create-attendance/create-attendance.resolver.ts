@@ -1,7 +1,7 @@
 import { UseGuards } from "@nestjs/common";
 import { Args, Context, Int, Mutation, Resolver } from "@nestjs/graphql";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 import { CreateAttendanceService } from "./create-attendance.service";
 
 @Resolver()

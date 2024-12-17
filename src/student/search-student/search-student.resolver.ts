@@ -2,7 +2,7 @@ import { Args, Mutation, Resolver, Int, Context } from "@nestjs/graphql";
 import { SearchStudentService } from "./search-student.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { SearchStudentResult } from "@src/result-dto/common-response.dto";
+import { SearchStudentResult } from "@src/student/entity/student.entity";
 
 @Resolver()
 export class SearchStudentResolver {

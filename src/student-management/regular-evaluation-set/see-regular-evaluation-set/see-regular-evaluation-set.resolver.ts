@@ -2,7 +2,7 @@ import { Args, Int, Query, Resolver } from "@nestjs/graphql";
 import { SeeRegularEvaluationSetService } from "./see-regular-evaluation-set.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { ResultSeeRegularEvaluationSet } from "@src/result-dto/common-response.dto";
+import { ResultSeeRegularEvaluationSet } from "@src/student-management/regular-evaluation-set/entity/regularEvaluationSet.entity";
 
 @Resolver()
 export class SeeRegularEvaluationSetResolver {

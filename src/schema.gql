@@ -2,6 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CommonResponse {
+  ok: Boolean!
+  message: String
+  error: String
+}
+
+type ResultLogin {
+  ok: Boolean!
+  message: String
+  error: String
+  token: String
+  refreshToken: String
+}
+
 type ConsultationMemo {
   id: Int!
   content: String!
@@ -48,6 +62,34 @@ type StudentState {
   consultationMemo: [ConsultationMemo]
 }
 
+type UpdateStudentStateResult {
+  ok: Boolean!
+  message: String
+  error: String
+}
+
+type StudentStateResponse {
+  ok: Boolean!
+  message: String
+  totalCount: Int
+  studentState: [StudentState]
+}
+
+type UpdateFavoriteResult {
+  ok: Boolean!
+  message: String
+  error: String
+  favoriteStudentState: ManageUser
+}
+
+type SearchStudentStateResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  studentState: [StudentState]
+}
+
 type AdviceType {
   id: Int!
   type: String!
@@ -57,11 +99,19 @@ type AdviceType {
   defaultValue: String
   createdAt: String!
   updatedAt: String!
-  studentStates: [StudentState!]
+  studentStates: [StudentState]
   lastModifiedTime: String
   Branch: Branch
   branchId: Int
   StudentState: [StudentState!]!
+}
+
+type ResultAdviceType {
+  ok: Boolean!
+  message: String
+  error: String
+  adviceType: [AdviceType]
+  totalCount: Int
 }
 
 type Branch {
@@ -89,6 +139,14 @@ type PermissionsGranted {
   Branch: Branch
   branchId: Int
   lastModifiedTime: String
+}
+
+type ResultSearchPermissionsGranted {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [PermissionsGranted]
+  totalCount: Int
 }
 
 type StudentMemo {
@@ -137,6 +195,21 @@ type WorkLogs {
   lastModifiedTime: String
 }
 
+type SearchWorkLogsResult {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [WorkLogs]
+  totalCount: Int
+}
+
+type SignWorkLogsResult {
+  ok: Boolean!
+  message: String
+  error: String
+  stampUrl: String
+}
+
 type Lectures {
   id: Int!
   createdAt: String!
@@ -159,6 +232,22 @@ type Lectures {
   timetableAttached: String
   WorkLogs: [WorkLogs!]
   lastModifiedTime: String
+}
+
+type SeeLecturesResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  data: [Lectures]
+}
+
+type SearchLecturesResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  data: [Lectures]
 }
 
 type Subject {
@@ -185,6 +274,22 @@ type Subject {
   lastModifiedTime: String
 }
 
+type SearchSubjectResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  result: [Subject]
+}
+
+type SeeSubjectResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  subject: [Subject]
+}
+
 type Attendance {
   id: Int
   createdAt: String
@@ -202,6 +307,32 @@ type Attendance {
   lastModifiedTime: String
   Branch: Branch
   branchId: Int
+}
+
+type SeeAttendanceResult {
+  ok: Boolean!
+  message: String
+  error: String
+  enrollData: [Attendance]
+  enrollCount: Int
+  attendanceData: [Attendance]
+  attendanceCount: Int
+  absentData: [Attendance]
+  absentCount: Int
+  leaveEarlyData: [Attendance]
+  leaveEarlyCount: Int
+  outingData: [Attendance]
+  outingCount: Int
+  tardyData: [Attendance]
+  tardyCount: Int
+}
+
+type SearchAttendanceResult {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [Attendance]
+  totalCount: Int
 }
 
 type EmploymentStatus {
@@ -429,6 +560,14 @@ type PaymentDetail {
   lastModifiedTime: String
 }
 
+type PaymentDetailResult {
+  ok: Boolean!
+  message: String
+  error: String
+  PaymentDetail: [PaymentDetail]
+  totalCount: Int
+}
+
 type Career {
   id: Int!
   lectureId: Int!
@@ -501,6 +640,22 @@ type StudentPayment {
   lastModifiedByUserId: String
 }
 
+type StudentPaymentResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  StudentPayment: [StudentPayment]
+}
+
+type SearchStudentPaymentResult {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [StudentPayment]
+  totalCount: Int
+}
+
 type Student {
   id: Int!
   name: String!
@@ -518,6 +673,22 @@ type Student {
   lastModifiedTime: String
   Branch: Branch
   branchId: Int
+}
+
+type SeeStudentResult {
+  ok: Boolean!
+  message: String
+  error: String
+  totalCount: Int
+  student: [Student]
+}
+
+type SearchStudentResult {
+  ok: Boolean!
+  message: String
+  error: String
+  student: [Student!]
+  totalCount: Int
 }
 
 type Stamp {
@@ -547,6 +718,14 @@ type Sms {
   sender: String
   failureReason: String
   lastModifiedTime: String
+}
+
+type ResultSearchSms {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [Sms]
+  totalCount: Int
 }
 
 type ManageUser {
@@ -588,91 +767,6 @@ type ManageUser {
   Sms: [Sms]
 }
 
-type Alarm {
-  id: Int!
-  title: String!
-  content: String!
-  personalTarget: [Int!]
-  createdAt: String
-  updatedAt: String
-  Branch: Branch
-  branchId: Int
-  lastModifiedTime: String
-}
-
-type AttendanceRecord {
-  id: Int!
-  clockIn: String!
-  clockOut: String
-  createdAt: String!
-  updatedAt: String!
-  ManageUser: ManageUser!
-  manageUserId: Int!
-  Branch: Branch
-  branchId: Int
-}
-
-type UserActivityLogs {
-  id: Int!
-  userId: String!
-  eventName: String!
-  description: String
-  createdAt: String
-  updatedAt: String
-  Branch: Branch
-  branchId: Int
-}
-
-type HourlyData {
-  nowDate: String
-  cashOrCard: String
-  currentState: String
-  amount: Int
-}
-
-type RegularEvaluationSet {
-  id: Int!
-  lectureId: Int!
-  statusType: String!
-  evaluationDetails: String!
-  points: Int!
-  Subject: Subject
-  subjectId: Int!
-  createdAt: String!
-  updatedAt: String!
-  Branch: Branch
-  branchId: Int
-  lastModifiedByUserId: String!
-  lastModifiedByName: String!
-  lastModifiedTime: String
-}
-
-type MessageStorage {
-  id: Int!
-  manageUser: ManageUser
-  manageUserId: Int
-  message: String!
-  saveType: String!
-  createdAt: String!
-  updatedAt: String!
-  Branch: Branch
-  branchId: Int
-}
-
-type CommonResponse {
-  ok: Boolean!
-  message: String
-  error: String
-}
-
-type ResultLogin {
-  ok: Boolean!
-  message: String
-  error: String
-  token: String
-  refreshToken: String
-}
-
 type SeeManageUserResult {
   ok: Boolean!
   message: String
@@ -701,40 +795,16 @@ type ResultIsMe {
   error: String
 }
 
-type ResultSearchPermissionsGranted {
-  ok: Boolean!
-  message: String
-  error: String
-  data: [PermissionsGranted]
-  totalCount: Int
-}
-
-type UpdateStudentStateResult {
-  ok: Boolean!
-  message: String
-  error: String
-}
-
-type StudentStateResponse {
-  ok: Boolean!
-  message: String
-  totalCount: Int
-  studentState: [StudentState]
-}
-
-type UpdateFavoriteResult {
-  ok: Boolean!
-  message: String
-  error: String
-  favoriteStudentState: ManageUser
-}
-
-type ResultAdviceType {
-  ok: Boolean!
-  message: String
-  error: String
-  adviceType: [AdviceType]
-  totalCount: Int
+type Alarm {
+  id: Int!
+  title: String!
+  content: String!
+  personalTarget: [Int!]
+  createdAt: String
+  updatedAt: String
+  Branch: Branch
+  branchId: Int
+  lastModifiedTime: String
 }
 
 type ResultSeeAlarms {
@@ -745,6 +815,18 @@ type ResultSeeAlarms {
   totalCount: Float
 }
 
+type AttendanceRecord {
+  id: Int!
+  clockIn: String!
+  clockOut: String
+  createdAt: String!
+  updatedAt: String!
+  ManageUser: ManageUser!
+  manageUserId: Int!
+  Branch: Branch
+  branchId: Int
+}
+
 type ResultSearchAttendanceRecord {
   ok: Boolean!
   message: String
@@ -753,28 +835,15 @@ type ResultSearchAttendanceRecord {
   totalCount: Int
 }
 
-type SearchStudentStateResult {
-  ok: Boolean!
-  error: String
-  message: String
-  totalCount: Int
-  studentState: [StudentState]
-}
-
-type SearchSubjectResult {
-  ok: Boolean!
-  error: String
-  totalCount: Int
-  message: String
-  result: [Subject]
-}
-
-type SeeSubjectResult {
-  ok: Boolean!
-  error: String
-  message: String
-  totalCount: Int
-  subject: [Subject]
+type UserActivityLogs {
+  id: Int!
+  userId: String!
+  eventName: String!
+  description: String
+  createdAt: String
+  updatedAt: String
+  Branch: Branch
+  branchId: Int
 }
 
 type UserActivityLogsResponse {
@@ -821,44 +890,11 @@ type DashboardRDResult {
   count: Int
 }
 
-type SeeStudentResult {
-  ok: Boolean
-  message: String
-  error: String
-  totalCount: Int
-  student: [Student]
-}
-
-type SearchStudentResult {
-  ok: Boolean
-  message: String
-  error: String
-  student: [Student!]
-  totalCount: Int
-}
-
-type StudentPaymentResult {
-  ok: Boolean!
-  message: String
-  error: String
-  totalCount: Int
-  StudentPayment: [StudentPayment]
-}
-
-type SearchStudentPaymentResult {
-  ok: Boolean!
-  message: String
-  error: String
-  data: [StudentPayment]
-  totalCount: Int
-}
-
-type PaymentDetailResult {
-  ok: Boolean!
-  message: String
-  error: String
-  PaymentDetail: [PaymentDetail]
-  totalCount: Int
+type HourlyData {
+  nowDate: String
+  cashOrCard: String
+  currentState: String
+  amount: Int
 }
 
 type HourlySalesData {
@@ -875,13 +911,6 @@ type HourlySalesData {
   thisTimeRealTotal: Int
 }
 
-type SalesStatisticsResult {
-  ok: Boolean!
-  message: String
-  error: String
-  data: [ProcessingManagerGroupResult]
-}
-
 type ProcessingManagerGroupResult {
   receiverId: Int
   totalAmount: Int
@@ -891,54 +920,11 @@ type ProcessingManagerGroupResult {
   totalRefundCount: Int
 }
 
-type SeeLecturesResult {
+type SalesStatisticsResult {
   ok: Boolean!
   message: String
   error: String
-  totalCount: Int
-  data: [Lectures]
-}
-
-type SearchLecturesResult {
-  ok: Boolean!
-  message: String
-  error: String
-  totalCount: Int
-  data: [Lectures]
-}
-
-type SeeAttendanceResult {
-  ok: Boolean!
-  message: String
-  error: String
-  enrollData: [Attendance]
-  enrollCount: Int
-  attendanceData: [Attendance]
-  attendanceCount: Int
-  absentData: [Attendance]
-  absentCount: Int
-  leaveEarlyData: [Attendance]
-  leaveEarlyCount: Int
-  outingData: [Attendance]
-  outingCount: Int
-  tardyData: [Attendance]
-  tardyCount: Int
-}
-
-type SearchAttendanceResult {
-  ok: Boolean!
-  message: String
-  error: String
-  data: [Attendance]
-  totalCount: Int
-}
-
-type SearchWorkLogsResult {
-  ok: Boolean!
-  message: String
-  error: String
-  data: [WorkLogs]
-  totalCount: Int
+  data: [ProcessingManagerGroupResult]
 }
 
 type ResultAcademyRecord {
@@ -949,11 +935,21 @@ type ResultAcademyRecord {
   totalCount: Int
 }
 
-type SignWorkLogsResult {
-  ok: Boolean!
-  message: String
-  error: String
-  stampUrl: String
+type RegularEvaluationSet {
+  id: Int!
+  lectureId: Int!
+  statusType: String!
+  evaluationDetails: String!
+  points: Int!
+  Subject: Subject
+  subjectId: Int!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
+  lastModifiedByUserId: String!
+  lastModifiedByName: String!
+  lastModifiedTime: String
 }
 
 type ResultSeeRegularEvaluationSet {
@@ -974,12 +970,16 @@ type ResultSearchSM {
 
 union SearchDataUnion = Career | EduInfomation | Certificate | StudentConsultation | HopeForEmployment | EmploymentRecommendation | EmploymentStatus | PreInspection | StudentPortfolio
 
-type ResultSearchSms {
-  ok: Boolean!
-  message: String
-  error: String
-  data: [Sms]
-  totalCount: Int
+type MessageStorage {
+  id: Int!
+  manageUser: ManageUser
+  manageUserId: Int
+  message: String!
+  saveType: String!
+  createdAt: String!
+  updatedAt: String!
+  Branch: Branch
+  branchId: Int
 }
 
 type ResultMessageStorage {

@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Args } from "@nestjs/graphql";
 import { LoginService } from "./login.service";
-import { ResultLogin } from "@src/result-dto/common-response.dto";
+import { ResultLogin } from "./entity/login.entity";
 
 @Resolver()
 export class LoginResolver {

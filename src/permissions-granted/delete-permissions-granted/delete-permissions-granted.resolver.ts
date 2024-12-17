@@ -1,7 +1,7 @@
 import { UseGuards } from "@nestjs/common";
 import { Int, Mutation, Resolver, Args } from "@nestjs/graphql";
 import { DeletePermissionsGrantedService } from "./delete-permissions-granted.service";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 
 @Resolver()
 export class DeletePermissionsGrantedResolver {

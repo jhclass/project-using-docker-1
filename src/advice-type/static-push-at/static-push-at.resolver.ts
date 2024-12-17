@@ -2,7 +2,7 @@ import { UseGuards } from "@nestjs/common";
 import { Args, Int, Mutation, Resolver } from "@nestjs/graphql";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { StaticPushAtService } from "./static-push-at.service";
-import { CommonResponse } from "@src/result-dto/common-response.dto";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 
 @Resolver()
 export class StaticPushAtResolver {

@@ -2,7 +2,7 @@ import { Args, Context, Int, Query, Resolver } from "@nestjs/graphql";
 import { SignWorkLogsService } from "./sign-work-logs.service";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
-import { SignWorkLogsResult } from "@src/result-dto/common-response.dto";
+import { SignWorkLogsResult } from "@src/work-log/entity/workLogs.entity";
 
 @Resolver()
 export class SignWorkLogsResolver {

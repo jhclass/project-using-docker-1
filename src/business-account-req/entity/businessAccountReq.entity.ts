@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { CommonResponse } from "@src/common-entity/common-response.entity";
 import { IsEmail } from "class-validator";
 
 @ObjectType()
@@ -24,4 +25,10 @@ export class BusinessAccountReq {
   createdAt: Date;
   @Field(() => String)
   updatedAt: Date;
+}
+
+@ObjectType()
+export class ResultValidateNumber extends CommonResponse {
+  @Field({ nullable: true })
+  validateNum?: string;
 }

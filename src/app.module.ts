@@ -1,6 +1,5 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
+
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { SampleResolver } from "@src/sample/sample.resolver";
@@ -84,13 +83,7 @@ import { BusinessAccountReqModule } from "./business-account-req/business-accoun
     SmsModule,
     BusinessAccountReqModule,
   ],
-  controllers: [AppController],
-  providers: [
-    AppService,
-    SampleResolver,
-    PrismaService,
-    JwtStrategy,
-    BatchService,
-  ],
+  controllers: [],
+  providers: [SampleResolver, PrismaService, JwtStrategy, BatchService],
 })
 export class AppModule {}

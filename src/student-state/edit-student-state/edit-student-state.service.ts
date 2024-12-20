@@ -4,36 +4,37 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
+import { EditStudentStateDto } from "./dto/edit-student-state.dto";
 
 @Injectable()
 export class EditStudentStateService {
   constructor(private readonly client: PrismaService) {}
-  async editStudentStateFunc(
-    context: any,
-    id: number,
-    campus?: string,
-    category?: string,
-    stName?: string,
-    phoneNum1?: string,
-    phoneNum2?: string,
-    phoneNum3?: string,
-    subject?: string[],
-    detail?: string,
-    progress?: number,
-    stEmail?: string,
-    stAddr?: string,
-    subDiv?: string,
-    stVisit?: string,
-    expEnrollDate?: string,
-    perchase?: boolean,
-    birthday?: string,
-    pic?: string,
-    receiptDiv?: string,
-    adviceTypes?: number[],
-    lastModifiedTime?: string,
-  ) {
+  async editStudentStateFunc(context: any, input: EditStudentStateDto) {
     try {
       const { user } = context.req;
+      const {
+        id,
+        campus,
+        category,
+        stName,
+        phoneNum1,
+        phoneNum2,
+        phoneNum3,
+        subject,
+        detail,
+        progress,
+        stEmail,
+        stAddr,
+        subDiv,
+        stVisit,
+        expEnrollDate,
+        perchase,
+        birthday,
+        pic,
+        receiptDiv,
+        adviceTypes,
+        lastModifiedTime,
+      } = input;
       if (!id || !lastModifiedTime) {
         throw new BadRequestException(
           "id 와 lastModifiedTime 은 필수값 입니다.",

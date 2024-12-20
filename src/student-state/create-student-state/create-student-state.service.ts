@@ -5,6 +5,7 @@ import {
 } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { WebSocketGatewayService } from "@src/websocket/websocket.gateway";
+import { CreateStudentStateDto } from "./dto/create-student-state.dto";
 
 @Injectable()
 export class CreateStudentStateService {
@@ -12,34 +13,33 @@ export class CreateStudentStateService {
     private readonly client: PrismaService,
     private readonly gateway: WebSocketGatewayService,
   ) {}
-  async createStudentStateFunc(
-    context: any,
-    agreement: string,
-    progress: number,
-    adviceTypes: number[],
-    subject: string[],
-    stName: string,
-    phoneNum1: string,
-    campus?: string,
-    detail?: string,
-    category?: string,
-    phoneNum2?: string,
-    phoneNum3?: string,
-    stEmail?: string,
-    stAddr?: string,
-    stVisit?: string,
-    subDiv?: string,
-    expEnrollDate?: string,
-    perchase?: boolean,
-    birthday?: string,
-    receiptDiv?: string,
-    pic?: string,
-    classMethod?: string[],
-    branchId?: number,
-
-    today?: string[],
-  ) {
+  async createStudentStateFunc(context: any, input: CreateStudentStateDto) {
     try {
+      const {
+        agreement,
+        progress,
+        adviceTypes,
+        subject,
+        stName,
+        phoneNum1,
+        campus,
+        detail,
+        category,
+        phoneNum2,
+        phoneNum3,
+        stEmail,
+        stAddr,
+        stVisit,
+        subDiv,
+        expEnrollDate,
+        perchase,
+        birthday,
+        receiptDiv,
+        pic,
+        classMethod,
+        branchId,
+        today,
+      } = input;
       const { user } = context.req;
       //const { ip } = context.req;
       //console.log("a", ip);

@@ -13,7 +13,7 @@ export class DeleteStudentStateResolver {
   @Mutation(() => CommonResponse)
   async deleteStudentState(
     @Context() context: any,
-    @Args("id", { type: () => [Int] }) id: number[],
+    @Args("id", { type: () => [Int], nullable: "items" }) id: number[],
   ): Promise<CommonResponse> {
     return this.deleteStudentStateService.deleteStudentStateFunc(context, id);
   }

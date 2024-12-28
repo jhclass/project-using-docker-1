@@ -1,6 +1,9 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
-import { validateIdExists } from "@src/utils/shared.utils";
 import * as bcrypt from "bcrypt";
 
 @Injectable()
@@ -40,7 +43,12 @@ export class CreateMasterUserService {
           branchId: existingBranchName.id,
         },
       });
-      validateIdExists(existingId);
+      //console.log(existingId);
+      if (existingId) {
+        throw new BadRequestException(
+          "아이디가 존재 합니다. 해당 브랜치에 마스터 아이디는 하나만 존재해야합니다.",
+        );
+      }
       const newPassword = await bcrypt.hash(mPassword, 10);
       await this.client.manageUser.create({
         data: {

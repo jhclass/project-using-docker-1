@@ -1,13 +1,14 @@
-# myapp 폴더의 .env 파일 제외
+# 환경 변수 파일
 .env
 
-# node_modules/ 디렉터리 제외
+# 종속성 디렉터리
 node_modules/
 
-# 빌드 파일 및 로그 파일 제외
+# 빌드 파일 및 로그 파일
 dist/
 *.log
 
-# Git 관련 파일 제외
+# Git 관련 파일
 .git/
 .gitignore
+

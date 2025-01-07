@@ -10,8 +10,8 @@ export class CreateBusinessAccountReqService {
     phoneNum: string,
     validate: string,
     email: string,
-    filePath: string[],
     agree: string,
+    filePath?: string[],
   ) {
     try {
       //

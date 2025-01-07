@@ -1,13 +1,12 @@
 import { Args, Context, Resolver, Mutation } from "@nestjs/graphql";
 import { SendSmsService } from "./send-sms.service";
-import { UseGuards } from "@nestjs/common";
-import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { CommonResponse } from "@src/common-entity/common-response.entity";
+import { Public } from "@src/public-decorator/public-decorator.decorator";
 
 @Resolver()
 export class SendSmsResolver {
   constructor(private readonly sendSmsService: SendSmsService) {}
-  @UseGuards(GqlAuthGuard)
+  @Public()
   @Mutation(() => CommonResponse)
   async sendSms(
     @Context() context: any,

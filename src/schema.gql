@@ -1131,10 +1131,11 @@ type Mutation {
   deleteSms(id: Int!): CommonResponse!
   createMessageStorage(message: String!, saveType: String!): CommonResponse!
   deleteMessageStorage(id: Int!): CommonResponse!
-  createBusinessAccountReq(companyName: String!, phoneNum: String!, validate: String!, email: String!, filePath: [String!]!, agree: String!): CommonResponse!
+  createBusinessAccountReq(companyName: String!, phoneNum: String!, validate: String!, email: String!, agree: String!, filePath: [String]!): CommonResponse!
   editBusinessAccountReq(id: Int!, creationComplete: String!, rejection: String): CommonResponse!
   deleteBusinessAccountReq(id: Int!): CommonResponse!
   validateNumber(input: ValidateNumberDto!): ResultValidateNumber!
+  createWorkBoard(createWorkBoardDto: CreateWorkBoardDto!): CommonResponse!
 }
 
 input CreateStudentStateDto {
@@ -1189,4 +1190,18 @@ input EditStudentStateDto {
 
 input ValidateNumberDto {
   phoneNum: String!
+}
+
+input CreateWorkBoardDto {
+  title: String!
+  writer: String!
+  toTeam: String
+  toPerson: String
+  level: String
+  startDate: String
+  endDate: String
+  workStatus: String
+  detail: String!
+  filePath: String
+  lastModifiedTime: String
 }

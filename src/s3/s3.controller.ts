@@ -20,9 +20,6 @@ export class S3Controller {
     @Body("folderName") folderName: string,
     //@Request() req,
   ) {
-    //console.log("req :", req);
-    //const { id } = req.user;
-    //console.log("id :", id);
     const url = await this.s3Service.uploadFile(file, folderName);
     return url;
   }

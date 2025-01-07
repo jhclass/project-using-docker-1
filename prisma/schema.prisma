@@ -53,6 +53,7 @@ model Branch {
   BoardForWorkRequest      BoardForWorkRequest[]
   ApiKey                   ApiKey[]
   AttendanceRecord         AttendanceRecord[]
+  WorkBoard                WorkBoard[]
 }
 
 model User {
@@ -904,4 +905,23 @@ model businessAccountReq {
   rejection        String? //반려사유
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+model WorkBoard {
+  id               Int       @id @default(autoincrement())
+  title            String
+  writer           String
+  toTeam           String?
+  toPerson         String?
+  level            String?
+  startDate        DateTime?
+  endDate          DateTime?
+  workStatus       String?
+  detail           String
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  filePath         String?
+  branch           Branch?   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  branchId         Int?
+  lastModifiedTime DateTime? //최근수정시간
 }

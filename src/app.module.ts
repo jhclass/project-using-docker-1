@@ -35,6 +35,7 @@ import { WorklogsModule } from "./work-log/worklogs.module";
 import { StudentManagementModule } from "./student-management/student-management.module";
 import { SmsModule } from "./sms/sms.module";
 import { BusinessAccountReqModule } from "./business-account-req/business-account-req.module";
+import { WorkBoardModule } from "./board/work-board/work-board.module";
 
 @Module({
   imports: [
@@ -82,6 +83,7 @@ import { BusinessAccountReqModule } from "./business-account-req/business-accoun
     StudentManagementModule,
     SmsModule,
     BusinessAccountReqModule,
+    WorkBoardModule,
   ],
   controllers: [],
   providers: [SampleResolver, PrismaService, JwtStrategy, BatchService],

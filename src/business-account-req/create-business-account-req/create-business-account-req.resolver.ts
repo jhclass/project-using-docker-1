@@ -18,18 +18,18 @@ export class CreateBusinessAccountReqResolver {
     validate: string,
     @Args("email")
     email: string,
-    @Args("filePath", { type: () => [String] })
-    filePath: string[],
     @Args("agree")
     agree: string,
+    @Args("filePath", { type: () => [String], nullable: "items" })
+    filePath?: string[],
   ): Promise<CommonResponse> {
     return this.createBusinessACountReqService.createBuninessAccountReqFunc(
       companyName,
       phoneNum,
       validate,
       email,
-      filePath,
       agree,
+      filePath,
     );
   }
 }

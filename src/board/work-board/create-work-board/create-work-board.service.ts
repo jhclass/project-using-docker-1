@@ -6,7 +6,6 @@ import {
 import { PrismaService } from "@src/prisma/prisma.service";
 import { CreateWorkBoardDto } from "./dto/create-work-board.dto";
 import { S3Service } from "@src/s3/s3.service";
-import { match } from "assert";
 
 @Injectable()
 export class CreateWorkBoardService {
@@ -75,11 +74,8 @@ export class CreateWorkBoardService {
 
       const imgSrcRegex = /<img\s+[^>]*src="data:image\/[^"]+"[^>]*>/g;
       const matches = detail.match(imgSrcRegex);
-      let updateDetail;
-      if (!match || matches.length === 0) {
-        console.warn("No Images");
-        return detail;
-      } else {
+      let updateDetail = detail;
+      if (matches && matches.length > 0) {
         updateDetail = detail;
         matches.forEach((imgTag, index) => {
           if (urls[index]) {
@@ -103,7 +99,7 @@ export class CreateWorkBoardService {
           lastModifiedTime,
           filePath,
           workStatus,
-          detail: updateDetail,
+          detail: detail && updateDetail,
         },
       });
       return {

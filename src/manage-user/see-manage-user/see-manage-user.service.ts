@@ -12,12 +12,14 @@ export class SeeManageUserService {
     resign?: string,
   ): Promise<SeeManageUserResult> {
     try {
+      const { user } = context.req;
       const take = limit ?? 10;
       const pageNum = page ?? 1;
       const [result, totalCount] = await Promise.all([
         this.client.manageUser.findMany({
           where: {
             resign,
+            branchId: user.branchId,
           },
           skip: (pageNum - 1) * take,
           take,

@@ -5,10 +5,15 @@ import {
 } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { CreateWorkBoardDto } from "./dto/create-work-board.dto";
+import { S3Service } from "@src/s3/s3.service";
+import { match } from "assert";
 
 @Injectable()
 export class CreateWorkBoardService {
-  constructor(private readonly client: PrismaService) {}
+  constructor(
+    private readonly client: PrismaService,
+    private readonly s3Service: S3Service,
+  ) {}
   async createWorkBoardFunc(
     context: any,
     createWorkBoardDto: CreateWorkBoardDto,
@@ -51,6 +56,42 @@ export class CreateWorkBoardService {
           );
         }
       }
+
+      const extractSrcValues = (htmlString: string): string[] => {
+        const srcRegex = /<img\s+[^>]*src="([^"]+)"/g;
+        const srcValues = [];
+        let match;
+        while ((match = srcRegex.exec(htmlString)) !== null) {
+          srcValues.push(match[1]);
+        }
+        return srcValues;
+      };
+      const srcValues = extractSrcValues(detail);
+
+      const urls = await this.s3Service.uploadBase64Images(
+        srcValues,
+        "board/editor",
+      );
+
+      const imgSrcRegex = /<img\s+[^>]*src="data:image\/[^"]+"[^>]*>/g;
+      const matches = detail.match(imgSrcRegex);
+      let updateDetail;
+      if (!match || matches.length === 0) {
+        console.warn("No Images");
+        return detail;
+      } else {
+        updateDetail = detail;
+        matches.forEach((imgTag, index) => {
+          if (urls[index]) {
+            const newImgTag = imgTag.replace(
+              /src="[^"]+"/,
+              `src=${urls[index]}`,
+            );
+            updateDetail = updateDetail.replace(imgTag, newImgTag);
+          }
+        });
+      }
+
       await client.workBoard.create({
         data: {
           title,
@@ -62,7 +103,7 @@ export class CreateWorkBoardService {
           lastModifiedTime,
           filePath,
           workStatus,
-          detail,
+          detail: updateDetail,
         },
       });
       return {

@@ -1,5 +1,5 @@
 import { UseGuards } from "@nestjs/common";
-import { Resolver, Query, Args, Int } from "@nestjs/graphql";
+import { Resolver, Query, Args, Int, Context } from "@nestjs/graphql";
 import { GqlAuthGuard } from "@src/auth/gql-auth.guard";
 import { SearchManageUserService } from "@src/manage-user/search-manage-user/search-manage-user.service";
 import { SearchManageUserResult } from "@src/manage-user/entity/manageUser.entity";
@@ -10,6 +10,7 @@ export class SearchManageUserResolver {
   @UseGuards(GqlAuthGuard)
   @Query(() => SearchManageUserResult)
   async searchManageUser(
+    @Context() context: any,
     @Args("id", { type: () => Int, nullable: true }) id?: number,
     @Args("mUserId", { nullable: true }) mUserId?: string,
     @Args("mUsername", { nullable: true }) mUsername?: string,
@@ -24,6 +25,7 @@ export class SearchManageUserResolver {
     @Args("page", { type: () => Int, nullable: true }) page?: number,
   ): Promise<SearchManageUserResult> {
     return this.searchManageUserService.searchManageUserFunc(
+      context,
       id,
       mUserId,
       mUsername,

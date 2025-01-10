@@ -3,7 +3,10 @@ import { PrismaService } from "@src/prisma/prisma.service";
 interface ISearchConditions {
   id?: number;
   mUserId?: string;
-  mUsername?: string;
+  mUsername?: {
+    contains: string;
+    mode?: "insensitive";
+  };
   mGrade?: number;
   mRank?: string;
   mPhoneNum?: string;
@@ -17,11 +20,13 @@ interface ISearchConditions {
   };
   limit?: number;
   page?: number;
+  branchId: number;
 }
 @Injectable()
 export class SearchManageUserService {
   constructor(private readonly client: PrismaService) {}
   async searchManageUserFunc(
+    context: any,
     id?: number,
     mUserId?: string,
     mUsername?: string,
@@ -35,10 +40,13 @@ export class SearchManageUserService {
     page?: number,
   ) {
     try {
+      const { user } = context.req;
       const pageNum = page ?? 1;
       const take = limit ?? 10;
       // 조건
-      const searchConditions = {} as ISearchConditions;
+      const searchConditions = {
+        branchId: user.branchId,
+      } as ISearchConditions;
       if (id) {
         searchConditions.id = id;
       }
@@ -46,7 +54,10 @@ export class SearchManageUserService {
         searchConditions.mUserId = mUserId;
       }
       if (mUsername) {
-        searchConditions.mUsername = mUsername;
+        searchConditions.mUsername = {
+          contains: mUsername,
+          mode: "insensitive",
+        };
       }
       if (mGrade) {
         searchConditions.mGrade = mGrade;

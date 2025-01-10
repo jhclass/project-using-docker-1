@@ -15,6 +15,9 @@ async function bootstrap() {
     origin: "http://localhost:8000", // 허용할 프론트엔드 주소
     credentials: true,
   });
+
+  app.use(express.json({ limit: "50mb" }));
+  app.use(express.urlencoded({ limit: "50mb", extended: true }));
   await app.listen(4000);
 }
 bootstrap();

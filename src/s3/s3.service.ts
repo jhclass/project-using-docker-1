@@ -36,6 +36,41 @@ export class S3Service {
     stream.push(null);
     return stream;
   }
+  async uploadBase64Images(
+    base64Images: string[],
+    folderName: string,
+  ): Promise<string[]> {
+    try {
+      const uploadPromises = base64Images.map(async (base64Images) => {
+        const base64data = base64Images.replace(/data:image\/\w+;base64,/, "");
+        const buffer = Buffer.from(base64data, "base64");
+        const fileExtension =
+          base64Images.match(/data:image\/(\w+);base64,/)?.[1] || "png";
+        const key = `${folderName}/${uuidv4()}.${fileExtension}`;
+
+        const upload = new Upload({
+          client: this.s3Client,
+          params: {
+            Bucket: this.bucketName,
+            Key: key,
+            Body: buffer,
+            ContentType: `image/${fileExtension}`,
+            ACL: "public-read",
+          },
+        });
+        await upload.done();
+        return `https://${this.bucketName}.s3.${this.configService.get(
+          "AWS_REGION",
+        )}.amazonaws.com/${key}`;
+      });
+
+      const uploadedUrls = await Promise.all(uploadPromises);
+      return uploadedUrls;
+    } catch (error) {
+      console.error("s3 업로드 실패:", error);
+      throw new InternalServerErrorException("s3 이미지 업로드 실패");
+    }
+  }
   async uploadFile(
     file: Express.Multer.File,
     folderName: string,

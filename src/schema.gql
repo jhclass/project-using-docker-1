@@ -997,6 +997,32 @@ type ResultValidateNumber {
   validateNum: String
 }
 
+type WorkBoard {
+  id: Int!
+  title: String!
+  writer: String!
+  toTeam: String
+  toPerson: String
+  level: String
+  startDate: String
+  endDate: String
+  workStatus: String
+  createdAt: String!
+  updatedAt: String!
+  filePath: String
+  branch: Branch
+  branchId: Int
+  lastModifiedTime: String
+}
+
+type ResultSeeWorkBoard {
+  ok: Boolean!
+  message: String
+  error: String
+  data: [WorkBoard]
+  totalCount: Int
+}
+
 type Query {
   sayHello: String!
   searchManageUser(id: Int, mUserId: String, mUsername: String, mGrade: Int, mRank: String, mPhoneNum: String, mPart: String, resign: String, mJoiningDate: [String], limit: Int, page: Int): SearchManageUserResult!
@@ -1030,6 +1056,7 @@ type Query {
   searchSM(modelType: String!, lectureId: Int, studentPaymentId: Int, subjectId: Int, limit: Int, page: Int): ResultSearchSM!
   searchSms(id: Int, branchId: Int, receiver: String, manageUserId: Int, period: [String], page: Int, limit: Int, saveType: String): ResultSearchSms!
   seeMessageStorage(saveType: String!, page: Int, limit: Int): ResultMessageStorage!
+  seeWorkBoard(page: Int, limit: Int): ResultSeeWorkBoard!
 }
 
 type Mutation {
@@ -1049,7 +1076,7 @@ type Mutation {
   editAdviceType(id: Int!, onOff: String, category: String, defaultValue: String): CommonResponse!
   createAdviceType(type: String!, indexNum: Int!, category: String!, onOff: String, defaultValue: String): CommonResponse!
   staticPushAT(id: Int!, onOff: String): CommonResponse!
-  changeOrderAT(indexNums: [Int!]!, ids: [Int!]): CommonResponse!
+  changeOrderAT(indexNums: [Int], ids: [Int]): CommonResponse!
   readAlarms(id: Int, all: String): CommonResponse!
   createAttendanceRecord(clockIn: String!): CommonResponse!
   updateStudentState(input: EditStudentStateDto!): UpdateStudentStateResult!

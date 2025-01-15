@@ -4,10 +4,8 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { SampleResolver } from "@src/sample/sample.resolver";
 import { join } from "path";
-import { PrismaService } from "@src/prisma/prisma.service";
 import { ConfigModule } from "@nestjs/config";
 import { LoginModule } from "@src/login/login.module";
-import { JwtStrategy } from "@src/jwt.strategy";
 import { BranchModule } from "@src/branch/branch.module";
 import { ManageUserModule } from "@src/manage-user/manage-user.module";
 import { S3Module } from "@src/s3/s3.module";
@@ -28,14 +26,15 @@ import { StampModule } from "./stamp/stamp.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { StudentPaymentModule } from "./student-payment/student-payment.module";
 import { PaymentDetailModule } from "./payment-detail/payment-detail.module";
-import { BatchService } from "./batch/batch.service";
 import { LectureModule } from "./lecture/lecture.module";
 import { AttendanceModule } from "./attendance/attendance.module";
 import { WorklogsModule } from "./work-log/worklogs.module";
 import { StudentManagementModule } from "./student-management/student-management.module";
 import { SmsModule } from "./sms/sms.module";
 import { BusinessAccountReqModule } from "./business-account-req/business-account-req.module";
-import { WorkBoardModule } from "./board/work-board/work-board.module";
+import { BoardModule } from "./board/board.module";
+import { AuthModule } from "./auth/auth.module";
+import { BatchModule } from "./batch/batch.module";
 
 @Module({
   imports: [
@@ -83,9 +82,11 @@ import { WorkBoardModule } from "./board/work-board/work-board.module";
     StudentManagementModule,
     SmsModule,
     BusinessAccountReqModule,
-    WorkBoardModule,
+    BoardModule,
+    AuthModule,
+    BatchModule,
   ],
   controllers: [],
-  providers: [SampleResolver, PrismaService, JwtStrategy, BatchService],
+  providers: [SampleResolver],
 })
 export class AppModule {}

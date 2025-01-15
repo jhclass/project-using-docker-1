@@ -8,8 +8,10 @@ export class ChangeOrderAtResolver {
   @Mutation(() => CommonResponse)
   async changeOrderAT(
     @Context() context: any,
-    @Args("indexNums", { type: () => [Int] }) indexNums: number[],
-    @Args("ids", { type: () => [Int], nullable: true }) ids?: number[],
+    @Args("indexNums", { type: () => [Int], nullable: "itemsAndList" })
+    indexNums?: number[],
+    @Args("ids", { type: () => [Int], nullable: "itemsAndList" })
+    ids?: number[],
   ): Promise<CommonResponse> {
     return this.changeOrderAtService.changeOrderAtFunc(context, indexNums, ids);
   }

@@ -9,7 +9,7 @@ import { PrismaService } from "@src/prisma/prisma.service";
 @Injectable()
 export class ChangeOrderAtService {
   constructor(private readonly client: PrismaService) {}
-  async changeOrderAtFunc(context: any, indexNums: number[], ids?: number[]) {
+  async changeOrderAtFunc(context: any, indexNums?: number[], ids?: number[]) {
     try {
       const { user } = context.req;
       if (ids.length !== indexNums.length) {

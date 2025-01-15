@@ -20,6 +20,7 @@ export class CreateWorkBoardService {
     try {
       const { user } = context.req;
       const branchId = user.branchId;
+      console.log(branchId);
       const client = this.client;
       const {
         title,
@@ -100,6 +101,7 @@ export class CreateWorkBoardService {
           filePath,
           workStatus,
           detail: detail && updateDetail,
+          branchId: user.branchId,
         },
       });
       return {

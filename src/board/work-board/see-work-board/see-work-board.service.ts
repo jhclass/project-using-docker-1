@@ -21,6 +21,9 @@ export class SeeWorkBoardService {
           where: seeConditions,
           skip: (page - 1) * limit,
           take: limit,
+          orderBy: {
+            id: "desc",
+          },
         }),
         client.workBoard.count({
           where: seeConditions,

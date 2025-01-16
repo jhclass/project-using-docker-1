@@ -1007,6 +1007,7 @@ type WorkBoard {
   startDate: String
   endDate: String
   workStatus: String
+  detail: String!
   createdAt: String!
   updatedAt: String!
   filePath: String
@@ -1057,6 +1058,18 @@ type Query {
   searchSms(id: Int, branchId: Int, receiver: String, manageUserId: Int, period: [String], page: Int, limit: Int, saveType: String): ResultSearchSms!
   seeMessageStorage(saveType: String!, page: Int, limit: Int): ResultMessageStorage!
   seeWorkBoard(page: Int, limit: Int): ResultSeeWorkBoard!
+  searchWorkBoard(searchWorkBoardDto: SearchWorkBoardDto!): ResultSeeWorkBoard!
+}
+
+input SearchWorkBoardDto {
+  id: Int
+  writer: String
+  toTeam: String
+  toPerson: String
+  workPeriod: [String]
+  workStatus: String
+  page: Int
+  limit: Int
 }
 
 type Mutation {

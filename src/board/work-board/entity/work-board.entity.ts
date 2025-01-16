@@ -22,6 +22,8 @@ export class WorkBoard {
   endDate?: Date;
   @Field({ nullable: true })
   workStatus?: string;
+  @Field()
+  detail: string;
   @Field(() => String)
   createdAt: Date;
   @Field(() => String)

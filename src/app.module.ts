@@ -35,6 +35,8 @@ import { BusinessAccountReqModule } from "./business-account-req/business-accoun
 import { BoardModule } from "./board/board.module";
 import { AuthModule } from "./auth/auth.module";
 import { BatchModule } from "./batch/batch.module";
+import { APP_INTERCEPTOR } from "@nestjs/core";
+import { ResponseTimeInterceptor } from "common/interceptor/response-time.interceptor";
 
 @Module({
   imports: [
@@ -87,6 +89,12 @@ import { BatchModule } from "./batch/batch.module";
     BatchModule,
   ],
   controllers: [],
-  providers: [SampleResolver],
+  providers: [
+    SampleResolver,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseTimeInterceptor,
+    },
+  ],
 })
 export class AppModule {}

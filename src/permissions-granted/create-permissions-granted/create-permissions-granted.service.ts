@@ -12,7 +12,7 @@ export class CreatePermissionsGrantedService {
     context: any,
     permissionName: string,
     topic: string,
-    manageUserIds?: number[],
+    manageUserIds?: number[], //없을 경우 빈 배열추가
     smsPermitted?: string,
     readOnly?: string,
     allPermitted?: string,
@@ -22,6 +22,7 @@ export class CreatePermissionsGrantedService {
       if (!permissionName || !topic) {
         throw new BadRequestException("필수값을 확인하세요");
       }
+
       if (!Array.isArray(manageUserIds)) {
         throw new BadRequestException(
           `manageUserIds 값을 확인하세요. type 은 배열이어야 하고 값은 1개 이상 들어있어야 합니다.`,

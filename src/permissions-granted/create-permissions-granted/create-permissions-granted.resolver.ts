@@ -11,7 +11,7 @@ export class CreatePermissionsGrantedResolver {
   ) {}
   @UseGuards(GqlAuthGuard)
   @Mutation(() => CommonResponse)
-  async createPermissionGranted<CommonResponse>(
+  async createPermissionGranted(
     @Context() context: any,
     @Args("permissionName") permissionName: string,
     @Args("topic") topic: string,
@@ -20,7 +20,7 @@ export class CreatePermissionsGrantedResolver {
     @Args("smsPermitted", { nullable: true }) smsPermitted?: string,
     @Args("readOnly", { nullable: true }) readOnly?: string,
     @Args("allPermitted", { nullable: true }) allPermitted?: string,
-  ) {
+  ): Promise<CommonResponse> {
     return this.createPermissionsGrantedService.createPermissionsGrantedFunc(
       context,
       permissionName,

@@ -39,7 +39,8 @@ export class WebSocketGatewayService
     this.notificationSubject.subscribe(({ event, payload }) => {
       this.server.emit(event, payload);
       console.log(
-        "RxJS: Notification sent [${event}]: ${JSON.stringify(payload)}",
+        `RxJS: Notification sent [${event}]:`,
+        JSON.stringify(payload),
       );
     });
   }

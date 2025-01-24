@@ -54,8 +54,8 @@ export class CreateStudentStateService {
         context?.req?.headers?.["x-forwarded-for"]?.split(",")[0] || // 프록시를 통해 전달된 실제 클라이언트 IP
         context?.req?.connection?.remoteAddress || // 네트워크 소켓에서 직접 추출한 IP
         "Unknown";
-      console.log("context?", context.req);
-      console.log(ipAddr);
+      //console.log("context?", context.req);
+      //console.log(ipAddr);
       //today 체크
       if (!Array.isArray(today) || today.length < 2) {
         throw new BadRequestException(
@@ -104,7 +104,7 @@ export class CreateStudentStateService {
           branchName: true,
         },
       });
-      //console.log(branchName);
+      console.log(branchName);
       const classMethods = classMethod === null ? [] : classMethod;
       //console.log(user.branchId);
       await this.client.studentState.create({

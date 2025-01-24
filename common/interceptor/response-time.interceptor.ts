@@ -5,6 +5,7 @@ import {
   NestInterceptor,
 } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
+import { graphQLQueryPattern } from "@src/utils/regex/shared.regex";
 import { Observable, tap } from "rxjs";
 
 @Injectable()
@@ -14,12 +15,12 @@ export class ResponseTimeInterceptor implements NestInterceptor {
     next: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
     const reqTime = Date.now();
-    const req = context.switchToHttp().getRequest();
+
     const gqlContext = GqlExecutionContext.create(context);
     const gqlReq = gqlContext.getContext().req;
 
     const query = gqlReq.body.query;
-    const operationNameMatch = query.match(/(query|mutation)\s+(\w+)/);
+    const operationNameMatch = query.match(graphQLQueryPattern);
     try {
       if (operationNameMatch) {
         const operationType = operationNameMatch[1];
@@ -33,11 +34,12 @@ export class ResponseTimeInterceptor implements NestInterceptor {
           }),
         );
       } else {
-        console.log("query찾을 수 없음.");
+        console.log("query 찾을 수 없음.");
+        return next.handle();
       }
-      console.log("req", req);
     } catch (error) {
       console.error(error.message);
+      return next.handle();
     }
   }
 }

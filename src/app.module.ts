@@ -37,6 +37,8 @@ import { AuthModule } from "./auth/auth.module";
 import { BatchModule } from "./batch/batch.module";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { ResponseTimeInterceptor } from "common/interceptor/response-time.interceptor";
+import { CacheModule } from "@nestjs/cache-manager";
+import { ThrottleInterceptor } from "common/interceptor/throttle.Interceptor";
 
 @Module({
   imports: [
@@ -56,6 +58,9 @@ import { ResponseTimeInterceptor } from "common/interceptor/response-time.interc
         console.log(error); // 모든 에러 로그
         return error;
       },
+    }),
+    CacheModule.register({
+      isGlobal: true,
     }),
     LoginModule,
     BranchModule,

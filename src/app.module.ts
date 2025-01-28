@@ -38,7 +38,7 @@ import { BatchModule } from "./batch/batch.module";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { ResponseTimeInterceptor } from "common/interceptor/response-time.interceptor";
 import { CacheModule } from "@nestjs/cache-manager";
-import { ThrottleInterceptor } from "common/interceptor/throttle.Interceptor";
+import { FileUploadModule } from "./file-upload/file-upload.module";
 
 @Module({
   imports: [
@@ -92,12 +92,13 @@ import { ThrottleInterceptor } from "common/interceptor/throttle.Interceptor";
     BoardModule,
     AuthModule,
     BatchModule,
+    FileUploadModule,
   ],
   controllers: [],
   providers: [
     SampleResolver,
     {
-      provide: APP_INTERCEPTOR,
+      provide: APP_INTERCEPTOR, //전역
       useClass: ResponseTimeInterceptor,
     },
   ],

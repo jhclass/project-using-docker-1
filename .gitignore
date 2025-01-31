@@ -38,5 +38,5 @@ lerna-debug.log*
 .env
 
 #file
-/temp/*
+/temp
 /files

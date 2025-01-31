@@ -62,6 +62,7 @@ import { FileUploadModule } from "./file-upload/file-upload.module";
     CacheModule.register({
       isGlobal: true,
     }),
+
     LoginModule,
     BranchModule,
     ManageUserModule,

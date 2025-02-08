@@ -93,7 +93,7 @@ export class EditStudentStateService {
         message: "정상적으로 수정 완료 되었습니다.",
       };
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
       return {
         ok: false,
         message: `에러발생! 에러메세지를 확인하세요.`,

@@ -4,7 +4,7 @@ import { PrismaService } from "@src/prisma/prisma.service";
 @Injectable()
 export class SeeStudentStateService {
   constructor(private readonly client: PrismaService) {}
-  async seeStudentStateFunc(context: any, page: number, limit?: number) {
+  async seeStudentStateFunc(context: any, page?: number, limit?: number) {
     try {
       const { user } = context.req;
       const ITEMS_PER_PAGE = limit === null ? 15 : limit;

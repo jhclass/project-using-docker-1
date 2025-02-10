@@ -13,7 +13,7 @@ export class SeeStudentStateResolver {
   @Query(() => StudentStateResponse)
   async seeStudentState(
     @Context() context: any,
-    @Args("page", { type: () => Int }) page: number,
+    @Args("page", { type: () => Int, nullable: true }) page?: number,
     @Args("limit", { type: () => Int, nullable: true }) limit?: number,
   ): Promise<StudentStateResponse> {
     return this.seeStudentStateService.seeStudentStateFunc(

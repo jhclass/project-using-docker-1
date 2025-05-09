@@ -23,7 +23,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:branch": "jest --testPathPattern=src/branch",
     "test:manageUser": "jest --testPathPattern=src/manage-user",
-    "test:studentState": "jest --testPathPattern=src/student-state"
+    "test:studentState": "jest --testPathPattern=src/student-state",
+    "test:student": "jest --testRegex=src/student/.*\\.spec\\.ts$"
   },
   "dependencies": {
     "@apollo/server": "^4.11.0",

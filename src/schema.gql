@@ -739,7 +739,7 @@ type ManageUser {
   mPhoneNumCompany: String
   mPhoneNumInside: String
   mPhoneNumFriend: String
-  mPart: [String!]
+  mPart: [String]
   mAvatar: String
   mJoiningDate: String
   mAddresses: String
@@ -752,16 +752,16 @@ type ManageUser {
   Branch: Branch
   branchId: Int
   lastModifiedTime: String
-  PermissionsGranted: [PermissionsGranted!]
-  StudentState: [StudentState!]
-  ConsultationMemo: [ConsultationMemo!]
-  favoriteStudentState: [Int!]
-  Student: [Student!]
-  StudentMemo: [StudentMemo!]
-  StudentPayment: [StudentPayment!]
-  PaymentDetail: [PaymentDetail!]
-  Lectures: [Lectures!]
-  Stamp: [Stamp!]
+  PermissionsGranted: [PermissionsGranted]
+  StudentState: [StudentState]
+  ConsultationMemo: [ConsultationMemo]
+  favoriteStudentState: [Int]
+  Student: [Student]
+  StudentMemo: [StudentMemo]
+  StudentPayment: [StudentPayment]
+  PaymentDetail: [PaymentDetail]
+  Lectures: [Lectures]
+  Stamp: [Stamp]
   lastModifiedBy: String
   frequentlyUsed: [String]
   Sms: [Sms]
@@ -1034,7 +1034,7 @@ type Query {
   seeAdviceType(limit: Int, page: Int, category: String): ResultAdviceType!
   seeAlarms(limit: Int, page: Int): ResultSeeAlarms!
   searchAttendanceRecord(id: Int, period: [String], mUserId: String, mUsername: String, page: Int, limit: Int): ResultSearchAttendanceRecord!
-  seeStudentState(page: Int!, limit: Int): StudentStateResponse!
+  seeStudentState(page: Int, limit: Int): StudentStateResponse!
   seeFavorite: [StudentState!]!
   seeSubject(page: Int, limit: Int): SeeSubjectResult!
   seeUserActivityLogs: UserActivityLogsResponse!

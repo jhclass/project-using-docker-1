@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from "@nestjs/common";
 import { PrismaService } from "@src/prisma/prisma.service";
 import { WebSocketGatewayService } from "@src/websocket/websocket.gateway";
@@ -22,6 +23,10 @@ export class CreateStudentService {
   ) {
     try {
       const { user } = context.req;
+      console.log("user", user.branchId);
+      if (user.branchId === null || user.branchId === undefined) {
+        throw new NotFoundException("branchId가 없습니다.");
+      }
       department;
       //이미등록된 학생이라면 한번 더 filtered
       const existingStudent = await this.client.student.count({

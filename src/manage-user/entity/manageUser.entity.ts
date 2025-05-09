@@ -33,8 +33,8 @@ export class ManageUser {
   mPhoneNumInside?: string;
   @Field({ nullable: true })
   mPhoneNumFriend?: string;
-  @Field(() => [String], { nullable: true })
-  mPart?: string[];
+  @Field(() => [String], { nullable: "itemsAndList" })
+  mPart?: string[] | null;
   @Field({ nullable: true })
   mAvatar?: string;
   @Field(() => String, { nullable: true })
@@ -59,26 +59,26 @@ export class ManageUser {
   branchId?: number;
   @Field(() => String, { nullable: true })
   lastModifiedTime?: Date;
-  @Field(() => [PermissionsGranted], { nullable: true })
-  PermissionsGranted?: PermissionsGranted[];
-  @Field(() => [StudentState], { nullable: true })
-  StudentState?: StudentState[];
-  @Field(() => [ConsultationMemo], { nullable: true })
-  ConsultationMemo?: ConsultationMemo[];
-  @Field(() => [Int], { nullable: true })
-  favoriteStudentState?: number[];
-  @Field(() => [Student], { nullable: true })
-  Student?: Student[];
-  @Field(() => [StudentMemo], { nullable: true })
-  StudentMemo?: StudentMemo[];
-  @Field(() => [StudentPayment], { nullable: true })
-  StudentPayment?: StudentPayment[];
-  @Field(() => [PaymentDetail], { nullable: true })
-  PaymentDetail?: PaymentDetail[];
-  @Field(() => [Lectures], { nullable: true })
-  Lectures?: Lectures[];
-  @Field(() => [Stamp], { nullable: true })
-  Stamp?: Stamp[];
+  @Field(() => [PermissionsGranted], { nullable: "itemsAndList" })
+  PermissionsGranted?: PermissionsGranted[] | null;
+  @Field(() => [StudentState], { nullable: "itemsAndList" })
+  StudentState?: StudentState[] | null;
+  @Field(() => [ConsultationMemo], { nullable: "itemsAndList" })
+  ConsultationMemo?: ConsultationMemo[] | null;
+  @Field(() => [Int], { nullable: "itemsAndList" })
+  favoriteStudentState?: number[] | null;
+  @Field(() => [Student], { nullable: "itemsAndList" })
+  Student?: Student[] | null;
+  @Field(() => [StudentMemo], { nullable: "itemsAndList" })
+  StudentMemo?: StudentMemo[] | null;
+  @Field(() => [StudentPayment], { nullable: "itemsAndList" })
+  StudentPayment?: StudentPayment[] | null;
+  @Field(() => [PaymentDetail], { nullable: "itemsAndList" })
+  PaymentDetail?: PaymentDetail[] | null;
+  @Field(() => [Lectures], { nullable: "itemsAndList" })
+  Lectures?: Lectures[] | null;
+  @Field(() => [Stamp], { nullable: "itemsAndList" })
+  Stamp?: Stamp[] | null;
   @Field({ nullable: true })
   lastModifiedBy?: string;
   @Field(() => [String], { nullable: "itemsAndList" })

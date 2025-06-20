@@ -30,6 +30,8 @@ export class WorkBoard {
   updatedAt: Date;
   @Field({ nullable: true })
   filePath?: string;
+  @Field({ nullable: true })
+  fileName?: string;
   @Field(() => Branch, { nullable: true })
   branch?: Branch;
   @Field(() => Int, { nullable: true })

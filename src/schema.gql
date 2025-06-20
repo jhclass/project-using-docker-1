@@ -1011,6 +1011,7 @@ type WorkBoard {
   createdAt: String!
   updatedAt: String!
   filePath: String
+  fileName: String
   branch: Branch
   branchId: Int
   lastModifiedTime: String

@@ -33,7 +33,7 @@ export class GqlAuthGuard extends AuthGuard("jwt") {
 
   handleRequest<TUser = any>(err: any, user: any): TUser {
     if (err || !user) {
-      throw err || new UnauthorizedException("당신은 인증되지 않았습니다.");
+      throw err || new UnauthorizedException("UNAUTHENTICATED");
     }
     return user;
   }

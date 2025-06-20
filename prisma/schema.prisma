@@ -921,6 +921,7 @@ model WorkBoard {
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
   filePath         String?
+  fileName         String?
   branch           Branch?   @relation(fields: [branchId], references: [id], onDelete: Cascade)
   branchId         Int?
   lastModifiedTime DateTime? //최근수정시간

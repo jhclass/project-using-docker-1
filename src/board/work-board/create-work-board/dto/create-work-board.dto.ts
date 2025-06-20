@@ -45,6 +45,10 @@ export class CreateWorkBoardDto {
   @IsOptional()
   filePath?: string;
 
+  @Field({ nullable: true })
+  @IsOptional()
+  fileName?: string;
+
   @Field(() => String, { nullable: true })
   @IsDateString()
   @IsOptional()

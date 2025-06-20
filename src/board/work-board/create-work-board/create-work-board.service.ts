@@ -31,6 +31,7 @@ export class CreateWorkBoardService {
         endDate,
         lastModifiedTime,
         filePath,
+        fileName,
         workStatus,
         detail,
       } = createWorkBoardDto;
@@ -99,6 +100,7 @@ export class CreateWorkBoardService {
           endDate,
           lastModifiedTime,
           filePath,
+          fileName,
           workStatus,
           detail: detail && updateDetail,
           branchId: user.branchId,
